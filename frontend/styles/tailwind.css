@@ -53,25 +53,48 @@
 
   .custom-resize-handle {
     position: absolute;
-    right: -6px;
-    bottom: calc(-6px + var(--panel-handle-offset, 0px));
-    width: 16px;
-    height: 16px;
-    border-radius: 6px;
-    background: linear-gradient(135deg, rgba(80, 140, 255, 0.95), rgba(71, 226, 164, 0.9));
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+    right: -4px;
+    bottom: calc(-4px + var(--panel-handle-offset, 0px));
+    width: 22px;
+    height: 22px;
+    border-radius: 8px;
+    background: transparent;
+    border: none;
+    box-shadow: none;
     cursor: se-resize;
-    opacity: 0.92;
+    opacity: 0.9;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    transform: translate(50%, 50%);
+    transform: translate(30%, 30%);
+    transition: box-shadow 120ms ease, transform 120ms ease, opacity 120ms ease;
+  }
+
+  .custom-resize-handle::before,
+  .custom-resize-handle::after {
+    content: '';
+    position: absolute;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.35));
+    border-radius: 2px;
   }
 
   .custom-resize-handle::before {
-    content: '↘';
-    color: #0a1022;
-    font-weight: 800;
-    font-size: 9px;
+    width: 2px;
+    height: 12px;
+    right: 6px;
+    bottom: 6px;
+  }
+
+  .custom-resize-handle::after {
+    height: 2px;
+    width: 12px;
+    right: 6px;
+    bottom: 6px;
+  }
+
+  .custom-resize-handle:hover {
+    box-shadow: none;
+    opacity: 1;
+    transform: translate(30%, 30%) scale(1.05);
   }
 }
