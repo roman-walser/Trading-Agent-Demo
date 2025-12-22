@@ -1,0 +1,9 @@
+# .dockerignore
+node_modules
+dist
+backend/data
+docs
+reference_project
+npm-debug.log*
+Dockerfile
+.dockerignore

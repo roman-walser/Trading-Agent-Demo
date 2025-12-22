@@ -1,0 +1,61 @@
+{
+  "test": "01_nodejs_infrastructure/00_health",
+  "baseUrl": "http://localhost:3000",
+  "timestampUtc": "2025-12-22T02:46:17.419Z",
+  "results": {
+    "health": {
+      "path": "/health",
+      "status": 200,
+      "ok": true,
+      "body": {
+        "ok": true,
+        "serverTimeUtc": "2025-12-22T02:46:17Z",
+        "version": "0.1.0"
+      }
+    },
+    "apiHealth": {
+      "path": "/api/health",
+      "status": 200,
+      "ok": true,
+      "body": {
+        "ok": true,
+        "serverTimeUtc": "2025-12-22T02:46:17Z",
+        "version": "0.1.0"
+      }
+    },
+    "validation": {
+      "health": {
+        "ok": true,
+        "serverTimeValid": true,
+        "versionValid": true,
+        "valid": true
+      },
+      "apiHealth": {
+        "ok": true,
+        "serverTimeValid": true,
+        "versionValid": true,
+        "valid": true
+      }
+    },
+    "websocket": {
+      "connected": true,
+      "id": "3zUphJRAk2IbNpjZAAAP",
+      "durationMs": 14
+    },
+    "frontend": {
+      "root": {
+        "path": "/",
+        "status": 200,
+        "ok": true,
+        "length": 494
+      },
+      "asset": {
+        "path": "/assets/index-BqTRLedc.css",
+        "status": 200,
+        "ok": true,
+        "length": 3771
+      },
+      "assetPath": "/assets/index-BqTRLedc.css"
+    }
+  }
+}

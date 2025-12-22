@@ -1,0 +1,39 @@
+{
+  "name": "trading-agent-demo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "start": "tsx backend/index.ts",
+    "dev:backend": "tsx watch backend/index.ts",
+    "dev:frontend": "vite",
+    "dev": "concurrently -k \"npm:dev:backend\" \"npm:dev:frontend\"",
+    "build": "tsc --noEmit && vite build",
+    "start:prod": "npm run build && node --import tsx backend/index.ts",
+    "test": "node scripts/tests/smoke/01_nodejs_infrastructure/00_health.smoke.js"
+  },
+  "dependencies": {
+    "@fastify/static": "^6.12.0",
+    "@tanstack/react-query": "^4.36.1",
+    "dotenv": "^16.3.1",
+    "fastify": "^4.25.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "socket.io": "^4.7.2",
+    "socket.io-client": "^4.7.2",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.4",
+    "@types/react": "^18.2.38",
+    "@types/react-dom": "^18.2.16",
+    "@vitejs/plugin-react": "^4.2.0",
+    "concurrently": "^8.2.2",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.2"
+  }
+}
