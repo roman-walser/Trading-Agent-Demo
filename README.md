@@ -7,20 +7,22 @@ Minimal HTTP + WebSocket baseline in TypeScript:
 - Vite + React dashboard with a Health panel (HTTP poll + WS status); panels live in a draggable grid, can be shown/hidden, and collapse/expand
 
 ![UI DashboardPage and ServerHealth Panel](docs/public/01_nodejs_infrastructure/00_UI_DashboardPage_and_ServerHealth_Panel.png)
-*Figure: Dashboard with ServerHealth panel and draggable grid.*
+*Dashboard with ServerHealth panel and draggable grid.*
 
 ![UI API Docs Page](docs/public/01_nodejs_infrastructure/01_UI_API_Docs.png)
-*Figure: Interactive API docs page (OpenAPI/Swagger).*
+*Interactive API docs page (OpenAPI/Swagger).*
 
 ## Chapters
-- [Project status](#project-status)
-- [Docs](#docs)
-- [Getting started](#getting-started)
-- [Smoke test](#smoke-test)
-  - [nodejs_infrastructure](#nodejs_infrastructure)
-- [Production build & serve](#production-build--serve)
-- [Docker (one-port API/WS + frontend)](#docker-one-port-apiws--frontend)
-- [Scripts](#scripts)
+- [Trading Agent Demo (Node.js Infra)](#trading-agent-demo-nodejs-infra)
+  - [Chapters](#chapters)
+  - [Project status](#project-status)
+  - [Docs](#docs)
+  - [Getting started](#getting-started)
+  - [Smoke test](#smoke-test)
+    - [nodejs\_infrastructure](#nodejs_infrastructure)
+  - [Production build \& serve](#production-build--serve)
+  - [Docker (one-port API/WS + frontend)](#docker-one-port-apiws--frontend)
+  - [Scripts](#scripts)
 
 ## Project status
 This demo is an early baseline extracted from a larger, real-world project. It does not yet include the trading-agent domain logic, but it already reflects the architecture, workflow, and engineering standards used in the full build (HTTP/WS contracts, UI patterns, testing approach, and documentation style).
