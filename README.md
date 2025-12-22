@@ -4,7 +4,7 @@
 Minimal HTTP + WebSocket baseline in TypeScript:
 - Fastify HTTP server with `/health` and `/api/health`
 - Socket.IO transport attached to the same server
-- Vite + React dashboard with a Health panel (HTTP poll + WS status)
+- Vite + React dashboard with a Health panel (HTTP poll + WS status); panels live in a draggable grid, can be shown/hidden, and collapse/expand
 
 ![UI DashboardPage and ServerHealth Panel](docs/public/01_nodejs_infrastructure/00_UI_DashboardPage_and_ServerHealth_Panel.png)
 
