@@ -1,5 +1,5 @@
 // frontend/features/dashboard/panels/HealthPanel.tsx
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, type MouseEvent as ReactMouseEvent } from 'react';
 import { HEALTH_POLL_INTERVAL_MS } from '../../../config/polling.config.js';
 import { useHealthQuery } from '../../../query/health.queries.js';
 import { WS_PATH, useWsConnectionState } from '../../../api/wsClient.js';
@@ -51,7 +51,7 @@ const HealthPanelContent = (): JSX.Element => {
     wsStatus === 'connected' ? 'connected' : wsStatus === 'connecting' ? 'reconnecting' : 'disconnected';
 
   return (
-    <div className="flex h-full flex-col">
+    <div className="flex h-full flex-col select-text">
       <div className="flex flex-1 flex-col">
         <div className="grid gap-4 px-4 pb-4 text-[#9fb2d6] text-sm">
           <div className="rounded-xl border border-[rgba(80,140,255,0.25)] bg-[#101c32b3] p-3 shadow-inner">
@@ -120,8 +120,9 @@ type HealthPanelProps = {
 export const HealthPanel = ({ onCollapseChange }: HealthPanelProps): JSX.Element => {
   const [collapsed, setCollapsed] = useState(false);
   const panelRef = useRef<HTMLDivElement | null>(null);
+  const mouseDownInsideRef = useRef(false);
   const containerClasses =
-    'relative flex flex-col rounded-2xl border border-[rgba(66,112,190,0.35)] bg-[linear-gradient(155deg,rgba(16,25,43,0.92),rgba(12,19,32,0.9))] shadow-[0_20px_60px_rgba(0,0,0,0.45),0_0_0_1px_rgba(255,255,255,0.02)] overflow-hidden ' +
+    'relative flex flex-col rounded-2xl border border-[rgba(66,112,190,0.35)] bg-[linear-gradient(155deg,rgba(16,25,43,0.92),rgba(12,19,32,0.9))] shadow-[0_20px_60px_rgba(0,0,0,0.45),0_0_0_1px_rgba(255,255,255,0.02)] overflow-hidden select-none ' +
     (collapsed ? 'h-auto' : 'h-full');
   const bodyClasses = `${collapsed ? 'flex-none' : 'flex-1'} transition-[height,opacity] duration-300 ease-in-out overflow-hidden`;
 
@@ -144,13 +145,38 @@ export const HealthPanel = ({ onCollapseChange }: HealthPanelProps): JSX.Element
     return () => observer.disconnect();
   }, [collapsed]);
 
+  useEffect(() => {
+    const handleMouseUp = (): void => {
+      mouseDownInsideRef.current = false;
+    };
+    window.addEventListener('mouseup', handleMouseUp, { passive: true });
+    return () => window.removeEventListener('mouseup', handleMouseUp);
+  }, []);
+
+  const handleMouseDownCapture = (): void => {
+    mouseDownInsideRef.current = true;
+  };
+
+  const handleMouseMoveCapture = (event: ReactMouseEvent<HTMLDivElement>): void => {
+    if (event.buttons && !mouseDownInsideRef.current) {
+      event.preventDefault();
+      const selection = window.getSelection();
+      selection?.removeAllRanges();
+    }
+  };
+
   return (
-    <div className={containerClasses} ref={panelRef}>
-      <div className="flex items-center justify-between px-4 py-3 text-[#dbe7ff] font-extrabold uppercase tracking-wide text-sm panel-drag-handle">
+    <div
+      className={containerClasses}
+      ref={panelRef}
+      onMouseDownCapture={handleMouseDownCapture}
+      onMouseMoveCapture={handleMouseMoveCapture}
+    >
+      <div className="flex items-center justify-between px-4 py-3 text-[#dbe7ff] font-extrabold uppercase tracking-wide text-sm panel-drag-handle select-none">
         <div className="flex items-center gap-2 text-base">Server Health</div>
         <button
           type="button"
-          className="px-2.5 py-1 rounded-lg border border-white/10 bg-white/5 text-[#dbe7ff] font-bold transition hover:bg-white/10 hover:border-[rgba(80,140,255,0.35)] panel-toggle"
+          className="px-2.5 py-1 rounded-lg border border-white/10 bg-white/5 text-[#dbe7ff] font-bold transition hover:bg-white/10 hover:border-[rgba(80,140,255,0.35)] panel-toggle select-none"
           aria-label={collapsed ? 'Expand panel' : 'Collapse panel'}
           onClick={() => {
             setCollapsed((c) => {
