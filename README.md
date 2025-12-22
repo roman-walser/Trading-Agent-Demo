@@ -8,6 +8,11 @@ Minimal HTTP + WebSocket baseline in TypeScript:
 
 ![UI DashboardPage and ServerHealth Panel](docs/public/01_nodejs_infrastructure/00_UI_DashboardPage_and_ServerHealth_Panel.png)
 
+## Docs
+- [Tech stack](docs/public/00_overview/00_tech_stack.md)
+- [Tooling](docs/public/00_overview/01_tooling.md)
+- [Node.js infrastructure](docs/public/01_nodejs_infrastructure/00_nodejs_infrastructure.md)
+
 ## Getting started
 1. Install deps: `npm install`
 2. Env: copy `.env.example` to `.env` (defaults use port 3000, log level `info`, WS path `/ws`)
