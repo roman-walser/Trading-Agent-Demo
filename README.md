@@ -8,6 +8,9 @@ Minimal HTTP + WebSocket baseline in TypeScript:
 
 ![UI DashboardPage and ServerHealth Panel](docs/public/01_nodejs_infrastructure/00_UI_DashboardPage_and_ServerHealth_Panel.png)
 
+## Project status
+This demo is an early baseline extracted from a larger, real-world project. It does not yet include the trading-agent domain logic, but it already reflects the architecture, workflow, and engineering standards used in the full build (HTTP/WS contracts, UI patterns, testing approach, and documentation style).
+
 ## Docs
 - [Tech stack](docs/public/00_overview/00_tech_stack.md)
 - [Tooling](docs/public/00_overview/01_tooling.md)
