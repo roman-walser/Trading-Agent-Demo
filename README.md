@@ -6,6 +6,8 @@ Minimal HTTP + WebSocket baseline in TypeScript:
 - Socket.IO transport attached to the same server
 - Vite + React dashboard with a Health panel (HTTP poll + WS status)
 
+![UI DashboardPage and ServerHealth Panel](docs/public/01_nodejs_infrastructure/00_UI_DashboardPage_and_ServerHealth_Panel.png)
+
 ## Getting started
 1. Install deps: `npm install`
 2. Env: copy `.env.example` to `.env` (defaults use port 3000, log level `info`, WS path `/ws`)
