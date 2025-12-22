@@ -6,6 +6,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { appConfig } from '../../config/index.js';
 import healthRoutes from './routes/health/health.route.js';
+import docsRoutes from './routes/docs/docs.route.js';
 
 export const createHttpServer = (): FastifyInstance => {
   /**
@@ -28,6 +29,7 @@ export const createHttpServer = (): FastifyInstance => {
   });
 
   app.register(healthRoutes);
+  app.register(docsRoutes);
 
   app.get('/', async (_request: FastifyRequest, reply: FastifyReply) =>
     reply.type('text/html').sendFile('index.html', frontendDistPath)

@@ -22,6 +22,16 @@ Minimal Node.js backend with env-driven config, Fastify HTTP, and Socket.IO on t
 - Header is not selectable; text selection is limited to the panel body to prevent cross-page selection.
 - Reusable Styling- und Verhalten-Pattern fuer kommende Panels; aktueller Screenshot: `docs/public/01_nodejs_infrastructure/00_UI_DashboardPage_and_ServerHealth_Panel.png`.
 
+## API routes (in this chapter)
+- `GET /health`  `{ ok, serverTimeUtc, version }` (plain health probe).
+- `GET /api/health`  `{ ok, serverTimeUtc, version }` (API-prefixed health).
+- `WS_PATH` (default `/ws`) via Socket.IO on the same port as HTTP.
+- Static frontend: `GET /` serves the built dashboard; assets under `/assets/*`.
+
+### API docs (Swagger UI)
+- Swagger UI: `http://localhost:3000/api/docs`
+- OpenAPI JSON: `http://localhost:3000/api/openapi.json`
+
 ## How to run
 Dev:
 1) Install deps: `npm install`
