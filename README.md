@@ -12,7 +12,8 @@ Minimal HTTP + WebSocket baseline in TypeScript:
 - [Project status](#project-status)
 - [Docs](#docs)
 - [Getting started](#getting-started)
-- [Smoke test (Roadmap 00)](#smoke-test-roadmap-00)
+- [Smoke test](#smoke-test)
+  - [nodejs_infrastructure](#nodejs_infrastructure)
 - [Production build & serve](#production-build--serve)
 - [Docker (one-port API/WS + frontend)](#docker-one-port-apiws--frontend)
 - [Scripts](#scripts)
@@ -31,11 +32,13 @@ This demo is an early baseline extracted from a larger, real-world project. It d
 3. Start backend (dev): `npm run start`
 4. Start frontend (dev, separate terminal): `npm run dev:frontend` (opens Vite on 5173; API/WS base defaults to `http://localhost:3000`)
 
-## Smoke test (Roadmap 00)
+## Smoke test
+
+### nodejs_infrastructure
 - Default spawns backend itself; set `SMOKE_SPAWN_BACKEND=false` to reuse a running one.
 - Run: `npm test`
 - Checks: HTTP `/health` + `/api/health` shape, WS connect, static frontend (`/` and first asset).
-- Output: `scripts/tests/smoke/01_nodejs_infrastructure/00_health.smoke.result.json`
+- Output: [00_health.smoke.result.json](scripts/tests/smoke/01_nodejs_infrastructure/00_health.smoke.result.json)
 
 ## Production build & serve
 - Build frontend + type-check: `npm run build` (outputs to `dist/frontend`)
