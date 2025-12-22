@@ -1,5 +1,5 @@
 // frontend/features/dashboard/panels/HealthPanel.tsx
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { HEALTH_POLL_INTERVAL_MS } from '../../../config/polling.config.js';
 import { useHealthQuery } from '../../../query/health.queries.js';
 import { WS_PATH, useWsConnectionState } from '../../../api/wsClient.js';
@@ -51,13 +51,14 @@ const HealthPanelContent = (): JSX.Element => {
     wsStatus === 'connected' ? 'connected' : wsStatus === 'connecting' ? 'reconnecting' : 'disconnected';
 
   return (
-    <>
-      <div className="grid gap-4 px-4 pb-4 text-[#9fb2d6] text-sm">
-        <div className="rounded-xl border border-[rgba(80,140,255,0.25)] bg-[#101c32b3] p-3 shadow-inner">
-          <div className="flex items-center justify-between mb-2 text-[#7d8caf] text-xs uppercase tracking-wide">
-            <span>HTTP API</span>
-          </div>
-          <div className="flex items-center justify-between gap-3 mb-2">
+    <div className="flex h-full flex-col">
+      <div className="flex flex-1 flex-col">
+        <div className="grid gap-4 px-4 pb-4 text-[#9fb2d6] text-sm">
+          <div className="rounded-xl border border-[rgba(80,140,255,0.25)] bg-[#101c32b3] p-3 shadow-inner">
+            <div className="flex items-center justify-between mb-2 text-[#7d8caf] text-xs uppercase tracking-wide">
+              <span>HTTP API</span>
+            </div>
+            <div className="flex items-center justify-between gap-3 mb-2">
             <div className="flex items-center gap-2 text-base text-[#dfe8ff] font-bold">
               <span className="inline-block w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_0_4px_rgba(255,255,255,0.05)]" />
               {httpLabel}
@@ -97,38 +98,82 @@ const HealthPanelContent = (): JSX.Element => {
         </div>
       </div>
 
-      <div className="flex justify-end items-center px-4 py-3 border-t border-[rgba(83,121,196,0.2)] text-xs text-[#7d8caf] bg-[#0c132099]">
-        <div className="text-right leading-tight">
-          <div>
-            Source HTTP: <code className="text-[#dfe8ff]">/api/health</code> (interval)
-          </div>
-          <div>
-            Source WS: <code className="text-[#dfe8ff]">{WS_PATH}</code>
+        <div className="mt-auto flex justify-end items-center px-4 py-3 border-t border-[rgba(83,121,196,0.2)] text-xs text-[#7d8caf] bg-[#0c132099]">
+          <div className="text-right leading-tight">
+            <div>
+              Source HTTP: <code className="text-[#dfe8ff]">/api/health</code> (interval)
+            </div>
+            <div>
+              Source WS: <code className="text-[#dfe8ff]">{WS_PATH}</code>
+            </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
-export const HealthPanel = (): JSX.Element => {
+type HealthPanelProps = {
+  onCollapseChange?: (collapsed: boolean) => void;
+};
+
+export const HealthPanel = ({ onCollapseChange }: HealthPanelProps): JSX.Element => {
   const [collapsed, setCollapsed] = useState(false);
+  const panelRef = useRef<HTMLDivElement | null>(null);
+  const containerClasses =
+    'relative flex flex-col rounded-2xl border border-[rgba(66,112,190,0.35)] bg-[linear-gradient(155deg,rgba(16,25,43,0.92),rgba(12,19,32,0.9))] shadow-[0_20px_60px_rgba(0,0,0,0.45),0_0_0_1px_rgba(255,255,255,0.02)] overflow-hidden ' +
+    (collapsed ? 'h-auto' : 'h-full');
+  const bodyClasses = `${collapsed ? 'flex-none' : 'flex-1'} transition-[height,opacity] duration-300 ease-in-out overflow-hidden`;
+
+  useEffect(() => {
+    const el = panelRef.current;
+    const parent = el?.parentElement;
+    if (!el || !parent || typeof ResizeObserver === 'undefined') return undefined;
+
+    const updateHandleOffset = (): void => {
+      const offset = Math.max(0, parent.clientHeight - el.clientHeight);
+      parent.style.setProperty('--panel-handle-offset', `${offset}px`);
+    };
+
+    updateHandleOffset();
+
+    const observer = new ResizeObserver(updateHandleOffset);
+    observer.observe(el);
+    observer.observe(parent);
+
+    return () => observer.disconnect();
+  }, [collapsed]);
 
   return (
-    <div className="relative rounded-2xl border border-[rgba(66,112,190,0.35)] bg-[linear-gradient(155deg,rgba(16,25,43,0.92),rgba(12,19,32,0.9))] shadow-[0_20px_60px_rgba(0,0,0,0.45),0_0_0_1px_rgba(255,255,255,0.02)] overflow-hidden">
-      <div className="flex items-center justify-between px-4 py-3 text-[#dbe7ff] font-extrabold uppercase tracking-wide text-sm">
-        <div className="flex items-center gap-2 text-base">Health</div>
+    <div className={containerClasses} ref={panelRef}>
+      <div className="flex items-center justify-between px-4 py-3 text-[#dbe7ff] font-extrabold uppercase tracking-wide text-sm panel-drag-handle">
+        <div className="flex items-center gap-2 text-base">Server Health</div>
         <button
           type="button"
-          className="px-2.5 py-1 rounded-lg border border-white/10 bg-white/5 text-[#dbe7ff] font-bold transition hover:bg-white/10 hover:border-[rgba(80,140,255,0.35)]"
+          className="px-2.5 py-1 rounded-lg border border-white/10 bg-white/5 text-[#dbe7ff] font-bold transition hover:bg-white/10 hover:border-[rgba(80,140,255,0.35)] panel-toggle"
           aria-label={collapsed ? 'Expand panel' : 'Collapse panel'}
-          onClick={() => setCollapsed((c) => !c)}
+          onClick={() => {
+            setCollapsed((c) => {
+              const next = !c;
+              onCollapseChange?.(next);
+              return next;
+            });
+          }}
         >
           {collapsed ? '▾' : '▴'}
         </button>
       </div>
 
-      {!collapsed ? <HealthPanelContent /> : null}
+      <div
+        className={bodyClasses}
+        style={{
+          height: collapsed ? 0 : '100%',
+          opacity: collapsed ? 0 : 1,
+          pointerEvents: collapsed ? 'none' : 'auto'
+        }}
+      >
+        {!collapsed ? <HealthPanelContent /> : null}
+      </div>
     </div>
   );
 };

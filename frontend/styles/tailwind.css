@@ -24,3 +24,54 @@
     text-decoration: none;
   }
 }
+
+@layer components {
+  .react-grid-item {
+    overflow: visible !important;
+  }
+
+  .resizable-item {
+    position: relative;
+    height: 100%;
+  }
+
+  .react-resizable-handle {
+    width: 24px !important;
+    height: 24px !important;
+    right: 8px;
+    bottom: 8px;
+    background: linear-gradient(135deg, rgba(80, 140, 255, 0.9), rgba(71, 226, 164, 0.8));
+    border-radius: 8px;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
+    opacity: 0.95;
+    cursor: se-resize;
+  }
+
+  .react-resizable-handle:after {
+    display: none;
+  }
+
+  .custom-resize-handle {
+    position: absolute;
+    right: -6px;
+    bottom: calc(-6px + var(--panel-handle-offset, 0px));
+    width: 16px;
+    height: 16px;
+    border-radius: 6px;
+    background: linear-gradient(135deg, rgba(80, 140, 255, 0.95), rgba(71, 226, 164, 0.9));
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+    cursor: se-resize;
+    opacity: 0.92;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transform: translate(50%, 50%);
+  }
+
+  .custom-resize-handle::before {
+    content: '↘';
+    color: #0a1022;
+    font-weight: 800;
+    font-size: 9px;
+  }
+}
