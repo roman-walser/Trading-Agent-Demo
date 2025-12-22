@@ -1,7 +1,7 @@
 {
   "test": "01_nodejs_infrastructure/00_health",
   "baseUrl": "http://localhost:3000",
-  "timestampUtc": "2025-12-22T02:46:17.419Z",
+  "timestampUtc": "2025-12-22T03:34:37.150Z",
   "results": {
     "health": {
       "path": "/health",
@@ -9,7 +9,7 @@
       "ok": true,
       "body": {
         "ok": true,
-        "serverTimeUtc": "2025-12-22T02:46:17Z",
+        "serverTimeUtc": "2025-12-22T03:34:37Z",
         "version": "0.1.0"
       }
     },
@@ -19,7 +19,7 @@
       "ok": true,
       "body": {
         "ok": true,
-        "serverTimeUtc": "2025-12-22T02:46:17Z",
+        "serverTimeUtc": "2025-12-22T03:34:37Z",
         "version": "0.1.0"
       }
     },
@@ -39,8 +39,8 @@
     },
     "websocket": {
       "connected": true,
-      "id": "3zUphJRAk2IbNpjZAAAP",
-      "durationMs": 14
+      "id": "czgMyfEIsTfFaTTkAAAv",
+      "durationMs": 16
     },
     "frontend": {
       "root": {
@@ -50,12 +50,12 @@
         "length": 494
       },
       "asset": {
-        "path": "/assets/index-BqTRLedc.css",
+        "path": "/assets/index-C2wjRNuR.css",
         "status": 200,
         "ok": true,
-        "length": 3771
+        "length": 11366
       },
-      "assetPath": "/assets/index-BqTRLedc.css"
+      "assetPath": "/assets/index-C2wjRNuR.css"
     }
   }
 }

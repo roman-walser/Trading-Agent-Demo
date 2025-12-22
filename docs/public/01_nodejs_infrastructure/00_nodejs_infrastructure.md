@@ -43,6 +43,7 @@ Prod serve (built frontend + API/WS on one port):
 - **Fastify (HTTP)**: Slim, fast HTTP server with a clear plugin model and strong typing; minimal footprint for health/API.
 - **Socket.IO (WS)**: Robust WebSocket transport with reconnect/multiplexing, sharing the HTTP port.
 - **Vite + React**: Fast dev/build for the dashboard; React for modular panels.
+- **Tailwind CSS**: Utility-first styling for the dashboard shell, header, and panels.
 - **React Query**: Server-state management (health polling), cleanly separated from UI logic.
 - **Zod**: Schema validation at API boundaries (health response shape in backend/tests).
 - **tsx**: Fast TS runner for dev/prod start without a separate backend build step.

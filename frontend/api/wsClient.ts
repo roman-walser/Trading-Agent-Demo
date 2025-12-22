@@ -7,34 +7,64 @@ export type WsStatus = 'connecting' | 'connected' | 'disconnected';
 export const WS_PATH = import.meta.env.VITE_WS_PATH ?? '/ws';
 export const WS_URL = import.meta.env.VITE_WS_URL ?? 'http://localhost:3000';
 
-const socket: Socket = io(WS_URL, {
-  path: WS_PATH,
-  transports: ['websocket']
-});
+let socket: Socket | null = null;
+let activeSubscribers = 0;
+
+const getSocket = (): Socket => {
+  if (!socket) {
+    socket = io(WS_URL, {
+      path: WS_PATH,
+      transports: ['websocket'],
+      autoConnect: false
+    });
+  }
+  return socket;
+};
+
+const connectIfNeeded = (): void => {
+  const s = getSocket();
+  if (!s.connected) {
+    s.connect();
+  }
+};
+
+const disconnectIfIdle = (): void => {
+  if (socket && activeSubscribers <= 0) {
+    socket.disconnect();
+  }
+};
 
 export const useWsConnectionState = (): WsStatus => {
-  const [status, setStatus] = useState<WsStatus>(socket.connected ? 'connected' : 'connecting');
+  const s = getSocket();
+  const [status, setStatus] = useState<WsStatus>(s.connected ? 'connected' : 'disconnected');
 
   useEffect(() => {
+    activeSubscribers += 1;
+    connectIfNeeded();
+
     const handleConnect = (): void => setStatus('connected');
     const handleDisconnect = (): void => setStatus('disconnected');
     const handleReconnectAttempt = (): void => setStatus('connecting');
     const handleError = (): void => setStatus('disconnected');
 
-    socket.on('connect', handleConnect);
-    socket.on('disconnect', handleDisconnect);
-    socket.io.on('reconnect_attempt', handleReconnectAttempt);
-    socket.on('connect_error', handleError);
+    s.on('connect', handleConnect);
+    s.on('disconnect', handleDisconnect);
+    s.io.on('reconnect_attempt', handleReconnectAttempt);
+    s.on('connect_error', handleError);
 
     return () => {
-      socket.off('connect', handleConnect);
-      socket.off('disconnect', handleDisconnect);
-      socket.io.off('reconnect_attempt', handleReconnectAttempt);
-      socket.off('connect_error', handleError);
+      s.off('connect', handleConnect);
+      s.off('disconnect', handleDisconnect);
+      s.io.off('reconnect_attempt', handleReconnectAttempt);
+      s.off('connect_error', handleError);
+      activeSubscribers = Math.max(0, activeSubscribers - 1);
+      if (activeSubscribers === 0) {
+        disconnectIfIdle();
+      }
     };
-  }, []);
+  }, [s]);
 
   return status;
 };
 
-export { socket as wsClient };
+export { getSocket as wsClient };

@@ -22,10 +22,17 @@ const formatAgo = (timestamp?: number, now?: number): string => {
   return `${minutes}m ${seconds}s ago`;
 };
 
-const badgeClass = (tone: BadgeTone): string => `badge badge--${tone}`;
+const badgeToneClass: Record<BadgeTone, string> = {
+  ok: 'bg-emerald-500/15 text-emerald-300 border border-emerald-400/40',
+  warn: 'bg-amber-400/15 text-amber-200 border border-amber-300/40',
+  err: 'bg-red-500/15 text-red-300 border border-red-400/40'
+};
 
-export const HealthPanel = (): JSX.Element => {
-  const { data, isFetching, isError, dataUpdatedAt, error } = useHealthQuery(HEALTH_POLL_INTERVAL_MS);
+const badgeClass = (tone: BadgeTone): string =>
+  `px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide ${badgeToneClass[tone]}`;
+
+const HealthPanelContent = (): JSX.Element => {
+  const { data, isError, dataUpdatedAt, error } = useHealthQuery(HEALTH_POLL_INTERVAL_MS, true);
   const wsStatus = useWsConnectionState();
   const [now, setNow] = useState<number>(Date.now());
 
@@ -35,63 +42,93 @@ export const HealthPanel = (): JSX.Element => {
   }, []);
 
   const httpTone: BadgeTone = isError ? 'err' : data?.ok ? 'ok' : 'warn';
-  const wsTone: BadgeTone = wsStatus === 'connected' ? 'ok' : wsStatus === 'connecting' ? 'warn' : 'err';
+  const wsTone: BadgeTone =
+    wsStatus === 'connected' ? 'ok' : wsStatus === 'connecting' ? 'warn' : 'err';
 
   const lastUpdate = useMemo(() => formatAgo(dataUpdatedAt, now), [dataUpdatedAt, now]);
   const httpLabel = isError ? 'unreachable' : data?.ok ? 'reachable' : 'unknown';
-  const wsLabel = wsStatus === 'connected' ? 'connected' : wsStatus === 'connecting' ? 'reconnecting' : 'disconnected';
-  const headerStatus = isFetching ? 'polling...' : 'up to date';
+  const wsLabel =
+    wsStatus === 'connected' ? 'connected' : wsStatus === 'connecting' ? 'reconnecting' : 'disconnected';
 
   return (
-    <div className="panel">
-      <div className="panel__header">
-        <div className="panel__title">Health</div>
-      </div>
-
-      <div className="panel__content panel__content--stack">
-        <div className="health-grid">
-          <div className="health-card">
-            <div className="health-card__label">HTTP API</div>
-            <div className="health-card__status">
-              <span className={`status-dot status-dot--${httpTone}`} />
-              <span className="health-card__value">{httpLabel}</span>
-              <span className={badgeClass(httpTone)}>{data?.ok ? '200 OK' : 'check'}</span>
-            </div>
-            <div className="health-card__meta">
-              <span className="muted">Last fetch</span>
-              <span className="muted">{lastUpdate}</span>
-            </div>
-            <div className="health-card__meta">
-              <span className="muted">HTTP poll</span>
-              <span className="muted">{HEALTH_POLL_INTERVAL_MS / 1000}s interval</span>
-            </div>
+    <>
+      <div className="grid gap-4 px-4 pb-4 text-[#9fb2d6] text-sm">
+        <div className="rounded-xl border border-[rgba(80,140,255,0.25)] bg-[#101c32b3] p-3 shadow-inner">
+          <div className="flex items-center justify-between mb-2 text-[#7d8caf] text-xs uppercase tracking-wide">
+            <span>HTTP API</span>
           </div>
-          <div className="health-card">
-            <div className="health-card__label">WebSocket</div>
-            <div className="health-card__status">
-              <span className={`status-dot status-dot--${wsTone}`} />
-              <span className="health-card__value">{wsLabel}</span>
-              <span className={badgeClass(wsTone)}>{wsStatus}</span>
+          <div className="flex items-center justify-between gap-3 mb-2">
+            <div className="flex items-center gap-2 text-base text-[#dfe8ff] font-bold">
+              <span className="inline-block w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_0_4px_rgba(255,255,255,0.05)]" />
+              {httpLabel}
             </div>
-            <div className="health-card__meta">
-              <span className="muted">Endpoint</span>
-              <span className="mono">{WS_PATH}</span>
-            </div>
+            <span className={badgeClass(httpTone)}>{data?.ok ? '200 OK' : 'check'}</span>
           </div>
+          <div className="flex items-center justify-between text-xs">
+            <span className="text-[#7d8caf]">Last fetch</span>
+            <span className="text-[#7d8caf]">{lastUpdate}</span>
+          </div>
+          <div className="flex items-center justify-between text-xs">
+            <span className="text-[#7d8caf]">HTTP poll</span>
+            <span className="text-[#7d8caf]">{HEALTH_POLL_INTERVAL_MS / 1000}s interval</span>
+          </div>
+          {isError ? (
+            <div className="mt-2 text-xs text-[#f17868]">
+              Error: {(error as Error | undefined)?.message ?? 'unknown'}
+            </div>
+          ) : null}
         </div>
 
-        {isError ? (
-          <div className="muted">Error: {(error as Error | undefined)?.message ?? 'unknown'}</div>
-        ) : null}
-      </div>
-
-      <div className="panel__footer">
-        <div />
-        <div className="panel__footer-source">
-          <div>Source HTTP: `/api/health` (interval)</div>
-          <div>Source WS: `{WS_PATH}`</div>
+        <div className="rounded-xl border border-[rgba(80,140,255,0.25)] bg-[#101c32b3] p-3 shadow-inner">
+          <div className="flex items-center justify-between mb-2 text-[#7d8caf] text-xs uppercase tracking-wide">
+            <span>WebSocket</span>
+          </div>
+          <div className="flex items-center justify-between gap-3 mb-2">
+            <div className="flex items-center gap-2 text-base text-[#dfe8ff] font-bold">
+              <span className="inline-block w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_0_4px_rgba(255,255,255,0.05)]" />
+              {wsLabel}
+            </div>
+            <span className={badgeClass(wsTone)}>{wsStatus}</span>
+          </div>
+          <div className="flex items-center justify-between text-xs">
+            <span className="text-[#7d8caf]">Endpoint</span>
+            <span className="mono">{WS_PATH}</span>
+          </div>
         </div>
       </div>
+
+      <div className="flex justify-end items-center px-4 py-3 border-t border-[rgba(83,121,196,0.2)] text-xs text-[#7d8caf] bg-[#0c132099]">
+        <div className="text-right leading-tight">
+          <div>
+            Source HTTP: <code className="text-[#dfe8ff]">/api/health</code> (interval)
+          </div>
+          <div>
+            Source WS: <code className="text-[#dfe8ff]">{WS_PATH}</code>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export const HealthPanel = (): JSX.Element => {
+  const [collapsed, setCollapsed] = useState(false);
+
+  return (
+    <div className="relative rounded-2xl border border-[rgba(66,112,190,0.35)] bg-[linear-gradient(155deg,rgba(16,25,43,0.92),rgba(12,19,32,0.9))] shadow-[0_20px_60px_rgba(0,0,0,0.45),0_0_0_1px_rgba(255,255,255,0.02)] overflow-hidden">
+      <div className="flex items-center justify-between px-4 py-3 text-[#dbe7ff] font-extrabold uppercase tracking-wide text-sm">
+        <div className="flex items-center gap-2 text-base">Health</div>
+        <button
+          type="button"
+          className="px-2.5 py-1 rounded-lg border border-white/10 bg-white/5 text-[#dbe7ff] font-bold transition hover:bg-white/10 hover:border-[rgba(80,140,255,0.35)]"
+          aria-label={collapsed ? 'Expand panel' : 'Collapse panel'}
+          onClick={() => setCollapsed((c) => !c)}
+        >
+          {collapsed ? '▾' : '▴'}
+        </button>
+      </div>
+
+      {!collapsed ? <HealthPanelContent /> : null}
     </div>
   );
 };

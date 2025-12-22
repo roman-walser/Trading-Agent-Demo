@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import DashboardPage from './pages/DashboardPage.js';
-import './styles/global.css';
+import './styles/tailwind.css';
 
 const queryClient = new QueryClient();
 
