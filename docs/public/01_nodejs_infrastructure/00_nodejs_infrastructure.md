@@ -1,4 +1,4 @@
-<!-- docs/public/01_nodejs_infrastructure/00_nodejs_infrastructure.md -->
+﻿<!-- docs/public/01_nodejs_infrastructure/00_nodejs_infrastructure.md -->
 # Node.js Infrastructure
 
 ## Overview
@@ -16,6 +16,12 @@ Minimal Node.js backend with env-driven config, Fastify HTTP, and Socket.IO on t
 - Static serving of the Vite-built dashboard (`npm run build`) at `/` with assets under `/assets/`
 - Git hygiene for local env/data/log artifacts
 
+## Dashboard panel UX (health panel)
+- Collapsible/expandable health panel with smooth height/opacity transition and horizontal-only resize when collapsed (full SE resize when expanded).
+- Resize handle redesigned als dezente Ecke ohne Icon, naeher an der Panel-Ecke platziert.
+- Header is not selectable; text selection is limited to the panel body to prevent cross-page selection.
+- Reusable Styling- und Verhalten-Pattern fuer kommende Panels; aktueller Screenshot: `docs/public/01_nodejs_infrastructure/00_UI_DashboardPage_and_ServerHealth_Panel.png`.
+
 ## How to run
 Dev:
 1) Install deps: `npm install`
@@ -31,12 +37,12 @@ Prod serve (built frontend + API/WS on one port):
 ## Smoke test
 - Run: `npm test` (or `node scripts/tests/smoke/01_nodejs_infrastructure/00_health.smoke.js`)
 - Checks: HTTP `/health` + `/api/health` shape, WS connect, static frontend (`/` + built asset), optional backend spawn (`SMOKE_SPAWN_BACKEND=false` to reuse running server)
-- Result: `scripts/tests/smoke/01_nodejs_infrastructure/00_health.smoke.result.json`
+- Latest run: `2025-12-22T05:50:21.496Z` -> `scripts/tests/smoke/01_nodejs_infrastructure/00_health.smoke.result.json`
 
 ## Docker quickstart
 - Build: `docker build -t trading-agent-demo .`
 - Run: `docker run --rm -p 3000:3000 trading-agent-demo`
-- UI: `http://localhost:3000/` · API: `http://localhost:3000/api/health`
+- UI: `http://localhost:3000/` | API: `http://localhost:3000/api/health`
 
 ## Stack & rationale
 - **Node.js + ESM + TypeScript baseline**: Modern tooling/typing, unified stack across backend/frontend.
