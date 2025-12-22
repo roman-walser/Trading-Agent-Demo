@@ -114,11 +114,12 @@ const HealthPanelContent = (): JSX.Element => {
 };
 
 type HealthPanelProps = {
+  collapsed?: boolean;
   onCollapseChange?: (collapsed: boolean) => void;
 };
 
-export const HealthPanel = ({ onCollapseChange }: HealthPanelProps): JSX.Element => {
-  const [collapsed, setCollapsed] = useState(false);
+export const HealthPanel = ({ onCollapseChange, collapsed: collapsedProp }: HealthPanelProps): JSX.Element => {
+  const [collapsed, setCollapsed] = useState(collapsedProp ?? false);
   const panelRef = useRef<HTMLDivElement | null>(null);
   const mouseDownInsideRef = useRef(false);
   const containerClasses =
@@ -164,6 +165,10 @@ export const HealthPanel = ({ onCollapseChange }: HealthPanelProps): JSX.Element
       selection?.removeAllRanges();
     }
   };
+
+  useEffect(() => {
+    setCollapsed(collapsedProp ?? false);
+  }, [collapsedProp]);
 
   return (
     <div
