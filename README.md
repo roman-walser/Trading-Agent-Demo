@@ -33,6 +33,7 @@ This demo is an early baseline extracted from a larger, real-world project. It d
 - [Node.js infrastructure](docs/public/01_nodejs_infrastructure/00_nodejs_infrastructure.md)
 
 ## Getting started
+Prereq: Node.js 20.11.1 (nvm-windows: `nvm install 20.11.1` then `nvm use 20.11.1`)
 1. Install deps: `npm install`
 2. Env: copy `.env.example` to `.env` (defaults use port 3000, log level `info`, WS path `/ws`)
 3. Start backend (dev): `npm run start`
