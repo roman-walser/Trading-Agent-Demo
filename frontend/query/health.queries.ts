@@ -1,6 +1,7 @@
 // frontend/query/health.queries.ts
 import { useQuery } from '@tanstack/react-query';
-import { fetchHealth, type HealthResponse } from '../api/health.api.js';
+import { fetchHealth, type HealthResponse } from '../api/routes/health.api.js';
+import { hydrateFromHealthResponse } from '../state/store.js';
 
 const HEALTH_QUERY_KEY = ['health'];
 
@@ -11,5 +12,6 @@ export const useHealthQuery = (refetchInterval: number, enabled = true) =>
     refetchInterval: enabled ? refetchInterval : false,
     refetchOnWindowFocus: false,
     staleTime: refetchInterval,
-    enabled
+    enabled,
+    onSuccess: (snapshot) => hydrateFromHealthResponse(snapshot)
   });
