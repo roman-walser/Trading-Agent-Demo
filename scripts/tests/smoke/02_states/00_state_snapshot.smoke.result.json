@@ -1,0 +1,265 @@
+{
+  "test": "02_states/00_state_snapshot",
+  "baseUrl": "http://localhost:3000",
+  "timestampUtc": "2026-01-03T16:36:55.041Z",
+  "results": {
+    "apiHealth": {
+      "path": "/api/health",
+      "status": 200,
+      "ok": true,
+      "body": {
+        "ok": true,
+        "serverTimeUtc": "2026-01-03T16:36:50Z"
+      }
+    },
+    "uiLayout": {
+      "path": "/api/ui/layout",
+      "status": 200,
+      "ok": true,
+      "body": {
+        "panels": {
+          "health": {
+            "visible": true,
+            "collapsed": false,
+            "x": 8,
+            "y": 0,
+            "w": 3,
+            "h": 8
+          }
+        },
+        "lastUpdatedUtc": "2026-01-03T16:35:06.573Z"
+      }
+    },
+    "uiSmoke": {
+      "skipped": false,
+      "reason": null,
+      "panelId": "health",
+      "panelLabel": "Health",
+      "dragOffsetX": 260,
+      "dragOffsetY": 0,
+      "steps": {
+        "initialLayout": {
+          "path": "/api/ui/layout",
+          "status": 200,
+          "ok": true,
+          "body": {
+            "panels": {
+              "health": {
+                "visible": true,
+                "collapsed": false,
+                "x": 8,
+                "y": 0,
+                "w": 3,
+                "h": 8
+              }
+            },
+            "lastUpdatedUtc": "2026-01-03T16:35:06.573Z"
+          }
+        },
+        "ensureVisible": {
+          "requested": true,
+          "checkedBefore": true,
+          "applied": false,
+          "matched": true,
+          "layout": {
+            "path": "/api/ui/layout",
+            "status": 200,
+            "ok": true,
+            "body": {
+              "panels": {
+                "health": {
+                  "visible": true,
+                  "collapsed": false,
+                  "x": 8,
+                  "y": 0,
+                  "w": 3,
+                  "h": 8
+                }
+              },
+              "lastUpdatedUtc": "2026-01-03T16:35:06.573Z"
+            }
+          }
+        },
+        "drag": {
+          "startX": 8,
+          "endX": 9,
+          "moved": true,
+          "movedPx": 108,
+          "matched": true,
+          "placeholderVisible": true,
+          "beforeLayout": {
+            "path": "/api/ui/layout",
+            "status": 200,
+            "ok": true,
+            "body": {
+              "panels": {
+                "health": {
+                  "visible": true,
+                  "collapsed": false,
+                  "x": 8,
+                  "y": 0,
+                  "w": 3,
+                  "h": 8
+                }
+              },
+              "lastUpdatedUtc": "2026-01-03T16:35:06.573Z"
+            }
+          },
+          "afterLayout": {
+            "path": "/api/ui/layout",
+            "status": 200,
+            "ok": true,
+            "body": {
+              "panels": {
+                "health": {
+                  "visible": true,
+                  "collapsed": false,
+                  "x": 9,
+                  "y": 0,
+                  "w": 3,
+                  "h": 8
+                }
+              },
+              "lastUpdatedUtc": "2026-01-03T16:36:53.857Z"
+            }
+          }
+        },
+        "collapse": {
+          "collapsed": true,
+          "matched": true,
+          "height": 2,
+          "heightOk": true,
+          "layout": {
+            "path": "/api/ui/layout",
+            "status": 200,
+            "ok": true,
+            "body": {
+              "panels": {
+                "health": {
+                  "visible": true,
+                  "collapsed": true,
+                  "x": 9,
+                  "y": 0,
+                  "w": 3,
+                  "h": 2
+                }
+              },
+              "lastUpdatedUtc": "2026-01-03T16:36:53.958Z"
+            }
+          }
+        },
+        "expand": {
+          "collapsed": false,
+          "matched": true,
+          "height": 8,
+          "heightOk": true,
+          "layout": {
+            "path": "/api/ui/layout",
+            "status": 200,
+            "ok": true,
+            "body": {
+              "panels": {
+                "health": {
+                  "visible": true,
+                  "collapsed": false,
+                  "x": 9,
+                  "y": 0,
+                  "w": 3,
+                  "h": 8
+                }
+              },
+              "lastUpdatedUtc": "2026-01-03T16:36:54.028Z"
+            }
+          }
+        },
+        "hide": {
+          "requested": false,
+          "checkedBefore": true,
+          "applied": true,
+          "matched": true,
+          "layout": {
+            "path": "/api/ui/layout",
+            "status": 200,
+            "ok": true,
+            "body": {
+              "panels": {
+                "health": {
+                  "visible": false,
+                  "collapsed": false,
+                  "x": 9,
+                  "y": 0,
+                  "w": 3,
+                  "h": 8
+                }
+              },
+              "lastUpdatedUtc": "2026-01-03T16:36:54.129Z"
+            }
+          }
+        },
+        "show": {
+          "requested": true,
+          "checkedBefore": false,
+          "applied": true,
+          "matched": true,
+          "layout": {
+            "path": "/api/ui/layout",
+            "status": 200,
+            "ok": true,
+            "body": {
+              "panels": {
+                "health": {
+                  "visible": true,
+                  "collapsed": false,
+                  "x": 9,
+                  "y": 0,
+                  "w": 3,
+                  "h": 8
+                }
+              },
+              "lastUpdatedUtc": "2026-01-03T16:36:54.209Z"
+            }
+          }
+        },
+        "reload": {
+          "preserved": true,
+          "beforeReload": {
+            "path": "/api/ui/layout",
+            "status": 200,
+            "ok": true,
+            "body": {
+              "panels": {
+                "health": {
+                  "visible": true,
+                  "collapsed": false,
+                  "x": 9,
+                  "y": 0,
+                  "w": 3,
+                  "h": 8
+                }
+              },
+              "lastUpdatedUtc": "2026-01-03T16:36:54.209Z"
+            }
+          },
+          "afterReload": {
+            "path": "/api/ui/layout",
+            "status": 200,
+            "ok": true,
+            "body": {
+              "panels": {
+                "health": {
+                  "visible": true,
+                  "collapsed": false,
+                  "x": 9,
+                  "y": 0,
+                  "w": 3,
+                  "h": 8
+                }
+              },
+              "lastUpdatedUtc": "2026-01-03T16:36:54.209Z"
+            }
+          }
+        }
+      }
+    }
+  }
+}
