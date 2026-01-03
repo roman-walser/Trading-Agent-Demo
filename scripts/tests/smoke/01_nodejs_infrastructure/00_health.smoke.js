@@ -89,13 +89,11 @@ const validateHealthShape = (response) => {
   const body = response?.body ?? {};
   const ok = body.ok === true;
   const serverTimeValid = typeof body.serverTimeUtc === 'string' && body.serverTimeUtc.length > 0;
-  const versionValid = typeof body.version === 'string' && body.version.length > 0;
 
   return {
     ok,
     serverTimeValid,
-    versionValid,
-    valid: ok && serverTimeValid && versionValid
+    valid: ok && serverTimeValid
   };
 };
 

@@ -1,7 +1,7 @@
 {
   "test": "01_nodejs_infrastructure/00_health",
   "baseUrl": "http://localhost:3000",
-  "timestampUtc": "2025-12-22T05:50:21.496Z",
+  "timestampUtc": "2026-01-02T23:03:09.609Z",
   "results": {
     "health": {
       "path": "/health",
@@ -9,8 +9,7 @@
       "ok": true,
       "body": {
         "ok": true,
-        "serverTimeUtc": "2025-12-22T05:50:21Z",
-        "version": "0.1.0"
+        "serverTimeUtc": "2026-01-02T23:03:09Z"
       }
     },
     "apiHealth": {
@@ -19,43 +18,40 @@
       "ok": true,
       "body": {
         "ok": true,
-        "serverTimeUtc": "2025-12-22T05:50:21Z",
-        "version": "0.1.0"
+        "serverTimeUtc": "2026-01-02T23:03:09Z"
       }
     },
     "validation": {
       "health": {
         "ok": true,
         "serverTimeValid": true,
-        "versionValid": true,
         "valid": true
       },
       "apiHealth": {
         "ok": true,
         "serverTimeValid": true,
-        "versionValid": true,
         "valid": true
       }
     },
     "websocket": {
       "connected": true,
-      "id": "el2sb_-0TnG1qjsHAAAJ",
-      "durationMs": 13
+      "id": "LHVhtLUEBSO9rnqeAAAd",
+      "durationMs": 37
     },
     "frontend": {
       "root": {
         "path": "/",
         "status": 200,
         "ok": true,
-        "length": 494
+        "length": 508
       },
       "asset": {
-        "path": "/assets/index-CSx2zeT0.css",
+        "path": "/assets/index-DbN3TXUD.css",
         "status": 200,
         "ok": true,
-        "length": 16345
+        "length": 18324
       },
-      "assetPath": "/assets/index-CSx2zeT0.css"
+      "assetPath": "/assets/index-DbN3TXUD.css"
     }
   }
 }
