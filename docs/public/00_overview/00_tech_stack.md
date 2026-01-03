@@ -18,6 +18,7 @@
 - React Query (server-state management)
 - Tailwind CSS (utility-first styling)
 - Vitest + React Testing Library (UI testing)
+- Playwright (UI smoke and layout stability checks)
 - ESLint + Prettier (linting & formatting)
 - openapi-typescript (shared API types generated from OpenAPI)
 - socket.io-client (real-time subscription for live status/events)
@@ -87,6 +88,9 @@ The utility-first approach is particularly effective for dashboards and data-dri
 **Vitest + React Testing Library (UI testing)**  
 Vitest provides fast test execution, while React Testing Library promotes user-centric component testing.  
 This combination enables reliable UI tests without coupling to implementation details.
+
+**Playwright (UI smoke testing)**  
+Playwright powers the UI smoke checks that validate panel interactions (collapse/drag/reload) and layout stability across reloads.
 
 **ESLint + Prettier (linting & formatting)**  
 A consistent linting and formatting setup improves maintainability and supports rapid iteration in a UI codebase.

@@ -4,9 +4,9 @@ import type { FastifyInstance } from 'fastify';
 const openApiDoc = {
   openapi: '3.0.0',
   info: {
-    title: 'Trading Agent Demo - Node.js Infrastructure',
-    version: '0.1.0',
-    description: 'Baseline health endpoints served from the Node.js infrastructure chapter.'
+    title: 'Trading Agent Demo',
+    version: '0.2.0',
+    description: 'API-Endpoints.'
   },
   servers: [{ url: '/', description: 'Local server' }],
   paths: {
@@ -23,10 +23,9 @@ const openApiDoc = {
                   type: 'object',
                   properties: {
                     ok: { type: 'boolean' },
-                    serverTimeUtc: { type: 'string', format: 'date-time' },
-                    version: { type: 'string' }
+                    serverTimeUtc: { type: 'string', format: 'date-time' }
                   },
-                  required: ['ok', 'serverTimeUtc', 'version']
+                  required: ['ok', 'serverTimeUtc']
                 }
               }
             }
@@ -47,10 +46,197 @@ const openApiDoc = {
                   type: 'object',
                   properties: {
                     ok: { type: 'boolean' },
-                    serverTimeUtc: { type: 'string', format: 'date-time' },
-                    version: { type: 'string' }
+                    serverTimeUtc: { type: 'string', format: 'date-time' }
                   },
-                  required: ['ok', 'serverTimeUtc', 'version']
+                  required: ['ok', 'serverTimeUtc']
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    '/api/ui/layout': {
+      get: {
+        tags: ['ui'],
+        summary: 'Get panel layout state',
+        responses: {
+          200: {
+            description: 'Current UI layout',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  properties: {
+                    panels: {
+                      type: 'object',
+                      additionalProperties: {
+                        type: 'object',
+                        properties: {
+                          visible: { type: 'boolean' },
+                          collapsed: { type: 'boolean' },
+                          x: { type: 'number' },
+                          y: { type: 'number' },
+                          w: { type: 'number' },
+                          h: { type: 'number' }
+                        },
+                        required: ['visible', 'collapsed', 'x', 'y', 'w', 'h']
+                      }
+                    },
+                    lastUpdatedUtc: { type: 'string', format: 'date-time', nullable: true }
+                  },
+                  required: ['panels', 'lastUpdatedUtc']
+                },
+                example: {
+                  panels: {
+                    health: {
+                      visible: true,
+                      collapsed: false,
+                      x: 0,
+                      y: 0,
+                      w: 3,
+                      h: 8
+                    }
+                  },
+                  lastUpdatedUtc: null
+                }
+              }
+            }
+          }
+        }
+      },
+      post: {
+        tags: ['ui'],
+        summary: 'Replace panel layout state',
+        requestBody: {
+          required: true,
+          content: {
+            'application/json': {
+              schema: {
+                type: 'object',
+                properties: {
+                  panels: {
+                    type: 'object',
+                    additionalProperties: {
+                      type: 'object',
+                      properties: {
+                        visible: { type: 'boolean' },
+                        collapsed: { type: 'boolean' },
+                        x: { type: 'number' },
+                        y: { type: 'number' },
+                        w: { type: 'number' },
+                        h: { type: 'number' }
+                      },
+                      required: ['visible', 'collapsed', 'x', 'y', 'w', 'h']
+                    }
+                  }
+                },
+                required: ['panels']
+              },
+              example: {
+                panels: {
+                  health: {
+                    visible: true,
+                    collapsed: false,
+                    x: 0,
+                    y: 0,
+                    w: 3,
+                    h: 8
+                  }
+                }
+              }
+            }
+          }
+        },
+        responses: {
+          200: {
+            description: 'Updated UI layout',
+            content: {
+              'application/json': {
+                schema: {
+                  $ref: '#/paths/~1api~1ui~1layout/get/responses/200/content/application~1json/schema'
+                },
+                example: {
+                  panels: {
+                    health: {
+                      visible: true,
+                      collapsed: false,
+                      x: 0,
+                      y: 0,
+                      w: 3,
+                      h: 8
+                    }
+                  },
+                  lastUpdatedUtc: null
+                }
+              }
+            }
+          }
+        }
+      },
+      patch: {
+        tags: ['ui'],
+        summary: 'Upsert panel layout entries',
+        requestBody: {
+          required: true,
+          content: {
+            'application/json': {
+              schema: {
+                type: 'object',
+                properties: {
+                  panels: {
+                    type: 'object',
+                    additionalProperties: {
+                      type: 'object',
+                      properties: {
+                        visible: { type: 'boolean' },
+                        collapsed: { type: 'boolean' },
+                        x: { type: 'number' },
+                        y: { type: 'number' },
+                        w: { type: 'number' },
+                        h: { type: 'number' }
+                      },
+                      required: ['visible', 'collapsed', 'x', 'y', 'w', 'h']
+                    }
+                  }
+                },
+                required: ['panels']
+              },
+              example: {
+                panels: {
+                  health: {
+                    visible: true,
+                    collapsed: false,
+                    x: 0,
+                    y: 0,
+                    w: 3,
+                    h: 8
+                  }
+                }
+              }
+            }
+          }
+        },
+        responses: {
+          200: {
+            description: 'Updated UI layout',
+            content: {
+              'application/json': {
+                schema: {
+                  $ref: '#/paths/~1api~1ui~1layout/get/responses/200/content/application~1json/schema'
+                },
+                example: {
+                  panels: {
+                    health: {
+                      visible: true,
+                      collapsed: false,
+                      x: 0,
+                      y: 0,
+                      w: 3,
+                      h: 8
+                    }
+                  },
+                  lastUpdatedUtc: null
                 }
               }
             }
@@ -63,6 +249,10 @@ const openApiDoc = {
     {
       name: 'health',
       description: 'Liveness and readiness probes'
+    },
+    {
+      name: 'ui',
+      description: 'Panel layout state'
     }
   ]
 };

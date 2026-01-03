@@ -1,7 +1,7 @@
 // backend/server/http/routes/health/health.route.ts
 import type { FastifyInstance } from 'fastify';
-import { appConfig } from '../../../../config/index.js';
 import { healthResponseSchema, type HealthResponse } from './health.schemas.js';
+import { refreshHealthState } from '../../../../state-services/health.service.js';
 
 const healthResponseJsonSchema = {
   200: {
@@ -9,21 +9,19 @@ const healthResponseJsonSchema = {
     type: 'object',
     properties: {
       ok: { type: 'boolean', const: true },
-      serverTimeUtc: { type: 'string' },
-      version: { type: 'string' }
+      serverTimeUtc: { type: 'string' }
     },
-    required: ['ok', 'serverTimeUtc', 'version']
+    required: ['ok', 'serverTimeUtc']
   }
 };
 
-const formatUtcSeconds = (date: Date): string => date.toISOString().replace(/\.\d{3}Z$/, 'Z');
-
-const buildHealth = (): HealthResponse =>
-  healthResponseSchema.parse({
-    ok: true,
-    serverTimeUtc: formatUtcSeconds(new Date()),
-    version: appConfig.meta.version
+const buildHealth = (): HealthResponse => {
+  const snapshot = refreshHealthState();
+  return healthResponseSchema.parse({
+    ok: snapshot.ok,
+    serverTimeUtc: snapshot.serverTimeUtc
   });
+};
 
 /**
  * Registers health endpoints for transport reachability checks.

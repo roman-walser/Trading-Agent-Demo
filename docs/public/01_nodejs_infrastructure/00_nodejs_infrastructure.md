@@ -2,7 +2,7 @@
 # Node.js Infrastructure
 
 ## Overview
-Minimal Node.js backend with env-driven config, Fastify HTTP, and Socket.IO on the same port. `/health` and `/api/health` return `{ ok, serverTimeUtc, version }`; graceful shutdown covers HTTP + WS. In prod mode the backend serves the built Vite dashboard at `/` (assets under `/assets/`). Only the health routes are exposed in this chapter; further APIs come later.
+Minimal Node.js backend with env-driven config, Fastify HTTP, and Socket.IO on the same port. `/health` and `/api/health` return `{ ok, serverTimeUtc }`; graceful shutdown covers HTTP + WS. In prod mode the backend serves the built Vite dashboard at `/` (assets under `/assets/`). Only the health routes are exposed in this chapter; further APIs come later.
 
 ## Purpose
 - Provide a predictable entrypoint for future runtime, state, and provider services
@@ -23,8 +23,8 @@ Minimal Node.js backend with env-driven config, Fastify HTTP, and Socket.IO on t
 - Reusable Styling- und Verhalten-Pattern fuer kommende Panels; aktueller Screenshot: `docs/public/01_nodejs_infrastructure/00_UI_DashboardPage_and_ServerHealth_Panel.png`.
 
 ## API routes (in this chapter)
-- `GET /health`  `{ ok, serverTimeUtc, version }` (plain health probe).
-- `GET /api/health`  `{ ok, serverTimeUtc, version }` (API-prefixed health).
+- `GET /health`  `{ ok, serverTimeUtc }` (plain health probe).
+- `GET /api/health`  `{ ok, serverTimeUtc }` (API-prefixed health).
 - `WS_PATH` (default `/ws`) via Socket.IO on the same port as HTTP.
 - Static frontend: `GET /` serves the built dashboard; assets under `/assets/*`.
 
