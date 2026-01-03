@@ -1,5 +1,5 @@
 <!-- README.md -->
-# Trading Agent Demo (Node.js Infra)
+# Trading Agent Demo
 
 Minimal HTTP + WebSocket baseline in TypeScript:
 - Fastify HTTP server with `/health` and `/api/health`
