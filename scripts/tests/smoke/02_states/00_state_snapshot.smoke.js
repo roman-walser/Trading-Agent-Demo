@@ -28,36 +28,71 @@ const toNumber = (value, fallback) => {
 const startupTimeoutMs = toNumber(process.env.SMOKE_STARTUP_TIMEOUT_MS, 15000);
 const startupIntervalMs = toNumber(process.env.SMOKE_STARTUP_INTERVAL_MS, 250);
 
-const cleanupChildProcess = (reason) => {
-  if (!childProcess || childProcess.killed) return;
+const waitForExit = (child, timeoutMs) =>
+  new Promise((resolve) => {
+    if (!child || child.exitCode !== null || child.signalCode) {
+      resolve(true);
+      return;
+    }
+    const timer = setTimeout(() => resolve(false), timeoutMs);
+    child.once('exit', () => {
+      clearTimeout(timer);
+      resolve(true);
+    });
+  });
+
+const forceKill = (child) => {
+  if (!child || child.exitCode !== null || child.signalCode) return;
   try {
-    childProcess.kill('SIGTERM');
-    setTimeout(() => {
-      if (!childProcess || childProcess.killed) return;
-      childProcess.kill('SIGKILL');
-    }, 500);
+    if (process.platform === 'win32') {
+      spawnSync('taskkill', ['/PID', String(child.pid), '/T', '/F'], { stdio: 'ignore' });
+      return;
+    }
+    process.kill(-child.pid, 'SIGKILL');
   } catch (error) {
-    console.error(`Cleanup failed to terminate backend${reason ? ` (${reason})` : ''}:`, error);
+    console.error('Force kill failed:', error);
   }
 };
 
+const stopBackend = async (child) => {
+  if (!child || child.exitCode !== null || child.signalCode) return;
+  try {
+    child.kill('SIGTERM');
+  } catch (error) {
+    console.error('Failed to terminate backend:', error);
+    return;
+  }
+  const exited = await waitForExit(child, 2000);
+  if (!exited) {
+    forceKill(child);
+    await waitForExit(child, 2000);
+  }
+};
+
+const cleanupChildProcess = async (reason) => {
+  if (!childProcess || childProcess.exitCode !== null || childProcess.signalCode) return;
+  console.error(`Cleaning up backend${reason ? ` (${reason})` : ''}...`);
+  await stopBackend(childProcess);
+};
+
 const registerCleanupHandlers = () => {
-  process.on('exit', () => cleanupChildProcess('exit'));
+  process.on('exit', () => {
+    if (childProcess && childProcess.exitCode === null && !childProcess.signalCode) {
+      forceKill(childProcess);
+    }
+  });
   ['SIGINT', 'SIGTERM'].forEach((signal) => {
     process.on(signal, () => {
-      cleanupChildProcess(signal);
-      process.exit(1);
+      void cleanupChildProcess(signal).finally(() => process.exit(1));
     });
   });
   process.on('uncaughtException', (error) => {
     console.error(error);
-    cleanupChildProcess('uncaughtException');
-    process.exit(1);
+    void cleanupChildProcess('uncaughtException').finally(() => process.exit(1));
   });
   process.on('unhandledRejection', (error) => {
     console.error(error);
-    cleanupChildProcess('unhandledRejection');
-    process.exit(1);
+    void cleanupChildProcess('unhandledRejection').finally(() => process.exit(1));
   });
 };
 
@@ -126,7 +161,8 @@ const startBackend = () => {
   const child = spawn(process.execPath, ['--import', 'tsx', 'backend/index.ts'], {
     cwd: rootDir,
     env: { ...process.env, PORT: port, NODE_CLEANUP_MODE: cleanupMode },
-    stdio: ['ignore', 'pipe', 'pipe']
+    stdio: ['ignore', 'pipe', 'pipe'],
+    detached: process.platform !== 'win32'
   });
 
   child.stdout?.on('data', (chunk) => {
@@ -142,15 +178,6 @@ const startBackend = () => {
   });
 
   return child;
-};
-
-const stopBackend = async (child) => {
-  if (!child) return;
-  child.kill('SIGTERM');
-  await wait(200);
-  if (!child.killed) {
-    child.kill('SIGKILL');
-  }
 };
 
 const waitForServer = async () => {

@@ -1,11 +1,11 @@
 {
   "test": "01_nodejs_infrastructure/00_health",
   "baseUrl": "http://localhost:3000",
-  "timestampUtc": "2026-01-04T18:30:52.790Z",
+  "timestampUtc": "2026-01-04T18:55:03.550Z",
   "backend": {
     "ready": true,
     "exit": null,
-    "stdout": "Preparing cleanup...\nCleanup ok. No other node processes found.\nStarting server...\n{\"level\":30,\"time\":1767551452569,\"pid\":1964,\"hostname\":\"DESKTOP-HONRRA7\",\"msg\":\"Server listening at http://0.0.0.0:3000\"}\nServer started on http://0.0.0.0:3000\n{\"level\":30,\"time\":1767551452669,\"pid\":1964,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1\",\"req\":{\"method\":\"GET\",\"url\":\"/health\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":58662},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767551452686,\"pid\":1964,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1\",\"res\":{\"statusCode\":200},\"responseTime\":15.972100004553795,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767551452727,\"pid\":1964,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-2\",\"req\":{\"method\":\"GET\",\"url\":\"/health\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":58664},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767551452728,\"pid\":1964,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-2\",\"res\":{\"statusCode\":200},\"responseTime\":0.7998000085353851,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767551452731,\"pid\":1964,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-3\",\"req\":{\"method\":\"GET\",\"url\":\"/api/health\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":58662},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767551452733,\"pid\":1964,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-3\",\"res\":{\"statusCode\":200},\"responseTime\":1.2866999953985214,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767551452767,\"pid\":1964,\"hostname\":\"DESKTOP-HONRRA7\",\"socketId\":\"Ivoue9tSIu9aD__xAAAB\",\"msg\":\"ws connected\"}\n{\"level\":30,\"time\":1767551452769,\"pid\":1964,\"hostname\":\"DESKTOP-HONRRA7\",\"socketId\":\"Ivoue9tSIu9aD__xAAAB\",\"reason\":\"client namespace disconnect\",\"msg\":\"ws disconnected\"}\n{\"level\":30,\"time\":1767551452770,\"pid\":1964,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-4\",\"req\":{\"method\":\"GET\",\"url\":\"/\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":58662},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767551452778,\"pid\":1964,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-4\",\"res\":{\"statusCode\":200},\"responseTime\":8.252099990844727,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767551452783,\"pid\":1964,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-5\",\"req\":{\"method\":\"GET\",\"url\":\"/assets/index-DbN3TXUD.css\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":58662},\"msg\":\"incoming request\"}\n",
+    "stdout": "",
     "stderr": ""
   },
   "results": {
@@ -15,7 +15,7 @@
       "ok": true,
       "body": {
         "ok": true,
-        "serverTimeUtc": "2026-01-04T18:30:52Z"
+        "serverTimeUtc": "2026-01-04T18:55:03Z"
       }
     },
     "apiHealth": {
@@ -24,7 +24,7 @@
       "ok": true,
       "body": {
         "ok": true,
-        "serverTimeUtc": "2026-01-04T18:30:52Z"
+        "serverTimeUtc": "2026-01-04T18:55:03Z"
       }
     },
     "validation": {
@@ -41,8 +41,8 @@
     },
     "websocket": {
       "connected": true,
-      "id": "Ivoue9tSIu9aD__xAAAB",
-      "durationMs": 34
+      "id": "EiqTn9rjFwhFXtIaAAAD",
+      "durationMs": 27
     },
     "frontend": {
       "root": {
@@ -52,12 +52,12 @@
         "length": 508
       },
       "asset": {
-        "path": "/assets/index-DbN3TXUD.css",
+        "path": "/assets/index-DXchUIU8.css",
         "status": 200,
         "ok": true,
-        "length": 18324
+        "length": 18303
       },
-      "assetPath": "/assets/index-DbN3TXUD.css"
+      "assetPath": "/assets/index-DXchUIU8.css"
     }
   }
 }
