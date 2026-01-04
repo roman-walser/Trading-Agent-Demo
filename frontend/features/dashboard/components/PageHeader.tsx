@@ -42,7 +42,7 @@ export const PageHeader = ({ title, panels, visible, onTogglePanel }: PageHeader
             >
               Panels
               <span className={chevronClass} aria-hidden="true">
-                ▾
+                v
               </span>
             </button>
             {isDropdownOpen ? (

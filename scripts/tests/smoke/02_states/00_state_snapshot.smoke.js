@@ -15,11 +15,53 @@ const runUi = process.env.SMOKE_UI !== 'false';
 const panelId = process.env.SMOKE_UI_PANEL_ID ?? 'health';
 const panelLabel = process.env.SMOKE_UI_PANEL_LABEL ?? 'Health';
 const headless = process.env.SMOKE_UI_HEADLESS !== 'false';
+let backendLogs = { stdout: '', stderr: '' };
+let backendExit = null;
+let backendReady = true;
+let childProcess = null;
 
 const toNumber = (value, fallback) => {
   const parsed = Number(value);
   return Number.isFinite(parsed) ? parsed : fallback;
 };
+
+const startupTimeoutMs = toNumber(process.env.SMOKE_STARTUP_TIMEOUT_MS, 15000);
+const startupIntervalMs = toNumber(process.env.SMOKE_STARTUP_INTERVAL_MS, 250);
+
+const cleanupChildProcess = (reason) => {
+  if (!childProcess || childProcess.killed) return;
+  try {
+    childProcess.kill('SIGTERM');
+    setTimeout(() => {
+      if (!childProcess || childProcess.killed) return;
+      childProcess.kill('SIGKILL');
+    }, 500);
+  } catch (error) {
+    console.error(`Cleanup failed to terminate backend${reason ? ` (${reason})` : ''}:`, error);
+  }
+};
+
+const registerCleanupHandlers = () => {
+  process.on('exit', () => cleanupChildProcess('exit'));
+  ['SIGINT', 'SIGTERM'].forEach((signal) => {
+    process.on(signal, () => {
+      cleanupChildProcess(signal);
+      process.exit(1);
+    });
+  });
+  process.on('uncaughtException', (error) => {
+    console.error(error);
+    cleanupChildProcess('uncaughtException');
+    process.exit(1);
+  });
+  process.on('unhandledRejection', (error) => {
+    console.error(error);
+    cleanupChildProcess('unhandledRejection');
+    process.exit(1);
+  });
+};
+
+registerCleanupHandlers();
 
 const dragOffsetX = toNumber(process.env.SMOKE_UI_DRAG_OFFSET_X, 260);
 const dragOffsetY = toNumber(process.env.SMOKE_UI_DRAG_OFFSET_Y, 0);
@@ -47,11 +89,56 @@ const fetchJson = async (relativePath) => {
   }
 };
 
+const fetchJsonWithOptions = async (relativePath, options = {}) => {
+  try {
+    const { method = 'GET', body } = options;
+    const hasBody = body !== undefined;
+    const response = await fetch(`${baseUrl}${relativePath}`, {
+      method,
+      headers: hasBody ? { 'Content-Type': 'application/json' } : undefined,
+      body: hasBody ? JSON.stringify(body) : undefined
+    });
+    const parsed = await response
+      .json()
+      .catch(() => ({ parseError: true, text: 'Unable to parse JSON body' }));
+
+    return {
+      path: relativePath,
+      method,
+      status: response.status,
+      ok: response.ok,
+      body: parsed
+    };
+  } catch (error) {
+    return {
+      path: relativePath,
+      status: null,
+      ok: false,
+      error: error instanceof Error ? error.message : 'unknown error'
+    };
+  }
+};
+
 const startBackend = () => {
-  const child = spawn('node', ['--import', 'tsx', 'backend/index.ts'], {
+  backendLogs = { stdout: '', stderr: '' };
+  backendExit = null;
+  const cleanupMode = process.env.NODE_CLEANUP_MODE ?? 'kill';
+  const child = spawn(process.execPath, ['--import', 'tsx', 'backend/index.ts'], {
     cwd: rootDir,
-    env: { ...process.env, PORT: port },
+    env: { ...process.env, PORT: port, NODE_CLEANUP_MODE: cleanupMode },
     stdio: ['ignore', 'pipe', 'pipe']
+  });
+
+  child.stdout?.on('data', (chunk) => {
+    backendLogs.stdout += chunk.toString();
+  });
+
+  child.stderr?.on('data', (chunk) => {
+    backendLogs.stderr += chunk.toString();
+  });
+
+  child.on('exit', (code, signal) => {
+    backendExit = { code, signal };
   });
 
   return child;
@@ -67,10 +154,14 @@ const stopBackend = async (child) => {
 };
 
 const waitForServer = async () => {
-  for (let attempt = 0; attempt < 20; attempt++) {
+  const maxAttempts = Math.max(1, Math.ceil(startupTimeoutMs / startupIntervalMs));
+  for (let attempt = 0; attempt < maxAttempts; attempt++) {
+    if (backendExit) {
+      return false;
+    }
     const result = await fetchJson('/health');
     if (result.ok) return true;
-    await wait(250);
+    await wait(startupIntervalMs);
   }
   return false;
 };
@@ -101,6 +192,111 @@ const waitForPanelState = async (predicate, timeoutMs = 5000, intervalMs = 250) 
   return { matched: false, response: lastResponse };
 };
 
+const runLayoutApiTests = async () => {
+  const result = {
+    skipped: false,
+    reason: null,
+    steps: {}
+  };
+
+  if (!backendReady) {
+    return { ...result, skipped: true, reason: 'backend not ready' };
+  }
+
+  const initial = await fetchJson('/api/ui/layout');
+  result.steps.initial = initial;
+
+  if (!initial.ok) {
+    return { ...result, skipped: true, reason: 'initial layout fetch failed' };
+  }
+
+  const initialPanels = initial?.body?.panels ?? {};
+  const restorePayload = { panels: initialPanels };
+
+  const baseHealth = {
+    visible: true,
+    collapsed: false,
+    x: 0,
+    y: 0,
+    w: 3,
+    h: 8
+  };
+  const secondary = {
+    visible: true,
+    collapsed: false,
+    x: 3,
+    y: 0,
+    w: 3,
+    h: 8
+  };
+
+  try {
+    const replacePayload = { panels: { health: baseHealth, secondary } };
+    const replaceResponse = await fetchJsonWithOptions('/api/ui/layout', {
+      method: 'POST',
+      body: replacePayload
+    });
+    result.steps.replace = replaceResponse;
+
+    const patchedHealth = {
+      ...baseHealth,
+      collapsed: true,
+      x: 4,
+      y: 1,
+      w: 4,
+      h: 6
+    };
+
+    const patchResponse = await fetchJsonWithOptions('/api/ui/layout', {
+      method: 'PATCH',
+      body: { panels: { health: patchedHealth } }
+    });
+    const patchedSecondary = patchResponse?.body?.panels?.secondary;
+    const mergeOk = Boolean(
+      patchResponse.ok &&
+        patchResponse?.body?.panels?.health &&
+        patchedSecondary &&
+        patchResponse.body.panels.health.x === patchedHealth.x &&
+        patchResponse.body.panels.health.y === patchedHealth.y &&
+        patchResponse.body.panels.health.w === patchedHealth.w &&
+        patchResponse.body.panels.health.h === patchedHealth.h &&
+        patchResponse.body.panels.health.collapsed === patchedHealth.collapsed &&
+        patchedSecondary.x === secondary.x &&
+        patchedSecondary.y === secondary.y &&
+        patchedSecondary.w === secondary.w &&
+        patchedSecondary.h === secondary.h &&
+        patchedSecondary.visible === secondary.visible &&
+        patchedSecondary.collapsed === secondary.collapsed
+    );
+
+    result.steps.patch = { ...patchResponse, mergeOk };
+
+    const invalidMissingPanels = await fetchJsonWithOptions('/api/ui/layout', {
+      method: 'PATCH',
+      body: {}
+    });
+    const invalidPanelShape = await fetchJsonWithOptions('/api/ui/layout', {
+      method: 'PATCH',
+      body: { panels: { health: { visible: true } } }
+    });
+
+    result.steps.invalidMissingPanels = invalidMissingPanels;
+    result.steps.invalidPanelShape = invalidPanelShape;
+    result.steps.validation = {
+      missingPanelsRejected: (invalidMissingPanels.status ?? 0) >= 400 || !invalidMissingPanels.ok,
+      invalidShapeRejected: (invalidPanelShape.status ?? 0) >= 400 || !invalidPanelShape.ok
+    };
+  } finally {
+    const restore = await fetchJsonWithOptions('/api/ui/layout', {
+      method: 'POST',
+      body: restorePayload
+    });
+    result.steps.restore = restore;
+  }
+
+  return result;
+};
+
 const runUiSmoke = async () => {
   const result = {
     skipped: false,
@@ -111,6 +307,10 @@ const runUiSmoke = async () => {
     dragOffsetY,
     steps: {}
   };
+
+  if (!backendReady) {
+    return { ...result, skipped: true, reason: 'backend not ready' };
+  }
 
   if (!runUi) {
     return { ...result, skipped: true, reason: 'SMOKE_UI disabled' };
@@ -268,17 +468,16 @@ const runUiSmoke = async () => {
 };
 
 const run = async () => {
-  let childProcess = null;
-
   if (shouldSpawnBackend) {
     childProcess = startBackend();
-    const ready = await waitForServer();
-    if (!ready) {
+    backendReady = await waitForServer();
+    if (!backendReady) {
       console.error('Backend did not become ready in time');
     }
   }
 
   const apiHealth = await fetchJson('/api/health');
+  const layoutApiTests = await runLayoutApiTests();
   const uiLayout = await fetchJson('/api/ui/layout');
   const uiSmoke = await runUiSmoke();
 
@@ -286,8 +485,17 @@ const run = async () => {
     test: '02_states/00_state_snapshot',
     baseUrl,
     timestampUtc: new Date().toISOString(),
+    backend: shouldSpawnBackend
+      ? {
+          ready: backendReady,
+          exit: backendExit,
+          stdout: backendLogs.stdout,
+          stderr: backendLogs.stderr
+        }
+      : { ready: backendReady, skipped: true },
     results: {
       apiHealth,
+      layoutApiTests,
       uiLayout,
       uiSmoke
     }
@@ -299,6 +507,7 @@ const run = async () => {
 
   if (shouldSpawnBackend) {
     await stopBackend(childProcess);
+    childProcess = null;
   }
 };
 

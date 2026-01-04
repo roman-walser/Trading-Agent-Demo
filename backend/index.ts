@@ -44,6 +44,25 @@ void start();
 async function ensureCleanNodeStartup(): Promise<void> {
   console.log('Preparing cleanup...');
 
+  const cleanupModeRaw = (process.env.NODE_CLEANUP_MODE ?? 'prompt').trim().toLowerCase();
+  const allowedModes = new Set(['prompt', 'skip', 'kill']);
+  const cleanupMode = allowedModes.has(cleanupModeRaw) ? cleanupModeRaw : 'prompt';
+  const isInteractive = Boolean(process.stdin.isTTY && process.stdout.isTTY);
+
+  if (process.env.NODE_CLEANUP_MODE && cleanupMode !== cleanupModeRaw) {
+    console.log(`Unknown NODE_CLEANUP_MODE "${cleanupModeRaw}", defaulting to "prompt".`);
+  }
+
+  if (cleanupMode === 'skip') {
+    console.log('Cleanup skipped (NODE_CLEANUP_MODE=skip).');
+    return;
+  }
+
+  if (!isInteractive && cleanupMode === 'prompt') {
+    console.log('Cleanup skipped (non-interactive session).');
+    return;
+  }
+
   const pids = getNodeProcessPids();
   const protectedPids = getProtectedPids();
   const filtered = pids.filter((pid) => !protectedPids.has(pid));
@@ -56,10 +75,12 @@ async function ensureCleanNodeStartup(): Promise<void> {
   const uniquePids = Array.from(new Set(filtered));
   console.log(`Found ${uniquePids.length} node process(es).`);
 
-  const shouldKill = await promptYesNo('Kill these processes? (y/N): ');
-  if (!shouldKill) {
-    console.log('Cleanup skipped by user choice.');
-    return;
+  if (cleanupMode === 'prompt') {
+    const shouldKill = await promptYesNo('Kill these processes? (y/N): ');
+    if (!shouldKill) {
+      console.log('Cleanup skipped by user choice.');
+      return;
+    }
   }
 
   uniquePids.forEach((pid) => {
@@ -110,12 +131,13 @@ async function ensureCleanNodeStartup(): Promise<void> {
       '-NoProfile',
       '-Command',
       `(Get-CimInstance Win32_Process -Filter "ProcessId=${pid}").ParentProcessId`,
-    ]);
-    if (result.status !== 0) {
-      if (result.stderr) {
-        console.error(result.stderr.trim());
+    ], 'pipe', true);
+    if (result.error || result.status !== 0) {
+      const detail = result.error?.message ?? result.stderr?.trim();
+      if (detail) {
+        console.warn(`Cleanup helper failed (powershell): ${detail}`);
       }
-      process.exit(result.status ?? 1);
+      return null;
     }
 
     const output = result.stdout.trim();
@@ -128,12 +150,13 @@ async function ensureCleanNodeStartup(): Promise<void> {
   }
 
   function getPosixParentPid(pid: number): number | null {
-    const result = runCommand('ps', ['-p', String(pid), '-o', 'ppid=']);
-    if (result.status !== 0) {
-      if (result.stderr) {
-        console.error(result.stderr.trim());
+    const result = runCommand('ps', ['-p', String(pid), '-o', 'ppid='], 'pipe', true);
+    if (result.error || result.status !== 0) {
+      const detail = result.error?.message ?? result.stderr?.trim();
+      if (detail) {
+        console.warn(`Cleanup helper failed (ps ppid): ${detail}`);
       }
-      process.exit(result.status ?? 1);
+      return null;
     }
 
     const output = result.stdout.trim();
@@ -146,12 +169,13 @@ async function ensureCleanNodeStartup(): Promise<void> {
   }
 
   function getWindowsNodePids(): string[] {
-    const result = runCommand('tasklist', ['/FI', 'IMAGENAME eq node.exe', '/FO', 'CSV', '/NH']);
-    if (result.status !== 0) {
-      if (result.stderr) {
-        console.error(result.stderr.trim());
+    const result = runCommand('tasklist', ['/FI', 'IMAGENAME eq node.exe', '/FO', 'CSV', '/NH'], 'pipe', true);
+    if (result.error || result.status !== 0) {
+      const detail = result.error?.message ?? result.stderr?.trim();
+      if (detail) {
+        console.warn(`Cleanup helper failed (tasklist): ${detail}`);
       }
-      process.exit(result.status ?? 1);
+      return [];
     }
 
     const lines = result.stdout.split(/\r?\n/).map((line) => line.trim());
@@ -177,12 +201,13 @@ async function ensureCleanNodeStartup(): Promise<void> {
   }
 
   function getPosixNodePids(): string[] {
-    const result = runCommand('ps', ['-A', '-o', 'pid=', '-o', 'comm=']);
-    if (result.status !== 0) {
-      if (result.stderr) {
-        console.error(result.stderr.trim());
+    const result = runCommand('ps', ['-A', '-o', 'pid=', '-o', 'comm='], 'pipe', true);
+    if (result.error || result.status !== 0) {
+      const detail = result.error?.message ?? result.stderr?.trim();
+      if (detail) {
+        console.warn(`Cleanup helper failed (ps list): ${detail}`);
       }
-      process.exit(result.status ?? 1);
+      return [];
     }
 
     const pids: string[] = [];
@@ -241,10 +266,14 @@ async function ensureCleanNodeStartup(): Promise<void> {
   function runCommand(
     command: string,
     args: string[],
-    stdio: 'pipe' | 'inherit' = 'pipe'
+    stdio: 'pipe' | 'inherit' = 'pipe',
+    allowFailure = false
   ) {
     const result = spawnSync(command, args, { encoding: 'utf8', stdio });
     if (result.error) {
+      if (allowFailure) {
+        return result;
+      }
       console.error(result.error.message);
       process.exit(1);
     }

@@ -176,7 +176,7 @@ export const HealthPanel = ({ onCollapseChange, collapsed: collapsedProp }: Heal
   const containerClasses =
     'relative flex flex-col rounded-2xl border border-[rgba(66,112,190,0.35)] bg-[linear-gradient(155deg,rgba(16,25,43,0.92),rgba(12,19,32,0.9))] shadow-[0_20px_60px_rgba(0,0,0,0.45),0_0_0_1px_rgba(255,255,255,0.02)] overflow-hidden select-none ' +
     (collapsed ? 'h-auto' : 'h-full');
-  const bodyClasses = `${collapsed ? 'flex-none' : 'flex-1'} transition-[height,opacity] duration-300 ease-in-out min-h-0`;
+  const bodyClasses = `${collapsed ? '+' : '-'} transition-[height,opacity] duration-300 ease-in-out min-h-0`;
 
   useEffect(() => {
     const el = panelRef.current;
@@ -279,7 +279,7 @@ export const HealthPanel = ({ onCollapseChange, collapsed: collapsedProp }: Heal
             });
           }}
         >
-          {collapsed ? '▾' : '▴'}
+          {collapsed ? '+' : '-'}
         </button>
       </div>
 

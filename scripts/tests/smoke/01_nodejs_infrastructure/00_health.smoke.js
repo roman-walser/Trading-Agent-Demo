@@ -9,10 +9,56 @@ import { io } from 'socket.io-client';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, '../../../..');
 const resultPath = path.join(__dirname, '00_health.smoke.result.json');
+const toNumber = (value, fallback) => {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : fallback;
+};
+
 const port = process.env.PORT ?? '3000';
 const baseUrl = process.env.SMOKE_BASE_URL ?? `http://localhost:${port}`;
 const wsPath = process.env.WS_PATH ?? '/ws';
 const shouldSpawnBackend = process.env.SMOKE_SPAWN_BACKEND !== 'false';
+const startupTimeoutMs = toNumber(process.env.SMOKE_STARTUP_TIMEOUT_MS, 15000);
+const startupIntervalMs = toNumber(process.env.SMOKE_STARTUP_INTERVAL_MS, 250);
+
+let backendLogs = { stdout: '', stderr: '' };
+let backendExit = null;
+let childProcess = null;
+
+const cleanupChildProcess = (reason) => {
+  if (!childProcess || childProcess.killed) return;
+  try {
+    childProcess.kill('SIGTERM');
+    setTimeout(() => {
+      if (!childProcess || childProcess.killed) return;
+      childProcess.kill('SIGKILL');
+    }, 500);
+  } catch (error) {
+    console.error(`Cleanup failed to terminate backend${reason ? ` (${reason})` : ''}:`, error);
+  }
+};
+
+const registerCleanupHandlers = () => {
+  process.on('exit', () => cleanupChildProcess('exit'));
+  ['SIGINT', 'SIGTERM'].forEach((signal) => {
+    process.on(signal, () => {
+      cleanupChildProcess(signal);
+      process.exit(1);
+    });
+  });
+  process.on('uncaughtException', (error) => {
+    console.error(error);
+    cleanupChildProcess('uncaughtException');
+    process.exit(1);
+  });
+  process.on('unhandledRejection', (error) => {
+    console.error(error);
+    cleanupChildProcess('unhandledRejection');
+    process.exit(1);
+  });
+};
+
+registerCleanupHandlers();
 
 const fetchJson = async (relativePath) => {
   try {
@@ -58,10 +104,25 @@ const fetchText = async (relativePath) => {
 };
 
 const startBackend = () => {
-  const child = spawn('node', ['--import', 'tsx', 'backend/index.ts'], {
+  backendLogs = { stdout: '', stderr: '' };
+  backendExit = null;
+  const cleanupMode = process.env.NODE_CLEANUP_MODE ?? 'kill';
+  const child = spawn(process.execPath, ['--import', 'tsx', 'backend/index.ts'], {
     cwd: rootDir,
-    env: { ...process.env, PORT: port },
+    env: { ...process.env, PORT: port, NODE_CLEANUP_MODE: cleanupMode },
     stdio: ['ignore', 'pipe', 'pipe']
+  });
+
+  child.stdout?.on('data', (chunk) => {
+    backendLogs.stdout += chunk.toString();
+  });
+
+  child.stderr?.on('data', (chunk) => {
+    backendLogs.stderr += chunk.toString();
+  });
+
+  child.on('exit', (code, signal) => {
+    backendExit = { code, signal };
   });
 
   return child;
@@ -77,10 +138,14 @@ const stopBackend = async (child) => {
 };
 
 const waitForServer = async () => {
-  for (let attempt = 0; attempt < 20; attempt++) {
+  const maxAttempts = Math.max(1, Math.ceil(startupTimeoutMs / startupIntervalMs));
+  for (let attempt = 0; attempt < maxAttempts; attempt++) {
+    if (backendExit) {
+      return false;
+    }
     const result = await fetchJson('/health');
     if (result.ok) return true;
-    await wait(250);
+    await wait(startupIntervalMs);
   }
   return false;
 };
@@ -139,12 +204,12 @@ const findAssetPath = async () => {
 };
 
 const run = async () => {
-  let childProcess = null;
+  let backendReady = true;
 
   if (shouldSpawnBackend) {
     childProcess = startBackend();
-    const ready = await waitForServer();
-    if (!ready) {
+    backendReady = await waitForServer();
+    if (!backendReady) {
       console.error('Backend did not become ready in time');
     }
   }
@@ -166,6 +231,14 @@ const run = async () => {
     test: '01_nodejs_infrastructure/00_health',
     baseUrl,
     timestampUtc: new Date().toISOString(),
+    backend: shouldSpawnBackend
+      ? {
+          ready: backendReady,
+          exit: backendExit,
+          stdout: backendLogs.stdout,
+          stderr: backendLogs.stderr
+        }
+      : { ready: backendReady, skipped: true },
     results: {
       health,
       apiHealth,
@@ -185,6 +258,7 @@ const run = async () => {
 
   if (shouldSpawnBackend) {
     await stopBackend(childProcess);
+    childProcess = null;
   }
 };
 
