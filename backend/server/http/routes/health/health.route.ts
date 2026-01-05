@@ -8,7 +8,7 @@ const healthResponseJsonSchema = {
     description: 'Health status',
     type: 'object',
     properties: {
-      ok: { type: 'boolean', const: true },
+      ok: { type: 'boolean' },
       serverTimeUtc: { type: 'string' }
     },
     required: ['ok', 'serverTimeUtc']
