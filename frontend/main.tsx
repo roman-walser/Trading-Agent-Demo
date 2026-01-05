@@ -16,20 +16,9 @@ if (!rootElement) {
   throw new Error('Root element #root not found');
 }
 
-const withTimeout = <T,>(promise: Promise<T>, timeoutMs: number): Promise<T> =>
-  new Promise((resolve, reject) => {
-    const timer = setTimeout(() => {
-      reject(new Error(`UI layout preload timed out after ${timeoutMs}ms`));
-    }, timeoutMs);
-    promise
-      .then((value) => resolve(value))
-      .catch(reject)
-      .finally(() => clearTimeout(timer));
-  });
-
 const preloadUiLayout = async (): Promise<void> => {
   try {
-    const layoutSnapshot = await withTimeout(fetchUiLayout(), UI_LAYOUT_PRELOAD_TIMEOUT_MS);
+    const layoutSnapshot = await fetchUiLayout({ timeoutMs: UI_LAYOUT_PRELOAD_TIMEOUT_MS });
     hydrateUiLayoutFromSnapshot(layoutSnapshot);
     queryClient.setQueryData(['ui-layout'], layoutSnapshot);
   } catch (error) {

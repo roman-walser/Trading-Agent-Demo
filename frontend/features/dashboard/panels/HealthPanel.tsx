@@ -161,9 +161,14 @@ const HealthPanelContent = ({ pollingEnabled }: HealthPanelContentProps): JSX.El
 type HealthPanelProps = {
   collapsed?: boolean;
   onCollapseChange?: (collapsed: boolean) => void;
+  interactionDisabled?: boolean;
 };
 
-export const HealthPanel = ({ onCollapseChange, collapsed: collapsedProp }: HealthPanelProps): JSX.Element => {
+export const HealthPanel = ({
+  onCollapseChange,
+  collapsed: collapsedProp,
+  interactionDisabled = false
+}: HealthPanelProps): JSX.Element => {
   const [collapsed, setCollapsed] = useState(collapsedProp ?? false);
   const [availableHeight, setAvailableHeight] = useState<number>(0);
   const [contentHeight, setContentHeight] = useState<number>(0);
@@ -250,6 +255,11 @@ export const HealthPanel = ({ onCollapseChange, collapsed: collapsedProp }: Heal
   const shouldScroll = hasSizedBody && contentHeight - effectiveHeight > SCROLL_EPSILON;
   const overflowY = shouldScroll ? 'auto' : 'hidden';
   const overflowX = 'hidden';
+  const collapseButtonClass =
+    'px-2.5 py-1 rounded-lg border border-white/10 bg-white/5 text-[#dbe7ff] font-bold transition panel-toggle select-none ' +
+    (interactionDisabled
+      ? 'opacity-60 cursor-not-allowed'
+      : 'hover:bg-white/10 hover:border-[rgba(80,140,255,0.35)]');
   const scrollbarStyles: CSSProperties = shouldScroll
     ? {
         scrollbarWidth: 'thin',
@@ -269,8 +279,9 @@ export const HealthPanel = ({ onCollapseChange, collapsed: collapsedProp }: Heal
         <div className="flex items-center gap-2 text-base">Server Health</div>
         <button
           type="button"
-          className="px-2.5 py-1 rounded-lg border border-white/10 bg-white/5 text-[#dbe7ff] font-bold transition hover:bg-white/10 hover:border-[rgba(80,140,255,0.35)] panel-toggle select-none"
+          className={collapseButtonClass}
           aria-label={collapsed ? 'Expand panel' : 'Collapse panel'}
+          disabled={interactionDisabled}
           onClick={() => {
             setCollapsed((current) => {
               const next = !current;

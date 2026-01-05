@@ -14,6 +14,8 @@ import {
 } from '../state/store.js';
 
 const UI_LAYOUT_QUERY_KEY = ['ui-layout'];
+const UI_LAYOUT_FETCH_TIMEOUT_MS = 8000;
+const UI_LAYOUT_PATCH_TIMEOUT_MS = 8000;
 
 type UiLayoutMutationContext = {
   previousSnapshot: UiLayoutStateDto;
@@ -22,7 +24,7 @@ type UiLayoutMutationContext = {
 export const useUiLayoutQuery = (enabled = true, initialData?: UiLayoutStateDto) =>
   useQuery<UiLayoutStateDto>({
     queryKey: UI_LAYOUT_QUERY_KEY,
-    queryFn: fetchUiLayout,
+    queryFn: () => fetchUiLayout({ timeoutMs: UI_LAYOUT_FETCH_TIMEOUT_MS }),
     refetchOnWindowFocus: false,
     retry: false,
     enabled,
@@ -35,7 +37,8 @@ export const useUiLayoutQuery = (enabled = true, initialData?: UiLayoutStateDto)
 export const usePatchUiLayout = () => {
   const client = useQueryClient();
   return useMutation<UiLayoutStateDto, Error, UiLayoutPayloadDto, UiLayoutMutationContext>({
-    mutationFn: (payload: UiLayoutPayloadDto) => patchUiLayout(payload),
+    mutationFn: (payload: UiLayoutPayloadDto) =>
+      patchUiLayout(payload, { timeoutMs: UI_LAYOUT_PATCH_TIMEOUT_MS }),
     onMutate: (payload) => {
       const previousSnapshot = getUiLayoutSnapshot();
       for (const [panelId, layout] of Object.entries(payload.panels)) {

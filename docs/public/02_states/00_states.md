@@ -48,7 +48,7 @@ Dev:
 - `frontend/state/store.ts`: Added a lightweight store that wires the health + UI layout slices and exposes selector hooks.
 - `frontend/query/health.queries.ts`: Updated health query to hydrate the store and use the new routed health client.
 - `frontend/query/uiLayout.queries.ts`: Added UI layout query/mutation hooks that hydrate the UI layout slice.
-- `frontend/main.tsx`: Preloads `/api/ui/layout` before rendering so the grid hydrates with the persisted layout on first paint.
+- `frontend/main.tsx`: Renders immediately, then preloads `/api/ui/layout` in the background with a timeout; the grid hydrates when the snapshot arrives.
 - `frontend/pages/DashboardPage.tsx`: Reworked the grid to hydrate from the UI layout slice, persist drag/resize/visibility changes, and measure container width for stable positioning.
 - `frontend/features/dashboard/panels/HealthPanel.tsx`: Reads health from the store (lastCheckedAtUtc), disables polling when collapsed, and improves panel scroll/resize behavior.
 - `frontend/styles/tailwind.css`: Stabilized scrollbar width and added grid placeholder + drag cursor styling to improve layout feedback.

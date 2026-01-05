@@ -1,5 +1,5 @@
 // scripts/tests/smoke/02_states/00_state_snapshot.smoke.js
-import { spawn } from 'child_process';
+import { spawn, spawnSync } from 'child_process';
 import { mkdir, stat, writeFile } from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -309,9 +309,16 @@ const runLayoutApiTests = async () => {
 
     result.steps.invalidMissingPanels = invalidMissingPanels;
     result.steps.invalidPanelShape = invalidPanelShape;
+    const missingPanelsRejected =
+      (invalidMissingPanels.status ?? 0) >= 400 || !invalidMissingPanels.ok;
+    const invalidShapeRejected =
+      (invalidPanelShape.status ?? 0) >= 400 || !invalidPanelShape.ok;
+
     result.steps.validation = {
-      missingPanelsRejected: (invalidMissingPanels.status ?? 0) >= 400 || !invalidMissingPanels.ok,
-      invalidShapeRejected: (invalidPanelShape.status ?? 0) >= 400 || !invalidPanelShape.ok
+      missingPanelsRejected,
+      invalidShapeRejected,
+      mergeOk,
+      ok: missingPanelsRejected && invalidShapeRejected && mergeOk
     };
   } finally {
     const restore = await fetchJsonWithOptions('/api/ui/layout', {
@@ -363,8 +370,95 @@ const runUiSmoke = async () => {
   const page = await browser.newPage({ viewport: { width: 1280, height: 720 } });
 
   try {
+    const cacheKey = 'ui-layout-cache';
+    const seedGuardKey = 'ui-layout-cache-smoke-seeded';
+    const stalePanelId = 'stale-panel';
+    const seededHealth = {
+      visible: true,
+      collapsed: false,
+      x: 0,
+      y: 0,
+      w: 3,
+      h: 8
+    };
+    const stalePanel = {
+      visible: true,
+      collapsed: false,
+      x: 6,
+      y: 0,
+      w: 3,
+      h: 8
+    };
+    const staleCacheSeed = {
+      panels: { [panelId]: seededHealth, [stalePanelId]: stalePanel },
+      lastUpdatedUtc: null
+    };
+    const staleServerReset = await fetchJsonWithOptions('/api/ui/layout', {
+      method: 'POST',
+      body: { panels: {} }
+    });
+    result.steps.stalePanelSeed = {
+      stalePanelId,
+      serverReset: staleServerReset,
+      cacheSeed: staleCacheSeed
+    };
+
+    await page.addInitScript((payload) => {
+      try {
+        const alreadySeeded = window.sessionStorage.getItem(payload.guardKey);
+        if (alreadySeeded) return;
+        window.localStorage.setItem(payload.key, JSON.stringify(payload.snapshot));
+        window.sessionStorage.setItem(payload.guardKey, '1');
+      } catch {
+        /* ignore */
+      }
+    }, { key: cacheKey, snapshot: staleCacheSeed, guardKey: seedGuardKey });
+
+    const layoutResponsePromise = page
+      .waitForResponse(
+        (response) =>
+          response.url().includes('/api/ui/layout') && response.request().method() === 'GET',
+        { timeout: 15000 }
+      )
+      .catch(() => null);
+
     await page.goto(baseUrl, { waitUntil: 'networkidle' });
     await page.locator('.panel-drag-handle').first().waitFor({ state: 'visible', timeout: 15000 });
+
+    const readLayoutCache = async () =>
+      page.evaluate((key) => {
+        const raw = window.localStorage.getItem(key);
+        if (!raw) return null;
+        try {
+          return JSON.parse(raw);
+        } catch {
+          return { parseError: true };
+        }
+      }, cacheKey);
+
+    const waitForCacheWithoutPanel = async (targetId, timeoutMs = 5000, intervalMs = 250) => {
+      const start = Date.now();
+      let lastSnapshot = null;
+
+      while (Date.now() - start < timeoutMs) {
+        lastSnapshot = await readLayoutCache();
+        const hasPanel = Boolean(lastSnapshot?.panels && targetId in lastSnapshot.panels);
+        if (!hasPanel) {
+          return { matched: true, snapshot: lastSnapshot };
+        }
+        await wait(intervalMs);
+      }
+
+      return { matched: false, snapshot: lastSnapshot };
+    };
+
+    await layoutResponsePromise;
+    const staleCleanup = await waitForCacheWithoutPanel(stalePanelId);
+    result.steps.stalePanelCleanup = {
+      stalePanelId,
+      matched: staleCleanup.matched,
+      cache: staleCleanup.snapshot
+    };
 
     const initialLayout = await fetchJson('/api/ui/layout');
     result.steps.initialLayout = initialLayout;
@@ -460,7 +554,89 @@ const runUiSmoke = async () => {
       };
     };
 
+    const waitForToggleLabel = async (locator, expected, timeoutMs = 5000, intervalMs = 200) => {
+      const start = Date.now();
+      let lastLabel = null;
+
+      while (Date.now() - start < timeoutMs) {
+        lastLabel = await locator.getAttribute('aria-label');
+        if (lastLabel === expected) {
+          return { matched: true, label: lastLabel };
+        }
+        await wait(intervalMs);
+      }
+
+      return { matched: false, label: lastLabel };
+    };
+
+    const rollbackStep = async () => {
+      const toggle = page.locator('.panel-toggle').first();
+      const labelBefore = await toggle.getAttribute('aria-label');
+
+      if (!labelBefore) {
+        return { skipped: true, reason: 'toggle missing' };
+      }
+
+      let intercepted = false;
+      const handler = async (route) => {
+        const request = route.request();
+        if (request.method() === 'PATCH' && !intercepted) {
+          intercepted = true;
+          await route.fulfill({
+            status: 500,
+            contentType: 'application/json',
+            body: JSON.stringify({ error: 'forced failure' })
+          });
+          return;
+        }
+        await route.continue();
+      };
+
+      await page.route('**/api/ui/layout', handler);
+
+      let patchStatus = null;
+      let labelAfter = null;
+      let rollbackResult = { matched: false, label: null };
+
+      try {
+        await toggle.click();
+        const response = await page
+          .waitForResponse(
+            (resp) =>
+              resp.url().includes('/api/ui/layout') && resp.request().method() === 'PATCH',
+            { timeout: 5000 }
+          )
+          .catch(() => null);
+        patchStatus = response?.status() ?? null;
+        rollbackResult = await waitForToggleLabel(toggle, labelBefore);
+        labelAfter = rollbackResult.label;
+      } finally {
+        await page.unroute('**/api/ui/layout', handler);
+      }
+
+      let restored = false;
+      if (!rollbackResult.matched) {
+        await toggle.click();
+        const restoreResult = await waitForToggleLabel(toggle, labelBefore);
+        restored = restoreResult.matched;
+        if (restoreResult.matched) {
+          labelAfter = restoreResult.label;
+        }
+      }
+
+      return {
+        skipped: false,
+        intercepted,
+        patchStatus,
+        labelBefore,
+        labelAfter,
+        rolledBack: rollbackResult.matched,
+        restored
+      };
+    };
+
     result.steps.ensureVisible = await ensurePanelVisible(true);
+    result.steps.rollbackOnPatchFailure = await rollbackStep();
     result.steps.drag = await dragStep();
     result.steps.collapse = await collapseStep(true);
     result.steps.expand = await collapseStep(false);
@@ -486,6 +662,14 @@ const runUiSmoke = async () => {
       preserved,
       beforeReload,
       afterReload
+    };
+
+    const stalePanelCleanupOk = result.steps.stalePanelCleanup?.matched === true;
+    const rollbackOk = result.steps.rollbackOnPatchFailure?.rolledBack === true;
+    result.steps.validation = {
+      stalePanelCleanup: stalePanelCleanupOk,
+      rollbackOnPatchFailure: rollbackOk,
+      ok: stalePanelCleanupOk && rollbackOk
     };
   } finally {
     await browser.close();
@@ -531,6 +715,18 @@ const run = async () => {
   await mkdir(path.dirname(resultPath), { recursive: true });
   await writeFile(resultPath, JSON.stringify(payload, null, 2), 'utf-8');
   console.log(`Smoke test complete. Result written to ${resultPath}`);
+
+  const layoutValidationOk = payload.results.layoutApiTests?.steps?.validation?.ok;
+  const uiValidationOk = payload.results.uiSmoke?.steps?.validation?.ok;
+  const hasUiSmoke = payload.results.uiSmoke && !payload.results.uiSmoke.skipped;
+  const hasLayoutSmoke = payload.results.layoutApiTests && !payload.results.layoutApiTests.skipped;
+  const failedUiValidation = hasUiSmoke && uiValidationOk === false;
+  const failedLayoutValidation = hasLayoutSmoke && layoutValidationOk === false;
+
+  if (failedUiValidation || failedLayoutValidation) {
+    console.error('Smoke test validation failed.');
+    process.exitCode = 1;
+  }
 
   if (shouldSpawnBackend) {
     await stopBackend(childProcess);

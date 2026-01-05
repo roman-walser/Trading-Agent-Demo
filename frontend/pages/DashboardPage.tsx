@@ -51,9 +51,13 @@ export const DashboardPage = (): JSX.Element => {
   const cachedLayout = getCachedUiLayoutSnapshot() ?? undefined;
   const {
     isSuccess: layoutQueryReady,
-    isError: layoutError
+    isError: layoutError,
+    isFetchedAfterMount: layoutFetchedAfterMount
   } = useUiLayoutQuery(true, cachedLayout);
   const patchUiLayout = usePatchUiLayout();
+  const isSavingLayout = patchUiLayout.status === 'loading';
+  const hasFetchedLayout = layoutFetchedAfterMount || layoutError;
+  const isInteractionLocked = isSavingLayout || !hasFetchedLayout;
   const uiLayoutState = useUiLayoutState();
   const layoutReady = uiLayoutState.hydrated || layoutQueryReady || layoutError;
   const isLoadingLayout = !layoutReady;
@@ -175,6 +179,7 @@ export const DashboardPage = (): JSX.Element => {
     collapsedState: boolean,
     visibleState: boolean
   ): void => {
+    if (isInteractionLocked) return;
     const dto: PanelLayoutDto = {
       visible: visibleState,
       collapsed: collapsedState,
@@ -192,6 +197,7 @@ export const DashboardPage = (): JSX.Element => {
   };
 
   const persistLayoutState = (layout: Layout[]): void => {
+    if (isInteractionLocked) return;
     if (layout.length === 0) return;
     const panelsPayload: Record<string, PanelLayoutDto> = {};
     layout.forEach((item) => {
@@ -211,10 +217,12 @@ export const DashboardPage = (): JSX.Element => {
   };
 
   const handleInteractionStart = (): void => {
+    if (isInteractionLocked) return;
     isInteractingRef.current = true;
   };
 
   const handleInteractionStop = (layout: Layout[]): void => {
+    if (isInteractionLocked) return;
     isInteractingRef.current = false;
     const normalizedLayout = layout.map((item) =>
       applyPanelConstraints(item, getPanelLayout(item.i).collapsed ?? false)
@@ -224,6 +232,7 @@ export const DashboardPage = (): JSX.Element => {
   };
 
   const togglePanel = (id: string): void => {
+    if (isInteractionLocked) return;
     const panelState = getPanelLayout(id);
     const nextVisible = !panelState.visible;
     const nextLayout = applyPanelConstraints({
@@ -253,6 +262,7 @@ export const DashboardPage = (): JSX.Element => {
   const activePanels = panels.filter((panel) => panelVisibility[panel.id]);
 
   const handleCollapseChange = (id: string, isCollapsed: boolean): void => {
+    if (isInteractionLocked) return;
     const panelState = getPanelLayout(id);
     const nextHeight =
       isCollapsed ? 2 : Math.max(panelState.h ?? DEFAULT_PANEL_H, DEFAULT_PANEL_H);
@@ -285,6 +295,7 @@ export const DashboardPage = (): JSX.Element => {
         panels={panels}
         visible={panelVisibility}
         onTogglePanel={togglePanel}
+        disabled={isInteractionLocked}
       />
 
       <div className="bg-transparent">
@@ -302,7 +313,7 @@ export const DashboardPage = (): JSX.Element => {
               rowHeight={30}
               margin={[16, 16]}
               containerPadding={[0, 0]}
-              isResizable
+              isResizable={!isInteractionLocked}
               draggableHandle=".panel-drag-handle"
               draggableCancel=".panel-toggle"
               resizeHandles={['se']}
@@ -310,7 +321,7 @@ export const DashboardPage = (): JSX.Element => {
               verticalCompact={false}
               isBounded={false}
               resizeHandle={resizeHandle}
-              isDraggable
+              isDraggable={!isInteractionLocked}
               onLayoutChange={(newLayout: Layout[]) =>
                 setGridLayout((prev) => mergeLayout(newLayout, prev))
               }
@@ -340,7 +351,8 @@ export const DashboardPage = (): JSX.Element => {
                 >
                   {panel.render({
                     collapsed: getPanelLayout(panel.id).collapsed,
-                    onCollapseChange: (collapsed: boolean) => handleCollapseChange(panel.id, collapsed)
+                    onCollapseChange: (collapsed: boolean) => handleCollapseChange(panel.id, collapsed),
+                    interactionDisabled: isInteractionLocked
                   })}
                 </div>
               ))}
