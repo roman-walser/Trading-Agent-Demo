@@ -19,8 +19,8 @@ Dev:
 3) Open `http://localhost:3000/` (UI), `http://localhost:3000/api/ui/layout`, or `http://localhost:3000/api/health`
 
 ## Layout stability check
-- Run: `node scripts/tests/e2e/layout-stability.mjs`
-- Result: `scripts/tests/e2e/layout-stability.result.json`
+- Run: `node scripts/tests/smoke/02_states/00_state_snapshot.smoke.js`
+- Result: `scripts/tests/smoke/02_states/00_state_snapshot.smoke.result.json`
 
 ## Notes
 - Backend in-memory state survives UI refresh (F5) but resets on backend restart.

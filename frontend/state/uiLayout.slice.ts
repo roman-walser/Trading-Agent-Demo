@@ -72,8 +72,10 @@ const reducer = (
       const nextPanels = snapshot.panels ?? {};
       const mergedPanels = { ...initialPanels, ...nextPanels };
       const nextLastUpdated = snapshot.lastUpdatedUtc ?? null;
+      const hasRemovedPanels = Object.keys(state.panels).some((key) => !(key in mergedPanels));
       const hasChanged =
         state.lastUpdatedUtc !== nextLastUpdated ||
+        hasRemovedPanels ||
         Object.keys(mergedPanels).some((key) => {
           const prev = state.panels[key];
           const next = mergedPanels[key];

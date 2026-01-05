@@ -1,11 +1,11 @@
 {
   "test": "01_nodejs_infrastructure/00_health",
   "baseUrl": "http://localhost:3000",
-  "timestampUtc": "2026-01-04T18:55:03.550Z",
+  "timestampUtc": "2026-01-05T13:39:28.473Z",
   "backend": {
     "ready": true,
     "exit": null,
-    "stdout": "",
+    "stdout": "Preparing cleanup...\nCleanup ok. No other node processes found.\nStarting server...\n{\"level\":30,\"time\":1767620368201,\"pid\":22468,\"hostname\":\"DESKTOP-HONRRA7\",\"msg\":\"Server listening at http://0.0.0.0:3000\"}\nServer started on http://0.0.0.0:3000\n{\"level\":30,\"time\":1767620368386,\"pid\":22468,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1\",\"req\":{\"method\":\"GET\",\"url\":\"/health\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":51138},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767620368400,\"pid\":22468,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1\",\"res\":{\"statusCode\":200},\"responseTime\":13.592700004577637,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767620368427,\"pid\":22468,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-2\",\"req\":{\"method\":\"GET\",\"url\":\"/health\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":51140},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767620368427,\"pid\":22468,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-2\",\"res\":{\"statusCode\":200},\"responseTime\":0.6668999791145325,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767620368429,\"pid\":22468,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-3\",\"req\":{\"method\":\"GET\",\"url\":\"/api/health\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":51138},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767620368430,\"pid\":22468,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-3\",\"res\":{\"statusCode\":200},\"responseTime\":0.6965000033378601,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767620368458,\"pid\":22468,\"hostname\":\"DESKTOP-HONRRA7\",\"socketId\":\"wqziBUQL3rGwdDB0AAAB\",\"msg\":\"ws connected\"}\n{\"level\":30,\"time\":1767620368460,\"pid\":22468,\"hostname\":\"DESKTOP-HONRRA7\",\"socketId\":\"wqziBUQL3rGwdDB0AAAB\",\"reason\":\"client namespace disconnect\",\"msg\":\"ws disconnected\"}\n{\"level\":30,\"time\":1767620368460,\"pid\":22468,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-4\",\"req\":{\"method\":\"GET\",\"url\":\"/\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":51138},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767620368469,\"pid\":22468,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-4\",\"res\":{\"statusCode\":200},\"responseTime\":8.420800000429153,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767620368471,\"pid\":22468,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-5\",\"req\":{\"method\":\"GET\",\"url\":\"/assets/index-DXchUIU8.css\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":51138},\"msg\":\"incoming request\"}\n",
     "stderr": ""
   },
   "results": {
@@ -15,7 +15,7 @@
       "ok": true,
       "body": {
         "ok": true,
-        "serverTimeUtc": "2026-01-04T18:55:03Z"
+        "serverTimeUtc": "2026-01-05T13:39:28Z"
       }
     },
     "apiHealth": {
@@ -24,7 +24,7 @@
       "ok": true,
       "body": {
         "ok": true,
-        "serverTimeUtc": "2026-01-04T18:55:03Z"
+        "serverTimeUtc": "2026-01-05T13:39:28Z"
       }
     },
     "validation": {
@@ -41,7 +41,7 @@
     },
     "websocket": {
       "connected": true,
-      "id": "EiqTn9rjFwhFXtIaAAAD",
+      "id": "wqziBUQL3rGwdDB0AAAB",
       "durationMs": 27
     },
     "frontend": {
