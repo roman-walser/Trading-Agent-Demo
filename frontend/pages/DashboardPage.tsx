@@ -7,7 +7,6 @@ import { usePatchUiLayout, useUiLayoutQuery } from '../query/uiLayout.queries.js
 import type { PanelLayoutDto } from '../api/routes/uiLayout.api.js';
 import {
   getPanelLayout,
-  setPanelLayout,
   useUiLayoutState,
   getCachedUiLayoutSnapshot
 } from '../state/store.js';
@@ -185,8 +184,6 @@ export const DashboardPage = (): JSX.Element => {
       h: entry.h
     };
 
-    setPanelLayout(panelId, dto);
-
     patchUiLayout.mutate({
       panels: {
         [panelId]: dto
@@ -208,7 +205,6 @@ export const DashboardPage = (): JSX.Element => {
         h: item.h
       };
       panelsPayload[item.i] = dto;
-      setPanelLayout(item.i, dto);
     });
 
     patchUiLayout.mutate({ panels: panelsPayload });

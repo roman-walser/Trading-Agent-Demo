@@ -137,21 +137,41 @@ export const createUiLayoutSlice = (store: StoreApi) => {
     });
   }
 
-  const hydrateFromServer = (snapshot: UiLayoutStateDto | undefined | null): void => {
+  const applySnapshot = (
+    snapshot: UiLayoutStateDto | undefined | null,
+    source: 'cache' | 'server',
+    persist: boolean
+  ): void => {
     if (!snapshot) return;
     store.dispatch({
       type: HYDRATE,
-      payload: { snapshot, source: 'server' as const }
+      payload: { snapshot, source }
     });
-    writeLayoutCache(getState());
+    if (persist) {
+      writeLayoutCache(getState());
+    }
   };
 
-  const setPanelLayout = (panelId: string, layout: PanelLayoutDto): void => {
+  const hydrateFromServer = (snapshot: UiLayoutStateDto | undefined | null): void =>
+    applySnapshot(snapshot, 'server', true);
+
+  const restoreFromSnapshot = (snapshot: UiLayoutStateDto | undefined | null): void =>
+    applySnapshot(snapshot, 'cache', false);
+
+  const getSnapshot = (): UiLayoutStateDto => toDto(getState());
+
+  const setPanelLayout = (
+    panelId: string,
+    layout: PanelLayoutDto,
+    persist = false
+  ): void => {
     store.dispatch({
       type: UPDATE_PANEL,
       payload: { panelId, layout }
     });
-    writeLayoutCache(getState());
+    if (persist) {
+      writeLayoutCache(getState());
+    }
   };
 
   const selectUiLayout = (globalState: { uiLayout?: UiLayoutSliceState }): UiLayoutSliceState =>
@@ -170,6 +190,8 @@ export const createUiLayoutSlice = (store: StoreApi) => {
   return {
     getState,
     hydrateFromServer,
+    restoreFromSnapshot,
+    getSnapshot,
     setPanelLayout,
     selectUiLayout,
     getPanelLayout

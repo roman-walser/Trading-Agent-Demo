@@ -104,6 +104,8 @@ export const useHealthState = (): HealthSliceState =>
 
 export const hydrateFromHealthResponse = healthSlice.hydrateFromHealthResponse;
 export const hydrateUiLayoutFromSnapshot = uiLayoutSlice.hydrateFromServer;
+export const restoreUiLayoutSnapshot = uiLayoutSlice.restoreFromSnapshot;
+export const getUiLayoutSnapshot = uiLayoutSlice.getSnapshot;
 export const setPanelLayout = uiLayoutSlice.setPanelLayout;
 export const getPanelLayout = uiLayoutSlice.getPanelLayout;
 export const useUiLayoutState = (): UiLayoutSliceState =>
