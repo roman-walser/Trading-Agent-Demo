@@ -2,8 +2,10 @@
 import { spawnSync } from 'node:child_process';
 import { createInterface } from 'node:readline';
 import { appConfig } from './config/index.js';
+import { closeUiLayoutAdapter } from './infra/persist/uiLayout.repo.js';
 import { createHttpServer } from './server/http/index.js';
 import { attachWebsocketServer } from './server/ws/index.js';
+import { hydrateUiLayoutFromPersistence } from './state-services/ui.service.js';
 
 const app = createHttpServer();
 const io = attachWebsocketServer(app);
@@ -11,6 +13,13 @@ const io = attachWebsocketServer(app);
 const start = async (): Promise<void> => {
   try {
     await ensureCleanNodeStartup();
+    const hydratedLayout = await hydrateUiLayoutFromPersistence();
+    if (hydratedLayout) {
+      const panelCount = Object.keys(hydratedLayout.panels ?? {}).length;
+      console.log(`UI layout hydrated from persistence (${panelCount} panel(s)).`);
+    } else {
+      console.log('UI layout persistence is empty.');
+    }
     console.log('Starting server...');
     await app.listen({ port: appConfig.http.port, host: '0.0.0.0' });
     console.log(`Server started on http://0.0.0.0:${appConfig.http.port}`);
@@ -29,6 +38,7 @@ const shutdown = async (signal?: string): Promise<void> => {
     io.close(() => resolve());
   });
 
+  await closeUiLayoutAdapter();
   await app.close();
   process.exit(0);
 };

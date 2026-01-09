@@ -22,6 +22,7 @@ Minimal HTTP + WebSocket baseline in TypeScript:
   - [Smoke tests](#smoke-tests)
     - [nodejs\_infrastructure](#nodejs_infrastructure)
     - [states](#states)
+    - [infra\_persist](#infra_persist)
   - [Production build \& serve](#production-build--serve)
   - [Docker (one-port API/WS + frontend)](#docker-one-port-apiws--frontend)
   - [Scripts](#scripts)
@@ -34,6 +35,7 @@ This demo is an early baseline extracted from a larger, real-world project. It d
 - [Tooling](docs/public/00_overview/01_tooling.md)
 - [Node.js infrastructure](docs/public/01_nodejs_infrastructure/00_nodejs_infrastructure.md)
 - [States (health + UI layout)](docs/public/02_states/00_states.md)
+- [Infra persist (UI layout persistence)](docs/public/03_infra_persist/00_infra_persist.md)
 
 ## Getting started
 Prereq: Node.js 20.11.1 (nvm-windows: `nvm install 20.11.1` then `nvm use 20.11.1`)
@@ -56,6 +58,18 @@ Prereq: Node.js 20.11.1 (nvm-windows: `nvm install 20.11.1` then `nvm use 20.11.
 - Run: `node scripts/tests/smoke/02_states/00_state_snapshot.smoke.js`
 - Checks: `/api/health`, `/api/ui/layout`, and UI drag/collapse/hide/reload persistence.
 - Output: [00_state_snapshot.smoke.result.json](scripts/tests/smoke/02_states/00_state_snapshot.smoke.result.json)
+
+### infra_persist
+- Default spawns backend itself; set `SMOKE_SPAWN_BACKEND=false` to reuse a running one.
+- Run: `node scripts/tests/smoke/03_infra_persist/00_ui_layout_persist.smoke.js`
+- Checks: `/api/ui/layout` persistence, NDJSON snapshot, and restart hydration (when spawning backend).
+- Output: [00_ui_layout_persist.smoke.result.json](scripts/tests/smoke/03_infra_persist/00_ui_layout_persist.smoke.result.json)
+- Run: `node --import tsx scripts/tests/smoke/03_infra_persist/01_ui_layout_history.smoke.js`
+- Checks: UI layout history back/forward state transitions (store-level).
+- Output: [01_ui_layout_history.smoke.result.json](scripts/tests/smoke/03_infra_persist/01_ui_layout_history.smoke.result.json)
+- Run: `node scripts/tests/smoke/03_infra_persist/02_ui_layout_presets.smoke.js`
+- Checks: layout presets create/rename/delete (API + UI).
+- Output: [02_ui_layout_presets.smoke.result.json](scripts/tests/smoke/03_infra_persist/02_ui_layout_presets.smoke.result.json)
 
 ## Production build & serve
 - Build frontend + type-check: `npm run build` (outputs to `dist/frontend`)

@@ -1,0 +1,201 @@
+{
+  "test": "03_infra_persist/02_ui_layout_presets",
+  "baseUrl": "http://localhost:3000",
+  "timestampUtc": "2026-01-06T16:09:43.043Z",
+  "backend": {
+    "ready": true,
+    "exit": null,
+    "stdout": "Preparing cleanup...\nCleanup ok. No other node processes found.\nUI layout hydrated from persistence (1 panel(s)).\nStarting server...\n{\"level\":30,\"time\":1767715778673,\"pid\":10844,\"hostname\":\"DESKTOP-HONRRA7\",\"msg\":\"Server listening at http://0.0.0.0:3000\"}\nServer started on http://0.0.0.0:3000\n{\"level\":30,\"time\":1767715778810,\"pid\":10844,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1\",\"req\":{\"method\":\"GET\",\"url\":\"/api/health\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":54351},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715778826,\"pid\":10844,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1\",\"res\":{\"statusCode\":200},\"responseTime\":15.094199985265732,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715778839,\"pid\":10844,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-2\",\"req\":{\"method\":\"GET\",\"url\":\"/health\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59629},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715778841,\"pid\":10844,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-2\",\"res\":{\"statusCode\":200},\"responseTime\":1.4991999864578247,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715778893,\"pid\":10844,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-3\",\"req\":{\"method\":\"GET\",\"url\":\"/api/health\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59631},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715778895,\"pid\":10844,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-3\",\"res\":{\"statusCode\":200},\"responseTime\":1.6231000125408173,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715778905,\"pid\":10844,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-4\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layouts\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59629},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715778916,\"pid\":10844,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-4\",\"res\":{\"statusCode\":200},\"responseTime\":10.182799994945526,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715778921,\"pid\":10844,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-5\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59631},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715778926,\"pid\":10844,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-5\",\"res\":{\"statusCode\":200},\"responseTime\":4.591800004243851,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715778956,\"pid\":10844,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-6\",\"req\":{\"method\":\"POST\",\"url\":\"/api/ui/layouts\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59629},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715779008,\"pid\":10844,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-6\",\"res\":{\"statusCode\":200},\"responseTime\":51.26079997420311,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715779016,\"pid\":10844,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-7\",\"req\":{\"method\":\"PATCH\",\"url\":\"/api/ui/layouts/2d01b99f-f4ad-45b9-8ea6-61079f864eb0\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59631},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715779060,\"pid\":10844,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-7\",\"res\":{\"statusCode\":200},\"responseTime\":43.01669999957085,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715779066,\"pid\":10844,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-8\",\"req\":{\"method\":\"DELETE\",\"url\":\"/api/ui/layouts/2d01b99f-f4ad-45b9-8ea6-61079f864eb0\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59629},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715779103,\"pid\":10844,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-8\",\"res\":{\"statusCode\":200},\"responseTime\":36.519999980926514,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715779106,\"pid\":10844,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-9\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layouts\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59631},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715779125,\"pid\":10844,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-9\",\"res\":{\"statusCode\":200},\"responseTime\":19.270999997854233,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715780954,\"pid\":10844,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-a\",\"req\":{\"method\":\"GET\",\"url\":\"/\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":52117},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715780969,\"pid\":10844,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-a\",\"res\":{\"statusCode\":200},\"responseTime\":15.254900008440018,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715780973,\"pid\":10844,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-b\",\"req\":{\"method\":\"GET\",\"url\":\"/assets/index-S-WAMz6D.js\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":52117},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715780984,\"pid\":10844,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-b\",\"res\":{\"statusCode\":200},\"responseTime\":10.701600015163422,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715780985,\"pid\":10844,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-c\",\"req\":{\"method\":\"GET\",\"url\":\"/assets/index-C4MZuMi1.css\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":52117},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715780989,\"pid\":10844,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-c\",\"res\":{\"statusCode\":200},\"responseTime\":3.2326000034809113,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715781022,\"pid\":10844,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-d\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":52117},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715781023,\"pid\":10844,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-d\",\"res\":{\"statusCode\":200},\"responseTime\":0.7949999868869781,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715781056,\"pid\":10844,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-e\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":52117},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715781056,\"pid\":10844,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-e\",\"res\":{\"statusCode\":200},\"responseTime\":0.6028999984264374,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715781058,\"pid\":10844,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-f\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout/history?limit=21\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":52117},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715781062,\"pid\":10844,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-f\",\"res\":{\"statusCode\":200},\"responseTime\":4.078199982643127,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715781064,\"pid\":10844,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-g\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layouts\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":52117},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715781068,\"pid\":10844,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-g\",\"res\":{\"statusCode\":200},\"responseTime\":3.0105000138282776,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715781092,\"pid\":10844,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-h\",\"req\":{\"method\":\"GET\",\"url\":\"/api/health\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":52117},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715781093,\"pid\":10844,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-h\",\"res\":{\"statusCode\":200},\"responseTime\":0.6876000165939331,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715781412,\"pid\":10844,\"hostname\":\"DESKTOP-HONRRA7\",\"socketId\":\"cxX5gVJGPRg8pBNKAAAB\",\"msg\":\"ws connected\"}\n{\"level\":30,\"time\":1767715782059,\"pid\":10844,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-i\",\"req\":{\"method\":\"POST\",\"url\":\"/api/ui/layouts\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":52117},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715782068,\"pid\":10844,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-i\",\"res\":{\"statusCode\":200},\"responseTime\":8.117399990558624,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715782205,\"pid\":10844,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-j\",\"req\":{\"method\":\"PATCH\",\"url\":\"/api/ui/layouts/4a567cfc-8270-465b-a5e2-415fb6797e72\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":52117},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715782212,\"pid\":10844,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-j\",\"res\":{\"statusCode\":200},\"responseTime\":6.64190000295639,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715782274,\"pid\":10844,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-k\",\"req\":{\"method\":\"DELETE\",\"url\":\"/api/ui/layouts/4a567cfc-8270-465b-a5e2-415fb6797e72\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":52117},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715782280,\"pid\":10844,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-k\",\"res\":{\"statusCode\":200},\"responseTime\":5.646699994802475,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715782306,\"pid\":10844,\"hostname\":\"DESKTOP-HONRRA7\",\"socketId\":\"cxX5gVJGPRg8pBNKAAAB\",\"reason\":\"transport close\",\"msg\":\"ws disconnected\"}\n",
+    "stderr": ""
+  },
+  "results": {
+    "apiHealth": {
+      "path": "/api/health",
+      "status": 200,
+      "ok": true,
+      "body": {
+        "ok": true,
+        "serverTimeUtc": "2026-01-06T16:09:38Z"
+      }
+    },
+    "apiSmoke": {
+      "skipped": false,
+      "reason": null,
+      "steps": {
+        "initial": {
+          "path": "/api/ui/layouts",
+          "status": 200,
+          "ok": true,
+          "body": {
+            "layouts": [
+              {
+                "id": "3313f067-ac6e-4e13-a615-68b9f8f23453",
+                "name": "default",
+                "snapshot": {
+                  "panels": {
+                    "health": {
+                      "visible": true,
+                      "collapsed": false,
+                      "x": 4,
+                      "y": 0,
+                      "w": 3,
+                      "h": 8
+                    }
+                  },
+                  "lastUpdatedUtc": "2026-01-06T13:52:43.225Z"
+                },
+                "createdUtc": "2026-01-06T13:52:57.384Z",
+                "updatedUtc": "2026-01-06T13:52:57.384Z"
+              }
+            ]
+          }
+        },
+        "layoutSnapshot": {
+          "path": "/api/ui/layout",
+          "status": 200,
+          "ok": true,
+          "body": {
+            "panels": {
+              "health": {
+                "visible": true,
+                "collapsed": false,
+                "x": 0,
+                "y": 0,
+                "w": 3,
+                "h": 8
+              }
+            },
+            "lastUpdatedUtc": "2026-01-06T16:09:20.417Z"
+          }
+        },
+        "create": {
+          "path": "/api/ui/layouts",
+          "method": "POST",
+          "status": 200,
+          "ok": true,
+          "body": {
+            "preset": {
+              "id": "2d01b99f-f4ad-45b9-8ea6-61079f864eb0",
+              "name": "Smoke preset 1767715778929",
+              "snapshot": {
+                "panels": {
+                  "health": {
+                    "visible": true,
+                    "collapsed": false,
+                    "x": 0,
+                    "y": 0,
+                    "w": 3,
+                    "h": 8
+                  }
+                },
+                "lastUpdatedUtc": "2026-01-06T16:09:20.417Z"
+              },
+              "createdUtc": "2026-01-06T16:09:38.966Z",
+              "updatedUtc": "2026-01-06T16:09:38.966Z"
+            }
+          }
+        },
+        "rename": {
+          "path": "/api/ui/layouts/2d01b99f-f4ad-45b9-8ea6-61079f864eb0",
+          "method": "PATCH",
+          "status": 200,
+          "ok": true,
+          "body": {
+            "preset": {
+              "id": "2d01b99f-f4ad-45b9-8ea6-61079f864eb0",
+              "name": "Smoke preset 1767715778929 renamed",
+              "snapshot": {
+                "panels": {
+                  "health": {
+                    "visible": true,
+                    "collapsed": false,
+                    "x": 0,
+                    "y": 0,
+                    "w": 3,
+                    "h": 8
+                  }
+                },
+                "lastUpdatedUtc": "2026-01-06T16:09:20.417Z"
+              },
+              "createdUtc": "2026-01-06T16:09:38.966Z",
+              "updatedUtc": "2026-01-06T16:09:39.044Z"
+            }
+          }
+        },
+        "delete": {
+          "path": "/api/ui/layouts/2d01b99f-f4ad-45b9-8ea6-61079f864eb0",
+          "method": "DELETE",
+          "status": 200,
+          "ok": true,
+          "body": {
+            "removed": {
+              "id": "2d01b99f-f4ad-45b9-8ea6-61079f864eb0",
+              "name": "Smoke preset 1767715778929 renamed",
+              "snapshot": {
+                "panels": {
+                  "health": {
+                    "visible": true,
+                    "collapsed": false,
+                    "x": 0,
+                    "y": 0,
+                    "w": 3,
+                    "h": 8
+                  }
+                },
+                "lastUpdatedUtc": "2026-01-06T16:09:20.417Z"
+              },
+              "createdUtc": "2026-01-06T16:09:38.966Z",
+              "updatedUtc": "2026-01-06T16:09:39.044Z"
+            }
+          }
+        },
+        "finalList": {
+          "path": "/api/ui/layouts",
+          "status": 200,
+          "ok": true,
+          "body": {
+            "layouts": [
+              {
+                "id": "3313f067-ac6e-4e13-a615-68b9f8f23453",
+                "name": "default",
+                "snapshot": {
+                  "panels": {
+                    "health": {
+                      "visible": true,
+                      "collapsed": false,
+                      "x": 4,
+                      "y": 0,
+                      "w": 3,
+                      "h": 8
+                    }
+                  },
+                  "lastUpdatedUtc": "2026-01-06T13:52:43.225Z"
+                },
+                "createdUtc": "2026-01-06T13:52:57.384Z",
+                "updatedUtc": "2026-01-06T13:52:57.384Z"
+              }
+            ]
+          }
+        },
+        "validation": {
+          "createdOk": true,
+          "renamedOk": true,
+          "deletedOk": true,
+          "removed": true,
+          "ok": true
+        }
+      }
+    },
+    "uiSmoke": {
+      "skipped": false,
+      "reason": null,
+      "steps": {
+        "flow": {
+          "created": true,
+          "renamed": true,
+          "deleted": true
+        }
+      }
+    }
+  }
+}

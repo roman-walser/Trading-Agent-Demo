@@ -23,9 +23,10 @@ Dev:
 - Result: `scripts/tests/smoke/02_states/00_state_snapshot.smoke.result.json`
 
 ## Notes
-- Backend in-memory state survives UI refresh (F5) but resets on backend restart.
+- Backend in-memory state survives UI refresh (F5) but resets on backend restart (health state).
 - Health panel polling uses `/api/health` for status.
 - UI layout is cached in local storage to avoid layout jumps on reload; server state is the source of truth.
+- UI layout persistence across backend restarts is added in the infra persist chapter.
 
 ## Files created/updated (what and why)
 - `package.json`: Added Playwright devDependencies for UI smoke/layout checks.

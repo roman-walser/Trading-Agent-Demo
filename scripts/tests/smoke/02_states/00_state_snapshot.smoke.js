@@ -203,6 +203,15 @@ const hasFrontendBuild = async () => {
   }
 };
 
+const panelFields = ['visible', 'collapsed', 'x', 'y', 'w', 'h'];
+
+const panelStateMatches = (expected, actual) =>
+  Boolean(
+    expected &&
+      actual &&
+      panelFields.every((field) => expected[field] === actual[field])
+  );
+
 const waitForPanelState = async (predicate, timeoutMs = 5000, intervalMs = 250) => {
   const start = Date.now();
   let lastResponse = null;
@@ -218,6 +227,9 @@ const waitForPanelState = async (predicate, timeoutMs = 5000, intervalMs = 250) 
 
   return { matched: false, response: lastResponse };
 };
+
+const waitForPanelMatch = (expected, timeoutMs, intervalMs) =>
+  waitForPanelState((panel) => panelStateMatches(expected, panel), timeoutMs, intervalMs);
 
 const runLayoutApiTests = async () => {
   const result = {
@@ -368,6 +380,11 @@ const runUiSmoke = async () => {
 
   const browser = await playwright.chromium.launch({ headless });
   const page = await browser.newPage({ viewport: { width: 1280, height: 720 } });
+  const layoutMenuButton = page.getByRole('button', { name: 'Layout menu' });
+  const backButton = page.getByRole('button', { name: 'Back layout' });
+  const forwardButton = page.getByRole('button', { name: 'Forward layout' });
+  const defaultButton = page.getByRole('button', { name: 'Default layout' });
+  const deleteButton = page.getByRole('button', { name: 'Delete history' });
 
   try {
     const cacheKey = 'ui-layout-cache';
@@ -381,6 +398,7 @@ const runUiSmoke = async () => {
       w: 3,
       h: 8
     };
+    const defaultPanelLayout = { ...seededHealth };
     const stalePanel = {
       visible: true,
       collapsed: false,
@@ -422,8 +440,52 @@ const runUiSmoke = async () => {
       )
       .catch(() => null);
 
+    const waitForLayoutMenuEnabled = async (timeoutMs = 5000, intervalMs = 200) => {
+      const start = Date.now();
+      let lastDisabled = true;
+
+      while (Date.now() - start < timeoutMs) {
+        lastDisabled = await layoutMenuButton.isDisabled();
+        if (!lastDisabled) {
+          return { matched: true, disabled: lastDisabled };
+        }
+        await wait(intervalMs);
+      }
+
+      return { matched: false, disabled: lastDisabled };
+    };
+
+    const openLayoutMenu = async () => {
+      const ready = await waitForLayoutMenuEnabled();
+      if (!ready.matched) {
+        throw new Error('Layout menu did not become enabled.');
+      }
+      const expanded = await layoutMenuButton.getAttribute('aria-expanded');
+      if (expanded !== 'true') {
+        await layoutMenuButton.click();
+      }
+      await defaultButton.waitFor({ state: 'visible', timeout: 5000 });
+    };
+
+    const closeLayoutMenu = async () => {
+      const expanded = await layoutMenuButton.getAttribute('aria-expanded');
+      if (expanded === 'true') {
+        await layoutMenuButton.click();
+        await defaultButton.waitFor({ state: 'hidden', timeout: 5000 }).catch(() => null);
+      }
+    };
+
     await page.goto(baseUrl, { waitUntil: 'networkidle' });
     await page.locator('.panel-drag-handle').first().waitFor({ state: 'visible', timeout: 15000 });
+    await layoutMenuButton.waitFor({ state: 'visible', timeout: 5000 });
+
+    await openLayoutMenu();
+    result.steps.historyButtonsInitial = {
+      backDisabled: await backButton.isDisabled(),
+      forwardDisabled: await forwardButton.isDisabled(),
+      deleteDisabled: await deleteButton.isDisabled()
+    };
+    await closeLayoutMenu();
 
     const readLayoutCache = async () =>
       page.evaluate((key) => {
@@ -464,11 +526,13 @@ const runUiSmoke = async () => {
     result.steps.initialLayout = initialLayout;
 
     const ensurePanelVisible = async (visible) => {
-      const button = page.getByRole('button', { name: 'Panels' });
+      await openLayoutMenu();
+      const panelsButton = page.getByRole('button', { name: 'Panels menu' });
       const panelItem = page.locator('label', { hasText: panelLabel });
+      await panelsButton.waitFor({ state: 'visible', timeout: 5000 });
       const isItemVisible = await panelItem.isVisible();
       if (!isItemVisible) {
-        await button.click();
+        await panelsButton.click();
       }
       await panelItem.waitFor({ state: 'visible', timeout: 5000 });
       const checkbox = panelItem.locator('input[type="checkbox"]');
@@ -476,6 +540,7 @@ const runUiSmoke = async () => {
       if (checked !== visible) {
         await checkbox.click();
       }
+      await closeLayoutMenu();
       const waitResult = await waitForPanelState((panel) => panel.visible === visible);
       return {
         requested: visible,
@@ -551,6 +616,180 @@ const runUiSmoke = async () => {
         height: panelState?.h ?? null,
         heightOk,
         layout: waitResult.response
+      };
+    };
+
+    const waitForButtonState = async (
+      locator,
+      expectedDisabled,
+      timeoutMs = 5000,
+      intervalMs = 200
+    ) => {
+      const start = Date.now();
+      let lastDisabled = true;
+
+      while (Date.now() - start < timeoutMs) {
+        lastDisabled = await locator.isDisabled();
+        if (lastDisabled === expectedDisabled) {
+          return { matched: true, disabled: lastDisabled };
+        }
+        await wait(intervalMs);
+      }
+
+      return { matched: false, disabled: lastDisabled };
+    };
+
+    const historyNavigationStep = async (beforeLayout, afterLayout) => {
+      const beforePanel = beforeLayout?.body?.panels?.[panelId];
+      const afterPanel = afterLayout?.body?.panels?.[panelId];
+
+      if (!beforePanel || !afterPanel) {
+        return {
+          skipped: true,
+          ok: false,
+          reason: 'panel state missing',
+          beforeLayout,
+          afterLayout
+        };
+      }
+
+      await openLayoutMenu();
+      const backState = await waitForButtonState(backButton, false);
+      const backDisabledBefore = backState.disabled;
+      const forwardDisabledBefore = await forwardButton.isDisabled();
+
+      if (backDisabledBefore) {
+        await closeLayoutMenu();
+        return {
+          skipped: true,
+          ok: false,
+          reason: 'back button disabled',
+          backDisabledBefore,
+          forwardDisabledBefore,
+          waitForBack: backState
+        };
+      }
+
+      await backButton.click();
+      const backWait = await waitForPanelMatch(beforePanel);
+      const backPanel = backWait.response?.body?.panels?.[panelId];
+      const backMatches = panelStateMatches(beforePanel, backPanel);
+      await openLayoutMenu();
+      const forwardStateAfterBack = await waitForButtonState(forwardButton, false);
+      const forwardDisabledAfterBack = forwardStateAfterBack.disabled;
+
+      await forwardButton.click();
+      const forwardWait = await waitForPanelMatch(afterPanel);
+      const forwardPanel = forwardWait.response?.body?.panels?.[panelId];
+      const forwardMatches = panelStateMatches(afterPanel, forwardPanel);
+      await openLayoutMenu();
+      const forwardStateAfterForward = await waitForButtonState(forwardButton, true);
+      const forwardDisabledAfterForward = forwardStateAfterForward.disabled;
+      await closeLayoutMenu();
+
+      return {
+        skipped: false,
+        ok:
+          backState.matched &&
+          backDisabledBefore === false &&
+          forwardDisabledBefore === true &&
+          backMatches &&
+          forwardMatches &&
+          forwardStateAfterBack.matched &&
+          forwardStateAfterForward.matched &&
+          forwardDisabledAfterBack === false &&
+          forwardDisabledAfterForward === true,
+        backDisabledBefore,
+        forwardDisabledBefore,
+        forwardDisabledAfterBack,
+        forwardDisabledAfterForward,
+        waitForBack: backState,
+        waitForForwardAfterBack: forwardStateAfterBack,
+        waitForForwardAfterForward: forwardStateAfterForward,
+        back: {
+          matched: backWait.matched,
+          layout: backWait.response
+        },
+        forward: {
+          matched: forwardWait.matched,
+          layout: forwardWait.response
+        }
+      };
+    };
+
+    const waitForHistoryCleared = async (timeoutMs = 5000, intervalMs = 250) => {
+      const start = Date.now();
+      let lastResponse = null;
+      let lastCount = null;
+
+      while (Date.now() - start < timeoutMs) {
+        lastResponse = await fetchJson('/api/ui/layout/history?limit=2');
+        const snapshots = lastResponse?.body?.snapshots ?? [];
+        lastCount = snapshots.length;
+        if (lastResponse.ok && snapshots.length <= 1) {
+          return { matched: true, response: lastResponse, count: lastCount };
+        }
+        await wait(intervalMs);
+      }
+
+      return { matched: false, response: lastResponse, count: lastCount };
+    };
+
+    const defaultLayoutStep = async () => {
+      await openLayoutMenu();
+      const defaultDisabledBefore = await defaultButton.isDisabled();
+      if (defaultDisabledBefore) {
+        await closeLayoutMenu();
+        return {
+          skipped: true,
+          ok: false,
+          reason: 'default layout disabled',
+          defaultDisabledBefore
+        };
+      }
+      await defaultButton.click();
+      const waitResult = await waitForPanelMatch(defaultPanelLayout);
+      const layout = waitResult.response ?? (await fetchJson('/api/ui/layout'));
+      return {
+        skipped: false,
+        ok: waitResult.matched,
+        defaultDisabledBefore,
+        layout
+      };
+    };
+
+    const deleteHistoryStep = async () => {
+      await openLayoutMenu();
+      const deleteDisabledBefore = await deleteButton.isDisabled();
+      if (deleteDisabledBefore) {
+        await closeLayoutMenu();
+        return {
+          skipped: true,
+          ok: false,
+          reason: 'delete history disabled',
+          deleteDisabledBefore
+        };
+      }
+      await deleteButton.click();
+      const historyCleared = await waitForHistoryCleared();
+      await openLayoutMenu();
+      const backDisabledAfter = await backButton.isDisabled();
+      const forwardDisabledAfter = await forwardButton.isDisabled();
+      const deleteDisabledAfter = await deleteButton.isDisabled();
+      await closeLayoutMenu();
+
+      return {
+        skipped: false,
+        ok:
+          historyCleared.matched &&
+          backDisabledAfter === true &&
+          forwardDisabledAfter === true &&
+          deleteDisabledAfter === true,
+        deleteDisabledBefore,
+        historyCleared,
+        backDisabledAfter,
+        forwardDisabledAfter,
+        deleteDisabledAfter
       };
     };
 
@@ -637,8 +876,15 @@ const runUiSmoke = async () => {
 
     result.steps.ensureVisible = await ensurePanelVisible(true);
     result.steps.rollbackOnPatchFailure = await rollbackStep();
-    result.steps.drag = await dragStep();
-    result.steps.collapse = await collapseStep(true);
+    const dragResult = await dragStep();
+    result.steps.drag = dragResult;
+    const beforeCollapseLayout = dragResult.afterLayout ?? (await fetchJson('/api/ui/layout'));
+    const collapseResult = await collapseStep(true);
+    result.steps.collapse = collapseResult;
+    result.steps.historyNavigation = await historyNavigationStep(
+      beforeCollapseLayout,
+      collapseResult.layout
+    );
     result.steps.expand = await collapseStep(false);
     result.steps.hide = await ensurePanelVisible(false);
     result.steps.show = await ensurePanelVisible(true);
@@ -664,12 +910,60 @@ const runUiSmoke = async () => {
       afterReload
     };
 
+    const historyAfterReload = await fetchJson('/api/ui/layout/history?limit=2');
+    const historySnapshots = historyAfterReload?.body?.snapshots ?? [];
+    let historyAfterReloadNavigation = {
+      skipped: true,
+      ok: false,
+      reason: historyAfterReload.ok ? 'insufficient history' : 'history request failed'
+    };
+
+    if (historyAfterReload.ok && historySnapshots.length > 1) {
+      historyAfterReloadNavigation = await historyNavigationStep(
+        { body: historySnapshots[historySnapshots.length - 2] },
+        { body: historySnapshots[historySnapshots.length - 1] }
+      );
+    }
+
+    result.steps.historyAfterReload = {
+      history: historyAfterReload,
+      navigation: historyAfterReloadNavigation
+    };
+
+    const beforeDefaultLayout = await fetchJson('/api/ui/layout');
+    const defaultLayoutResult = await defaultLayoutStep();
+    result.steps.defaultLayout = defaultLayoutResult;
+    result.steps.defaultLayoutHistory = defaultLayoutResult.layout
+      ? await historyNavigationStep(beforeDefaultLayout, defaultLayoutResult.layout)
+      : { skipped: true, ok: false, reason: 'default layout missing' };
+    result.steps.deleteHistory = await deleteHistoryStep();
+
     const stalePanelCleanupOk = result.steps.stalePanelCleanup?.matched === true;
     const rollbackOk = result.steps.rollbackOnPatchFailure?.rolledBack === true;
+    const historyInitialOk = result.steps.historyButtonsInitial?.forwardDisabled === true;
+    const historyNavigationOk = result.steps.historyNavigation?.ok === true;
+    const historyAfterReloadOk = result.steps.historyAfterReload?.navigation?.ok === true;
+    const defaultLayoutOk = result.steps.defaultLayout?.ok === true;
+    const defaultLayoutHistoryOk = result.steps.defaultLayoutHistory?.ok === true;
+    const deleteHistoryOk = result.steps.deleteHistory?.ok === true;
     result.steps.validation = {
       stalePanelCleanup: stalePanelCleanupOk,
       rollbackOnPatchFailure: rollbackOk,
-      ok: stalePanelCleanupOk && rollbackOk
+      historyButtonsInitial: historyInitialOk,
+      historyNavigation: historyNavigationOk,
+      historyAfterReload: historyAfterReloadOk,
+      defaultLayout: defaultLayoutOk,
+      defaultLayoutHistory: defaultLayoutHistoryOk,
+      deleteHistory: deleteHistoryOk,
+      ok:
+        stalePanelCleanupOk &&
+        rollbackOk &&
+        historyInitialOk &&
+        historyNavigationOk &&
+        historyAfterReloadOk &&
+        defaultLayoutOk &&
+        defaultLayoutHistoryOk &&
+        deleteHistoryOk
     };
   } finally {
     await browser.close();

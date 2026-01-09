@@ -120,3 +120,22 @@ export async function patchJson<T>(
 
   return (await response.json()) as T;
 }
+
+export async function deleteJson<T>(path: string, options?: RequestOptions): Promise<T> {
+  const response = await runFetch(
+    path,
+    {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    },
+    options
+  );
+
+  if (!response.ok) {
+    throw new Error(`Request failed with status ${response.status}`);
+  }
+
+  return (await response.json()) as T;
+}

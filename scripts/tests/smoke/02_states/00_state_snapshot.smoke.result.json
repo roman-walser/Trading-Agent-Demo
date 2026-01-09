@@ -1,12 +1,12 @@
 {
   "test": "02_states/00_state_snapshot",
   "baseUrl": "http://localhost:3000",
-  "timestampUtc": "2026-01-05T14:57:13.097Z",
+  "timestampUtc": "2026-01-06T16:09:13.392Z",
   "backend": {
     "ready": true,
     "exit": null,
-    "stdout": "Preparing cleanup...\nCleanup ok. No other node processes found.\nStarting server...\n{\"level\":30,\"time\":1767625017785,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"msg\":\"Server listening at http://0.0.0.0:3000\"}\nServer started on http://0.0.0.0:3000\n{\"level\":30,\"time\":1767625017916,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1\",\"req\":{\"method\":\"GET\",\"url\":\"/health\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":57257},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625017931,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1\",\"res\":{\"statusCode\":200},\"responseTime\":13.216799974441528,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625017958,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-2\",\"req\":{\"method\":\"GET\",\"url\":\"/api/health\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":57259},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625017960,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-2\",\"res\":{\"statusCode\":200},\"responseTime\":1.0256999731063843,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625017962,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-3\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":57257},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625017963,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-3\",\"res\":{\"statusCode\":200},\"responseTime\":1.2378999888896942,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625017969,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-4\",\"req\":{\"method\":\"POST\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":57259},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625017973,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-4\",\"res\":{\"statusCode\":200},\"responseTime\":3.710799992084503,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625017976,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-5\",\"req\":{\"method\":\"PATCH\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":57257},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625017977,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-5\",\"res\":{\"statusCode\":200},\"responseTime\":1.2888000011444092,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625017979,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-6\",\"req\":{\"method\":\"PATCH\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":57259},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625017980,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-6\",\"res\":{\"statusCode\":400},\"err\":{\"type\":\"Error\",\"message\":\"body must have required property 'panels'\",\"stack\":\"Error: body must have required property 'panels'\\n    at defaultSchemaErrorFormatter (C:\\\\Users\\\\Roman\\\\Desktop\\\\Trading-Agent-Demo\\\\node_modules\\\\fastify\\\\lib\\\\context.js:114:10)\\n    at wrapValidationError (C:\\\\Users\\\\Roman\\\\Desktop\\\\Trading-Agent-Demo\\\\node_modules\\\\fastify\\\\lib\\\\validation.js:249:17)\\n    at validate (C:\\\\Users\\\\Roman\\\\Desktop\\\\Trading-Agent-Demo\\\\node_modules\\\\fastify\\\\lib\\\\validation.js:167:16)\\n    at preValidationCallback (C:\\\\Users\\\\Roman\\\\Desktop\\\\Trading-Agent-Demo\\\\node_modules\\\\fastify\\\\lib\\\\handleRequest.js:93:25)\\n    at handler (C:\\\\Users\\\\Roman\\\\Desktop\\\\Trading-Agent-Demo\\\\node_modules\\\\fastify\\\\lib\\\\handleRequest.js:77:7)\\n    at C:\\\\Users\\\\Roman\\\\Desktop\\\\Trading-Agent-Demo\\\\node_modules\\\\fastify\\\\lib\\\\contentTypeParser.js:199:9\\n    at AsyncResource.runInAsyncScope (node:async_hooks:206:9)\\n    at done (C:\\\\Users\\\\Roman\\\\Desktop\\\\Trading-Agent-Demo\\\\node_modules\\\\fastify\\\\lib\\\\contentTypeParser.js:192:14)\\n    at Parser.defaultJsonParser [as fn] (C:\\\\Users\\\\Roman\\\\Desktop\\\\Trading-Agent-Demo\\\\node_modules\\\\fastify\\\\lib\\\\contentTypeParser.js:304:5)\\n    at IncomingMessage.onEnd (C:\\\\Users\\\\Roman\\\\Desktop\\\\Trading-Agent-Demo\\\\node_modules\\\\fastify\\\\lib\\\\contentTypeParser.js:283:27)\",\"statusCode\":400,\"code\":\"FST_ERR_VALIDATION\",\"validation\":[{\"instancePath\":\"\",\"schemaPath\":\"#/required\",\"keyword\":\"required\",\"params\":{\"missingProperty\":\"panels\"},\"message\":\"must have required property 'panels'\"}],\"validationContext\":\"body\"},\"msg\":\"body must have required property 'panels'\"}\n{\"level\":30,\"time\":1767625017981,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-6\",\"res\":{\"statusCode\":400},\"responseTime\":2.0454999804496765,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625017983,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-7\",\"req\":{\"method\":\"PATCH\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":57257},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625017983,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-7\",\"res\":{\"statusCode\":400},\"err\":{\"type\":\"Error\",\"message\":\"body/panels/health must have required property 'collapsed'\",\"stack\":\"Error: body/panels/health must have required property 'collapsed'\\n    at defaultSchemaErrorFormatter (C:\\\\Users\\\\Roman\\\\Desktop\\\\Trading-Agent-Demo\\\\node_modules\\\\fastify\\\\lib\\\\context.js:114:10)\\n    at wrapValidationError (C:\\\\Users\\\\Roman\\\\Desktop\\\\Trading-Agent-Demo\\\\node_modules\\\\fastify\\\\lib\\\\validation.js:249:17)\\n    at validate (C:\\\\Users\\\\Roman\\\\Desktop\\\\Trading-Agent-Demo\\\\node_modules\\\\fastify\\\\lib\\\\validation.js:167:16)\\n    at preValidationCallback (C:\\\\Users\\\\Roman\\\\Desktop\\\\Trading-Agent-Demo\\\\node_modules\\\\fastify\\\\lib\\\\handleRequest.js:93:25)\\n    at handler (C:\\\\Users\\\\Roman\\\\Desktop\\\\Trading-Agent-Demo\\\\node_modules\\\\fastify\\\\lib\\\\handleRequest.js:77:7)\\n    at C:\\\\Users\\\\Roman\\\\Desktop\\\\Trading-Agent-Demo\\\\node_modules\\\\fastify\\\\lib\\\\contentTypeParser.js:199:9\\n    at AsyncResource.runInAsyncScope (node:async_hooks:206:9)\\n    at done (C:\\\\Users\\\\Roman\\\\Desktop\\\\Trading-Agent-Demo\\\\node_modules\\\\fastify\\\\lib\\\\contentTypeParser.js:192:14)\\n    at Parser.defaultJsonParser [as fn] (C:\\\\Users\\\\Roman\\\\Desktop\\\\Trading-Agent-Demo\\\\node_modules\\\\fastify\\\\lib\\\\contentTypeParser.js:304:5)\\n    at IncomingMessage.onEnd (C:\\\\Users\\\\Roman\\\\Desktop\\\\Trading-Agent-Demo\\\\node_modules\\\\fastify\\\\lib\\\\contentTypeParser.js:283:27)\",\"statusCode\":400,\"code\":\"FST_ERR_VALIDATION\",\"validation\":[{\"instancePath\":\"/panels/health\",\"schemaPath\":\"#/properties/panels/additionalProperties/required\",\"keyword\":\"required\",\"params\":{\"missingProperty\":\"collapsed\"},\"message\":\"must have required property 'collapsed'\"}],\"validationContext\":\"body\"},\"msg\":\"body/panels/health must have required property 'collapsed'\"}\n{\"level\":30,\"time\":1767625017984,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-7\",\"res\":{\"statusCode\":400},\"responseTime\":0.8334999978542328,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625017985,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-8\",\"req\":{\"method\":\"POST\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":57259},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625017986,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-8\",\"res\":{\"statusCode\":200},\"responseTime\":0.6362999975681305,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625017987,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-9\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":57257},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625017988,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-9\",\"res\":{\"statusCode\":200},\"responseTime\":0.527999997138977,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625018133,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"socketId\":\"euDUDPOiP8jF9I5TAAAB\",\"msg\":\"ws connected\"}\n{\"level\":30,\"time\":1767625019016,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-a\",\"req\":{\"method\":\"POST\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":57257},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625019019,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-a\",\"res\":{\"statusCode\":200},\"responseTime\":2.0853999853134155,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625019363,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-b\",\"req\":{\"method\":\"GET\",\"url\":\"/\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":60873},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625019371,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-b\",\"res\":{\"statusCode\":200},\"responseTime\":8.156899988651276,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625019380,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-c\",\"req\":{\"method\":\"GET\",\"url\":\"/assets/index-D0Rzj6p7.js\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":60873},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625019386,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-c\",\"res\":{\"statusCode\":200},\"responseTime\":5.377600014209747,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625019387,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-d\",\"req\":{\"method\":\"GET\",\"url\":\"/assets/index-Dih3iv-n.css\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":60873},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625019389,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-d\",\"res\":{\"statusCode\":200},\"responseTime\":2.170899987220764,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625019432,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-e\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":60873},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625019433,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-e\",\"res\":{\"statusCode\":200},\"responseTime\":0.623199999332428,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625019524,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-f\",\"req\":{\"method\":\"GET\",\"url\":\"/api/health\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":60873},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625019525,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-f\",\"res\":{\"statusCode\":200},\"responseTime\":0.5397999882698059,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625019529,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-g\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":60873},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625019530,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-g\",\"res\":{\"statusCode\":200},\"responseTime\":0.823199987411499,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625019844,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"socketId\":\"h1UhepEKdLeFcG5CAAAD\",\"msg\":\"ws connected\"}\n{\"level\":30,\"time\":1767625020100,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-h\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":57257},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625020101,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-h\",\"res\":{\"statusCode\":200},\"responseTime\":0.613099992275238,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625020266,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-i\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":57257},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625020267,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-i\",\"res\":{\"statusCode\":200},\"responseTime\":0.9310999810695648,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625020524,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-j\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":57257},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625020525,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-j\",\"res\":{\"statusCode\":200},\"responseTime\":0.3928000032901764,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625020785,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-k\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":57257},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625020786,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-k\",\"res\":{\"statusCode\":200},\"responseTime\":0.9754000008106232,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625021053,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-l\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":57257},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625021054,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-l\",\"res\":{\"statusCode\":200},\"responseTime\":0.9638999998569489,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625021316,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-m\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":57257},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625021317,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-m\",\"res\":{\"statusCode\":200},\"responseTime\":1.1090999841690063,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625021584,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-n\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":57257},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625021585,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-n\",\"res\":{\"statusCode\":200},\"responseTime\":1.1915999948978424,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625021842,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-o\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":57257},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625021843,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-o\",\"res\":{\"statusCode\":200},\"responseTime\":0.722000002861023,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625022110,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-p\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":57257},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625022112,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-p\",\"res\":{\"statusCode\":200},\"responseTime\":1.4616999924182892,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625022365,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-q\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":57257},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625022366,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-q\",\"res\":{\"statusCode\":200},\"responseTime\":0.8909000158309937,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625022625,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-r\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":57257},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625022626,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-r\",\"res\":{\"statusCode\":200},\"responseTime\":0.9616999924182892,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625022894,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-s\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":57257},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625022895,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-s\",\"res\":{\"statusCode\":200},\"responseTime\":0.9986000061035156,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625023163,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-t\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":57257},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625023164,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-t\",\"res\":{\"statusCode\":200},\"responseTime\":1.6064000129699707,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625023426,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-u\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":57257},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625023427,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-u\",\"res\":{\"statusCode\":200},\"responseTime\":0.7204000055789948,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625023680,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-v\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":57257},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625023681,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-v\",\"res\":{\"statusCode\":200},\"responseTime\":0.8028999865055084,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625023943,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-w\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":57257},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625023943,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-w\",\"res\":{\"statusCode\":200},\"responseTime\":0.5584000051021576,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625024209,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-x\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":57257},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625024210,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-x\",\"res\":{\"statusCode\":200},\"responseTime\":0.5834999978542328,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625024475,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-y\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":57257},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625024476,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-y\",\"res\":{\"statusCode\":200},\"responseTime\":0.7138999998569489,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625024560,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-z\",\"req\":{\"method\":\"GET\",\"url\":\"/api/health\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":60873},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625024561,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-z\",\"res\":{\"statusCode\":200},\"responseTime\":0.6374000012874603,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625024743,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-10\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":57257},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625024744,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-10\",\"res\":{\"statusCode\":200},\"responseTime\":0.5041999816894531,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625025010,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-11\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":57257},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625025011,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-11\",\"res\":{\"statusCode\":200},\"responseTime\":0.6540000140666962,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625030382,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-12\",\"req\":{\"method\":\"GET\",\"url\":\"/api/health\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":60873},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625030384,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-12\",\"res\":{\"statusCode\":200},\"responseTime\":1.0370000004768372,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625030452,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-13\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":57257},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625030453,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-13\",\"res\":{\"statusCode\":200},\"responseTime\":0.8617999851703644,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625030753,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-14\",\"req\":{\"method\":\"PATCH\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":60873},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625030756,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-14\",\"res\":{\"statusCode\":200},\"responseTime\":2.032700002193451,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625030756,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-15\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":57257},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625030757,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-15\",\"res\":{\"statusCode\":200},\"responseTime\":1.125,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625030842,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-16\",\"req\":{\"method\":\"PATCH\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":60873},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625030844,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-16\",\"res\":{\"statusCode\":200},\"responseTime\":1.1500999927520752,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625030854,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-17\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":57257},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625030855,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-17\",\"res\":{\"statusCode\":200},\"responseTime\":1.0266999900341034,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625030915,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-18\",\"req\":{\"method\":\"PATCH\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":60873},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625030916,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-18\",\"res\":{\"statusCode\":200},\"responseTime\":0.8931999802589417,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625030933,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-19\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":57257},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625030934,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-19\",\"res\":{\"statusCode\":200},\"responseTime\":0.646699994802475,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625031040,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"socketId\":\"h1UhepEKdLeFcG5CAAAD\",\"reason\":\"client namespace disconnect\",\"msg\":\"ws disconnected\"}\n{\"level\":30,\"time\":1767625031041,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1a\",\"req\":{\"method\":\"PATCH\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":60873},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625031043,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1a\",\"res\":{\"statusCode\":200},\"responseTime\":1.5385000109672546,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625031051,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1b\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":57257},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625031052,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1b\",\"res\":{\"statusCode\":200},\"responseTime\":0.8680000007152557,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625031196,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1c\",\"req\":{\"method\":\"PATCH\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":60873},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625031197,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1c\",\"res\":{\"statusCode\":200},\"responseTime\":1.5687000155448914,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625031217,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1d\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":57257},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625031218,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1d\",\"res\":{\"statusCode\":200},\"responseTime\":0.8328999876976013,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625031230,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1e\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":57257},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625031231,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1e\",\"res\":{\"statusCode\":200},\"responseTime\":0.9324000179767609,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625031240,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1f\",\"req\":{\"method\":\"GET\",\"url\":\"/\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":60873},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625031244,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1f\",\"res\":{\"statusCode\":304},\"responseTime\":4.1886999905109406,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625031256,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1g\",\"req\":{\"method\":\"GET\",\"url\":\"/assets/index-D0Rzj6p7.js\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":60873},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625031257,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1h\",\"req\":{\"method\":\"GET\",\"url\":\"/assets/index-Dih3iv-n.css\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":52443},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625031259,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1g\",\"res\":{\"statusCode\":304},\"responseTime\":3.0473999977111816,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625031261,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1h\",\"res\":{\"statusCode\":304},\"responseTime\":3.444599986076355,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625031303,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1i\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":52443},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625031304,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1i\",\"res\":{\"statusCode\":200},\"responseTime\":0.5982000231742859,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625031318,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1j\",\"req\":{\"method\":\"GET\",\"url\":\"/api/health\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":52443},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625031319,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1j\",\"res\":{\"statusCode\":200},\"responseTime\":1.0311999917030334,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625031321,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1k\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":52443},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625031322,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1k\",\"res\":{\"statusCode\":200},\"responseTime\":0.854200005531311,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625031631,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"socketId\":\"BWQusD5YiO-zu4MeAAAF\",\"msg\":\"ws connected\"}\n{\"level\":30,\"time\":1767625031887,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1l\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":57257},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767625031888,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1l\",\"res\":{\"statusCode\":200},\"responseTime\":0.8220999836921692,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767625031905,\"pid\":23896,\"hostname\":\"DESKTOP-HONRRA7\",\"socketId\":\"BWQusD5YiO-zu4MeAAAF\",\"reason\":\"transport close\",\"msg\":\"ws disconnected\"}\n",
-    "stderr": ""
+    "stdout": "Preparing cleanup...\nCleanup ok. No other node processes found.\nUI layout hydrated from persistence (0 panel(s)).\nStarting server...\n{\"level\":30,\"time\":1767715735685,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"msg\":\"Server listening at http://0.0.0.0:3000\"}\nServer started on http://0.0.0.0:3000\n{\"level\":30,\"time\":1767715735770,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1\",\"req\":{\"method\":\"GET\",\"url\":\"/health\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59244},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715735781,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1\",\"res\":{\"statusCode\":200},\"responseTime\":10.623199999332428,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715735810,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-2\",\"req\":{\"method\":\"GET\",\"url\":\"/api/health\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59246},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715735811,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-2\",\"res\":{\"statusCode\":200},\"responseTime\":0.8861999809741974,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715735813,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-3\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59244},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715735814,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-3\",\"res\":{\"statusCode\":200},\"responseTime\":0.756199985742569,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715735819,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-4\",\"req\":{\"method\":\"POST\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59246},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715735825,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-4\",\"res\":{\"statusCode\":200},\"responseTime\":5.695700019598007,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715735829,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-5\",\"req\":{\"method\":\"PATCH\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59244},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715735834,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-5\",\"res\":{\"statusCode\":200},\"responseTime\":4.374500006437302,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715735837,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-6\",\"req\":{\"method\":\"PATCH\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59246},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715735838,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-6\",\"res\":{\"statusCode\":400},\"err\":{\"type\":\"Error\",\"message\":\"body must have required property 'panels'\",\"stack\":\"Error: body must have required property 'panels'\\n    at defaultSchemaErrorFormatter (C:\\\\Users\\\\Roman\\\\Desktop\\\\Trading-Agent-Demo\\\\node_modules\\\\fastify\\\\lib\\\\context.js:114:10)\\n    at wrapValidationError (C:\\\\Users\\\\Roman\\\\Desktop\\\\Trading-Agent-Demo\\\\node_modules\\\\fastify\\\\lib\\\\validation.js:249:17)\\n    at validate (C:\\\\Users\\\\Roman\\\\Desktop\\\\Trading-Agent-Demo\\\\node_modules\\\\fastify\\\\lib\\\\validation.js:167:16)\\n    at preValidationCallback (C:\\\\Users\\\\Roman\\\\Desktop\\\\Trading-Agent-Demo\\\\node_modules\\\\fastify\\\\lib\\\\handleRequest.js:93:25)\\n    at handler (C:\\\\Users\\\\Roman\\\\Desktop\\\\Trading-Agent-Demo\\\\node_modules\\\\fastify\\\\lib\\\\handleRequest.js:77:7)\\n    at C:\\\\Users\\\\Roman\\\\Desktop\\\\Trading-Agent-Demo\\\\node_modules\\\\fastify\\\\lib\\\\contentTypeParser.js:199:9\\n    at AsyncResource.runInAsyncScope (node:async_hooks:206:9)\\n    at done (C:\\\\Users\\\\Roman\\\\Desktop\\\\Trading-Agent-Demo\\\\node_modules\\\\fastify\\\\lib\\\\contentTypeParser.js:192:14)\\n    at Parser.defaultJsonParser [as fn] (C:\\\\Users\\\\Roman\\\\Desktop\\\\Trading-Agent-Demo\\\\node_modules\\\\fastify\\\\lib\\\\contentTypeParser.js:304:5)\\n    at IncomingMessage.onEnd (C:\\\\Users\\\\Roman\\\\Desktop\\\\Trading-Agent-Demo\\\\node_modules\\\\fastify\\\\lib\\\\contentTypeParser.js:283:27)\",\"statusCode\":400,\"code\":\"FST_ERR_VALIDATION\",\"validation\":[{\"instancePath\":\"\",\"schemaPath\":\"#/required\",\"keyword\":\"required\",\"params\":{\"missingProperty\":\"panels\"},\"message\":\"must have required property 'panels'\"}],\"validationContext\":\"body\"},\"msg\":\"body must have required property 'panels'\"}\n{\"level\":30,\"time\":1767715735840,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-6\",\"res\":{\"statusCode\":400},\"responseTime\":2.9117000102996826,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715735844,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-7\",\"req\":{\"method\":\"PATCH\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59244},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715735844,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-7\",\"res\":{\"statusCode\":400},\"err\":{\"type\":\"Error\",\"message\":\"body/panels/health must have required property 'collapsed'\",\"stack\":\"Error: body/panels/health must have required property 'collapsed'\\n    at defaultSchemaErrorFormatter (C:\\\\Users\\\\Roman\\\\Desktop\\\\Trading-Agent-Demo\\\\node_modules\\\\fastify\\\\lib\\\\context.js:114:10)\\n    at wrapValidationError (C:\\\\Users\\\\Roman\\\\Desktop\\\\Trading-Agent-Demo\\\\node_modules\\\\fastify\\\\lib\\\\validation.js:249:17)\\n    at validate (C:\\\\Users\\\\Roman\\\\Desktop\\\\Trading-Agent-Demo\\\\node_modules\\\\fastify\\\\lib\\\\validation.js:167:16)\\n    at preValidationCallback (C:\\\\Users\\\\Roman\\\\Desktop\\\\Trading-Agent-Demo\\\\node_modules\\\\fastify\\\\lib\\\\handleRequest.js:93:25)\\n    at handler (C:\\\\Users\\\\Roman\\\\Desktop\\\\Trading-Agent-Demo\\\\node_modules\\\\fastify\\\\lib\\\\handleRequest.js:77:7)\\n    at C:\\\\Users\\\\Roman\\\\Desktop\\\\Trading-Agent-Demo\\\\node_modules\\\\fastify\\\\lib\\\\contentTypeParser.js:199:9\\n    at AsyncResource.runInAsyncScope (node:async_hooks:206:9)\\n    at done (C:\\\\Users\\\\Roman\\\\Desktop\\\\Trading-Agent-Demo\\\\node_modules\\\\fastify\\\\lib\\\\contentTypeParser.js:192:14)\\n    at Parser.defaultJsonParser [as fn] (C:\\\\Users\\\\Roman\\\\Desktop\\\\Trading-Agent-Demo\\\\node_modules\\\\fastify\\\\lib\\\\contentTypeParser.js:304:5)\\n    at IncomingMessage.onEnd (C:\\\\Users\\\\Roman\\\\Desktop\\\\Trading-Agent-Demo\\\\node_modules\\\\fastify\\\\lib\\\\contentTypeParser.js:283:27)\",\"statusCode\":400,\"code\":\"FST_ERR_VALIDATION\",\"validation\":[{\"instancePath\":\"/panels/health\",\"schemaPath\":\"#/properties/panels/additionalProperties/required\",\"keyword\":\"required\",\"params\":{\"missingProperty\":\"collapsed\"},\"message\":\"must have required property 'collapsed'\"}],\"validationContext\":\"body\"},\"msg\":\"body/panels/health must have required property 'collapsed'\"}\n{\"level\":30,\"time\":1767715735845,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-7\",\"res\":{\"statusCode\":400},\"responseTime\":1.2202999889850616,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715735848,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-8\",\"req\":{\"method\":\"POST\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59246},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715735850,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-8\",\"res\":{\"statusCode\":200},\"responseTime\":2.42179998755455,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715735853,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-9\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59244},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715735853,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-9\",\"res\":{\"statusCode\":200},\"responseTime\":0.7040999829769135,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715736521,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"socketId\":\"V2hXb4m9m2wp-zTAAAAB\",\"msg\":\"ws connected\"}\n{\"level\":30,\"time\":1767715736686,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-a\",\"req\":{\"method\":\"POST\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59244},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715736689,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-a\",\"res\":{\"statusCode\":200},\"responseTime\":2.2675999999046326,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715737014,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-b\",\"req\":{\"method\":\"GET\",\"url\":\"/\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":62508},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715737029,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-b\",\"res\":{\"statusCode\":200},\"responseTime\":14.79559999704361,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715737039,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-c\",\"req\":{\"method\":\"GET\",\"url\":\"/assets/index-S-WAMz6D.js\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":62508},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715737053,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-c\",\"res\":{\"statusCode\":200},\"responseTime\":13.906899988651276,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715737055,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-d\",\"req\":{\"method\":\"GET\",\"url\":\"/assets/index-C4MZuMi1.css\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":62508},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715737059,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-d\",\"res\":{\"statusCode\":200},\"responseTime\":3.8790999948978424,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715737122,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-e\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":62508},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715737123,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-e\",\"res\":{\"statusCode\":200},\"responseTime\":0.5542999804019928,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715737167,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-f\",\"req\":{\"method\":\"GET\",\"url\":\"/api/health\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":62508},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715737167,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-f\",\"res\":{\"statusCode\":200},\"responseTime\":0.4659000039100647,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715737169,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-g\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":62508},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715737170,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-g\",\"res\":{\"statusCode\":200},\"responseTime\":0.7687000036239624,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715737172,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-h\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout/history?limit=21\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":62508},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715737176,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-h\",\"res\":{\"statusCode\":200},\"responseTime\":4.60929998755455,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715737177,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-i\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layouts\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":62508},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715737181,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-i\",\"res\":{\"statusCode\":200},\"responseTime\":3.5085999965667725,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715737484,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"socketId\":\"oKRK3MjxxsTYePPmAAAD\",\"msg\":\"ws connected\"}\n{\"level\":30,\"time\":1767715738128,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-j\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59244},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715738129,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-j\",\"res\":{\"statusCode\":200},\"responseTime\":0.6714999973773956,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715738298,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-k\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59244},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715738299,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-k\",\"res\":{\"statusCode\":200},\"responseTime\":0.40790000557899475,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715738561,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-l\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59244},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715738562,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-l\",\"res\":{\"statusCode\":200},\"responseTime\":0.4180999994277954,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715738827,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-m\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59244},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715738828,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-m\",\"res\":{\"statusCode\":200},\"responseTime\":0.774399995803833,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715739094,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-n\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59244},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715739094,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-n\",\"res\":{\"statusCode\":200},\"responseTime\":0.4336000084877014,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715739355,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-o\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59244},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715739356,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-o\",\"res\":{\"statusCode\":200},\"responseTime\":0.5049999952316284,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715739612,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-p\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59244},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715739613,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-p\",\"res\":{\"statusCode\":200},\"responseTime\":1.3625999987125397,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715739879,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-q\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59244},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715739879,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-q\",\"res\":{\"statusCode\":200},\"responseTime\":0.7509999871253967,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715740143,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-r\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59244},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715740144,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-r\",\"res\":{\"statusCode\":200},\"responseTime\":0.8156000077724457,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715740409,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-s\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59244},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715740410,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-s\",\"res\":{\"statusCode\":200},\"responseTime\":0.6155999898910522,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715740676,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-t\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59244},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715740677,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-t\",\"res\":{\"statusCode\":200},\"responseTime\":0.5782000124454498,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715740943,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-u\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59244},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715740943,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-u\",\"res\":{\"statusCode\":200},\"responseTime\":0.5999000072479248,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715741208,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-v\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59244},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715741208,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-v\",\"res\":{\"statusCode\":200},\"responseTime\":0.49300000071525574,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715741476,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-w\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59244},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715741477,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-w\",\"res\":{\"statusCode\":200},\"responseTime\":0.7355000078678131,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715741743,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-x\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59244},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715741744,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-x\",\"res\":{\"statusCode\":200},\"responseTime\":0.4343000054359436,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715742010,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-y\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59244},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715742011,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-y\",\"res\":{\"statusCode\":200},\"responseTime\":0.5609999895095825,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715742195,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-z\",\"req\":{\"method\":\"GET\",\"url\":\"/api/health\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":62508},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715742195,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-z\",\"res\":{\"statusCode\":200},\"responseTime\":0.5223000049591064,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715742277,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-10\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59244},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715742278,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-10\",\"res\":{\"statusCode\":200},\"responseTime\":0.9245999753475189,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715742544,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-11\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59244},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715742545,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-11\",\"res\":{\"statusCode\":200},\"responseTime\":0.7263000011444092,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715742811,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-12\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59244},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715742812,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-12\",\"res\":{\"statusCode\":200},\"responseTime\":0.982699990272522,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715743077,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-13\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59244},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715743078,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-13\",\"res\":{\"statusCode\":200},\"responseTime\":0.8148999810218811,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715748431,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-14\",\"req\":{\"method\":\"GET\",\"url\":\"/api/health\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":62508},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715748432,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-14\",\"res\":{\"statusCode\":200},\"responseTime\":0.5681000053882599,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715748459,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-15\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59244},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715748459,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-15\",\"res\":{\"statusCode\":200},\"responseTime\":0.4863000214099884,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715748738,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-16\",\"req\":{\"method\":\"PATCH\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":62508},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715748740,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-17\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59244},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715748740,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-17\",\"res\":{\"statusCode\":200},\"responseTime\":0.6248000264167786,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715748741,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-16\",\"res\":{\"statusCode\":200},\"responseTime\":2.976199984550476,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715748821,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-18\",\"req\":{\"method\":\"PATCH\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":62508},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715748824,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-18\",\"res\":{\"statusCode\":200},\"responseTime\":3.246199995279312,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715748841,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-19\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59244},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715748842,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-19\",\"res\":{\"statusCode\":200},\"responseTime\":0.973800003528595,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715749002,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1a\",\"req\":{\"method\":\"POST\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":62508},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715749005,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1a\",\"res\":{\"statusCode\":200},\"responseTime\":3.0178000032901764,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715749020,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1b\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59244},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715749021,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1b\",\"res\":{\"statusCode\":200},\"responseTime\":0.7980000078678131,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715749135,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1c\",\"req\":{\"method\":\"POST\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":62508},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715749139,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1c\",\"res\":{\"statusCode\":200},\"responseTime\":3.879199981689453,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715749158,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1d\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59244},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715749159,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1d\",\"res\":{\"statusCode\":200},\"responseTime\":0.9171000123023987,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715749336,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1e\",\"req\":{\"method\":\"PATCH\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":62508},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715749338,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1e\",\"res\":{\"statusCode\":200},\"responseTime\":2.3958999812602997,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715749347,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1f\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59244},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715749347,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1f\",\"res\":{\"statusCode\":200},\"responseTime\":0.3959999978542328,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715749529,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"socketId\":\"oKRK3MjxxsTYePPmAAAD\",\"reason\":\"client namespace disconnect\",\"msg\":\"ws disconnected\"}\n{\"level\":30,\"time\":1767715749530,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1g\",\"req\":{\"method\":\"PATCH\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":62508},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715749535,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1g\",\"res\":{\"statusCode\":200},\"responseTime\":4.391500025987625,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715749541,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1h\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59244},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715749541,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1h\",\"res\":{\"statusCode\":200},\"responseTime\":0.3546000123023987,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715749714,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1i\",\"req\":{\"method\":\"PATCH\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":62508},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715749717,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1i\",\"res\":{\"statusCode\":200},\"responseTime\":2.59060001373291,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715749731,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1j\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59244},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715749732,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1j\",\"res\":{\"statusCode\":200},\"responseTime\":0.7888999879360199,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715749757,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1k\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59244},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715749758,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1k\",\"res\":{\"statusCode\":200},\"responseTime\":0.6308000087738037,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715749763,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1l\",\"req\":{\"method\":\"GET\",\"url\":\"/\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":62508},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715749765,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1l\",\"res\":{\"statusCode\":304},\"responseTime\":1.6135999858379364,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715749771,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1m\",\"req\":{\"method\":\"GET\",\"url\":\"/assets/index-S-WAMz6D.js\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":62508},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715749772,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1n\",\"req\":{\"method\":\"GET\",\"url\":\"/assets/index-C4MZuMi1.css\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":55753},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715749773,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1m\",\"res\":{\"statusCode\":304},\"responseTime\":1.3911000192165375,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715749773,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1n\",\"res\":{\"statusCode\":304},\"responseTime\":1.5357000231742859,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715749801,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1o\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":55753},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715749801,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1o\",\"res\":{\"statusCode\":200},\"responseTime\":0.51869997382164,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715749809,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1p\",\"req\":{\"method\":\"GET\",\"url\":\"/api/health\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":55753},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715749810,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1p\",\"res\":{\"statusCode\":200},\"responseTime\":0.7269999980926514,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715749811,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1q\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":62508},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715749812,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1q\",\"res\":{\"statusCode\":200},\"responseTime\":1.089499980211258,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715749812,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1r\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout/history?limit=21\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":55753},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715749813,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1s\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layouts\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":61288},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715749817,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1r\",\"res\":{\"statusCode\":200},\"responseTime\":5.232400000095367,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715749818,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1s\",\"res\":{\"statusCode\":200},\"responseTime\":4.982100009918213,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715750117,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"socketId\":\"-45cYHtmqGBLrfttAAAF\",\"msg\":\"ws connected\"}\n{\"level\":30,\"time\":1767715750380,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1t\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59244},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715750381,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1t\",\"res\":{\"statusCode\":200},\"responseTime\":0.6283999979496002,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715750384,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1u\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout/history?limit=2\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59246},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715750386,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1u\",\"res\":{\"statusCode\":200},\"responseTime\":2.0137999951839447,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715750490,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"socketId\":\"-45cYHtmqGBLrfttAAAF\",\"reason\":\"client namespace disconnect\",\"msg\":\"ws disconnected\"}\n{\"level\":30,\"time\":1767715750491,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1v\",\"req\":{\"method\":\"POST\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":61288},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715750495,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1v\",\"res\":{\"statusCode\":200},\"responseTime\":3.8989000022411346,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715750497,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1w\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59244},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715750498,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1w\",\"res\":{\"statusCode\":200},\"responseTime\":0.32430002093315125,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715750803,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1x\",\"req\":{\"method\":\"POST\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":61288},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715750807,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1x\",\"res\":{\"statusCode\":200},\"responseTime\":3.776700019836426,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715750816,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1y\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59244},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715750816,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1y\",\"res\":{\"statusCode\":200},\"responseTime\":0.5100000202655792,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715750934,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1z\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59244},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715750935,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1z\",\"res\":{\"statusCode\":200},\"responseTime\":0.3831000030040741,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715751041,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-20\",\"req\":{\"method\":\"POST\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":61288},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715751046,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-21\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59244},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715751047,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-21\",\"res\":{\"statusCode\":200},\"responseTime\":0.5586000084877014,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715751047,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-20\",\"res\":{\"statusCode\":200},\"responseTime\":5.859100013971329,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715751117,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"socketId\":\"KI1z1VgyaverFjyIAAAH\",\"msg\":\"ws connected\"}\n{\"level\":30,\"time\":1767715751403,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-22\",\"req\":{\"method\":\"POST\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":61288},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715751407,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-22\",\"res\":{\"statusCode\":200},\"responseTime\":4.208500027656555,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715751419,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-23\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59244},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715751419,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-23\",\"res\":{\"statusCode\":200},\"responseTime\":0.5810000002384186,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715751527,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-24\",\"req\":{\"method\":\"POST\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":61288},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715751530,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-24\",\"res\":{\"statusCode\":200},\"responseTime\":2.8178999722003937,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715751532,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-25\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59244},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715751533,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-25\",\"res\":{\"statusCode\":200},\"responseTime\":0.5485000014305115,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715751981,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-26\",\"req\":{\"method\":\"DELETE\",\"url\":\"/api/ui/layout/history\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":61288},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715751985,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-26\",\"res\":{\"statusCode\":200},\"responseTime\":4.105599999427795,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715751993,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-27\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout/history?limit=2\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":59244},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715752005,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-27\",\"res\":{\"statusCode\":200},\"responseTime\":11.577499985694885,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715752147,\"pid\":21664,\"hostname\":\"DESKTOP-HONRRA7\",\"socketId\":\"KI1z1VgyaverFjyIAAAH\",\"reason\":\"transport close\",\"msg\":\"ws disconnected\"}\n",
+    "stderr": "[state-services:ui] Rapid layout update detected (last-write-wins). {\n  previousUtc: '2026-01-06T16:08:55.822Z',\n  nextUtc: '2026-01-06T16:08:55.830Z'\n}\n[state-services:ui] Rapid layout update detected (last-write-wins). {\n  previousUtc: '2026-01-06T16:08:55.830Z',\n  nextUtc: '2026-01-06T16:08:55.848Z'\n}\n[state-services:ui] Rapid layout update detected (last-write-wins). {\n  previousUtc: '2026-01-06T16:08:55.848Z',\n  nextUtc: '2026-01-06T16:08:56.687Z'\n}\n[state-services:ui] Rapid layout update detected (last-write-wins). {\n  previousUtc: '2026-01-06T16:09:08.739Z',\n  nextUtc: '2026-01-06T16:09:08.821Z'\n}\n[state-services:ui] Rapid layout update detected (last-write-wins). {\n  previousUtc: '2026-01-06T16:09:08.821Z',\n  nextUtc: '2026-01-06T16:09:09.003Z'\n}\n[state-services:ui] Rapid layout update detected (last-write-wins). {\n  previousUtc: '2026-01-06T16:09:09.003Z',\n  nextUtc: '2026-01-06T16:09:09.135Z'\n}\n[state-services:ui] Rapid layout update detected (last-write-wins). {\n  previousUtc: '2026-01-06T16:09:09.135Z',\n  nextUtc: '2026-01-06T16:09:09.336Z'\n}\n[state-services:ui] Rapid layout update detected (last-write-wins). {\n  previousUtc: '2026-01-06T16:09:09.336Z',\n  nextUtc: '2026-01-06T16:09:09.531Z'\n}\n[state-services:ui] Rapid layout update detected (last-write-wins). {\n  previousUtc: '2026-01-06T16:09:09.531Z',\n  nextUtc: '2026-01-06T16:09:09.715Z'\n}\n[state-services:ui] Rapid layout update detected (last-write-wins). {\n  previousUtc: '2026-01-06T16:09:09.715Z',\n  nextUtc: '2026-01-06T16:09:10.492Z'\n}\n[state-services:ui] Rapid layout update detected (last-write-wins). {\n  previousUtc: '2026-01-06T16:09:10.492Z',\n  nextUtc: '2026-01-06T16:09:10.804Z'\n}\n[state-services:ui] Rapid layout update detected (last-write-wins). {\n  previousUtc: '2026-01-06T16:09:10.804Z',\n  nextUtc: '2026-01-06T16:09:11.042Z'\n}\n[state-services:ui] Rapid layout update detected (last-write-wins). {\n  previousUtc: '2026-01-06T16:09:11.042Z',\n  nextUtc: '2026-01-06T16:09:11.404Z'\n}\n[state-services:ui] Rapid layout update detected (last-write-wins). {\n  previousUtc: '2026-01-06T16:09:11.404Z',\n  nextUtc: '2026-01-06T16:09:11.527Z'\n}\n"
   },
   "results": {
     "apiHealth": {
@@ -15,7 +15,7 @@
       "ok": true,
       "body": {
         "ok": true,
-        "serverTimeUtc": "2026-01-05T14:56:57Z"
+        "serverTimeUtc": "2026-01-06T16:08:55Z"
       }
     },
     "layoutApiTests": {
@@ -28,7 +28,7 @@
           "ok": true,
           "body": {
             "panels": {},
-            "lastUpdatedUtc": null
+            "lastUpdatedUtc": "2026-01-06T16:05:06.827Z"
           }
         },
         "replace": {
@@ -55,7 +55,7 @@
                 "h": 8
               }
             },
-            "lastUpdatedUtc": "2026-01-05T14:56:57.972Z"
+            "lastUpdatedUtc": "2026-01-06T16:08:55.822Z"
           }
         },
         "patch": {
@@ -82,7 +82,7 @@
                 "h": 8
               }
             },
-            "lastUpdatedUtc": "2026-01-05T14:56:57.976Z"
+            "lastUpdatedUtc": "2026-01-06T16:08:55.830Z"
           },
           "mergeOk": true
         },
@@ -123,7 +123,7 @@
           "ok": true,
           "body": {
             "panels": {},
-            "lastUpdatedUtc": "2026-01-05T14:56:57.986Z"
+            "lastUpdatedUtc": "2026-01-06T16:08:55.848Z"
           }
         }
       }
@@ -134,7 +134,7 @@
       "ok": true,
       "body": {
         "panels": {},
-        "lastUpdatedUtc": "2026-01-05T14:56:57.986Z"
+        "lastUpdatedUtc": "2026-01-06T16:08:55.848Z"
       }
     },
     "uiSmoke": {
@@ -154,7 +154,7 @@
             "ok": true,
             "body": {
               "panels": {},
-              "lastUpdatedUtc": "2026-01-05T14:56:59.017Z"
+              "lastUpdatedUtc": "2026-01-06T16:08:56.687Z"
             }
           },
           "cacheSeed": {
@@ -179,6 +179,11 @@
             "lastUpdatedUtc": null
           }
         },
+        "historyButtonsInitial": {
+          "backDisabled": false,
+          "forwardDisabled": true,
+          "deleteDisabled": false
+        },
         "stalePanelCleanup": {
           "stalePanelId": "stale-panel",
           "matched": true,
@@ -193,7 +198,7 @@
                 "h": 8
               }
             },
-            "lastUpdatedUtc": "2026-01-05T14:56:59.017Z"
+            "lastUpdatedUtc": "2026-01-06T16:08:56.687Z"
           }
         },
         "initialLayout": {
@@ -202,7 +207,7 @@
           "ok": true,
           "body": {
             "panels": {},
-            "lastUpdatedUtc": "2026-01-05T14:56:59.017Z"
+            "lastUpdatedUtc": "2026-01-06T16:08:56.687Z"
           }
         },
         "ensureVisible": {
@@ -216,7 +221,7 @@
             "ok": true,
             "body": {
               "panels": {},
-              "lastUpdatedUtc": "2026-01-05T14:56:59.017Z"
+              "lastUpdatedUtc": "2026-01-06T16:08:56.687Z"
             }
           }
         },
@@ -242,7 +247,7 @@
             "ok": true,
             "body": {
               "panels": {},
-              "lastUpdatedUtc": "2026-01-05T14:56:59.017Z"
+              "lastUpdatedUtc": "2026-01-06T16:08:56.687Z"
             }
           },
           "afterLayout": {
@@ -260,7 +265,7 @@
                   "h": 8
                 }
               },
-              "lastUpdatedUtc": "2026-01-05T14:57:10.755Z"
+              "lastUpdatedUtc": "2026-01-06T16:09:08.739Z"
             }
           }
         },
@@ -284,7 +289,69 @@
                   "h": 2
                 }
               },
-              "lastUpdatedUtc": "2026-01-05T14:57:10.843Z"
+              "lastUpdatedUtc": "2026-01-06T16:09:08.821Z"
+            }
+          }
+        },
+        "historyNavigation": {
+          "skipped": false,
+          "ok": true,
+          "backDisabledBefore": false,
+          "forwardDisabledBefore": true,
+          "forwardDisabledAfterBack": false,
+          "forwardDisabledAfterForward": true,
+          "waitForBack": {
+            "matched": true,
+            "disabled": false
+          },
+          "waitForForwardAfterBack": {
+            "matched": true,
+            "disabled": false
+          },
+          "waitForForwardAfterForward": {
+            "matched": true,
+            "disabled": true
+          },
+          "back": {
+            "matched": true,
+            "layout": {
+              "path": "/api/ui/layout",
+              "status": 200,
+              "ok": true,
+              "body": {
+                "panels": {
+                  "health": {
+                    "visible": true,
+                    "collapsed": false,
+                    "x": 2,
+                    "y": 0,
+                    "w": 3,
+                    "h": 8
+                  }
+                },
+                "lastUpdatedUtc": "2026-01-06T16:09:09.003Z"
+              }
+            }
+          },
+          "forward": {
+            "matched": true,
+            "layout": {
+              "path": "/api/ui/layout",
+              "status": 200,
+              "ok": true,
+              "body": {
+                "panels": {
+                  "health": {
+                    "visible": true,
+                    "collapsed": true,
+                    "x": 2,
+                    "y": 0,
+                    "w": 3,
+                    "h": 2
+                  }
+                },
+                "lastUpdatedUtc": "2026-01-06T16:09:09.135Z"
+              }
             }
           }
         },
@@ -308,7 +375,7 @@
                   "h": 8
                 }
               },
-              "lastUpdatedUtc": "2026-01-05T14:57:10.916Z"
+              "lastUpdatedUtc": "2026-01-06T16:09:09.336Z"
             }
           }
         },
@@ -332,7 +399,7 @@
                   "h": 8
                 }
               },
-              "lastUpdatedUtc": "2026-01-05T14:57:11.042Z"
+              "lastUpdatedUtc": "2026-01-06T16:09:09.531Z"
             }
           }
         },
@@ -356,7 +423,7 @@
                   "h": 8
                 }
               },
-              "lastUpdatedUtc": "2026-01-05T14:57:11.196Z"
+              "lastUpdatedUtc": "2026-01-06T16:09:09.715Z"
             }
           }
         },
@@ -377,7 +444,7 @@
                   "h": 8
                 }
               },
-              "lastUpdatedUtc": "2026-01-05T14:57:11.196Z"
+              "lastUpdatedUtc": "2026-01-06T16:09:09.715Z"
             }
           },
           "afterReload": {
@@ -395,13 +462,237 @@
                   "h": 8
                 }
               },
-              "lastUpdatedUtc": "2026-01-05T14:57:11.196Z"
+              "lastUpdatedUtc": "2026-01-06T16:09:09.715Z"
             }
           }
+        },
+        "historyAfterReload": {
+          "history": {
+            "path": "/api/ui/layout/history?limit=2",
+            "status": 200,
+            "ok": true,
+            "body": {
+              "snapshots": [
+                {
+                  "panels": {
+                    "health": {
+                      "visible": false,
+                      "collapsed": false,
+                      "x": 2,
+                      "y": 0,
+                      "w": 3,
+                      "h": 8
+                    }
+                  },
+                  "lastUpdatedUtc": "2026-01-06T16:09:09.531Z"
+                },
+                {
+                  "panels": {
+                    "health": {
+                      "visible": true,
+                      "collapsed": false,
+                      "x": 2,
+                      "y": 0,
+                      "w": 3,
+                      "h": 8
+                    }
+                  },
+                  "lastUpdatedUtc": "2026-01-06T16:09:09.715Z"
+                }
+              ]
+            }
+          },
+          "navigation": {
+            "skipped": false,
+            "ok": true,
+            "backDisabledBefore": false,
+            "forwardDisabledBefore": true,
+            "forwardDisabledAfterBack": false,
+            "forwardDisabledAfterForward": true,
+            "waitForBack": {
+              "matched": true,
+              "disabled": false
+            },
+            "waitForForwardAfterBack": {
+              "matched": true,
+              "disabled": false
+            },
+            "waitForForwardAfterForward": {
+              "matched": true,
+              "disabled": true
+            },
+            "back": {
+              "matched": true,
+              "layout": {
+                "path": "/api/ui/layout",
+                "status": 200,
+                "ok": true,
+                "body": {
+                  "panels": {
+                    "health": {
+                      "visible": false,
+                      "collapsed": false,
+                      "x": 2,
+                      "y": 0,
+                      "w": 3,
+                      "h": 8
+                    }
+                  },
+                  "lastUpdatedUtc": "2026-01-06T16:09:10.492Z"
+                }
+              }
+            },
+            "forward": {
+              "matched": true,
+              "layout": {
+                "path": "/api/ui/layout",
+                "status": 200,
+                "ok": true,
+                "body": {
+                  "panels": {
+                    "health": {
+                      "visible": true,
+                      "collapsed": false,
+                      "x": 2,
+                      "y": 0,
+                      "w": 3,
+                      "h": 8
+                    }
+                  },
+                  "lastUpdatedUtc": "2026-01-06T16:09:10.804Z"
+                }
+              }
+            }
+          }
+        },
+        "defaultLayout": {
+          "skipped": false,
+          "ok": true,
+          "defaultDisabledBefore": false,
+          "layout": {
+            "path": "/api/ui/layout",
+            "status": 200,
+            "ok": true,
+            "body": {
+              "panels": {
+                "health": {
+                  "visible": true,
+                  "collapsed": false,
+                  "x": 0,
+                  "y": 0,
+                  "w": 3,
+                  "h": 8
+                }
+              },
+              "lastUpdatedUtc": "2026-01-06T16:09:11.042Z"
+            }
+          }
+        },
+        "defaultLayoutHistory": {
+          "skipped": false,
+          "ok": true,
+          "backDisabledBefore": false,
+          "forwardDisabledBefore": true,
+          "forwardDisabledAfterBack": false,
+          "forwardDisabledAfterForward": true,
+          "waitForBack": {
+            "matched": true,
+            "disabled": false
+          },
+          "waitForForwardAfterBack": {
+            "matched": true,
+            "disabled": false
+          },
+          "waitForForwardAfterForward": {
+            "matched": true,
+            "disabled": true
+          },
+          "back": {
+            "matched": true,
+            "layout": {
+              "path": "/api/ui/layout",
+              "status": 200,
+              "ok": true,
+              "body": {
+                "panels": {
+                  "health": {
+                    "visible": true,
+                    "collapsed": false,
+                    "x": 2,
+                    "y": 0,
+                    "w": 3,
+                    "h": 8
+                  }
+                },
+                "lastUpdatedUtc": "2026-01-06T16:09:11.404Z"
+              }
+            }
+          },
+          "forward": {
+            "matched": true,
+            "layout": {
+              "path": "/api/ui/layout",
+              "status": 200,
+              "ok": true,
+              "body": {
+                "panels": {
+                  "health": {
+                    "visible": true,
+                    "collapsed": false,
+                    "x": 0,
+                    "y": 0,
+                    "w": 3,
+                    "h": 8
+                  }
+                },
+                "lastUpdatedUtc": "2026-01-06T16:09:11.527Z"
+              }
+            }
+          }
+        },
+        "deleteHistory": {
+          "skipped": false,
+          "ok": true,
+          "deleteDisabledBefore": false,
+          "historyCleared": {
+            "matched": true,
+            "response": {
+              "path": "/api/ui/layout/history?limit=2",
+              "status": 200,
+              "ok": true,
+              "body": {
+                "snapshots": [
+                  {
+                    "panels": {
+                      "health": {
+                        "visible": true,
+                        "collapsed": false,
+                        "x": 0,
+                        "y": 0,
+                        "w": 3,
+                        "h": 8
+                      }
+                    },
+                    "lastUpdatedUtc": "2026-01-06T16:09:11.527Z"
+                  }
+                ]
+              }
+            },
+            "count": 1
+          },
+          "backDisabledAfter": true,
+          "forwardDisabledAfter": true,
+          "deleteDisabledAfter": true
         },
         "validation": {
           "stalePanelCleanup": true,
           "rollbackOnPatchFailure": true,
+          "historyButtonsInitial": true,
+          "historyNavigation": true,
+          "historyAfterReload": true,
+          "defaultLayout": true,
+          "defaultLayoutHistory": true,
+          "deleteHistory": true,
           "ok": true
         }
       }

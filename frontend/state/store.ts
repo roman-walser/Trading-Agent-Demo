@@ -106,8 +106,18 @@ export const hydrateFromHealthResponse = healthSlice.hydrateFromHealthResponse;
 export const hydrateUiLayoutFromSnapshot = uiLayoutSlice.hydrateFromServer;
 export const restoreUiLayoutSnapshot = uiLayoutSlice.restoreFromSnapshot;
 export const getUiLayoutSnapshot = uiLayoutSlice.getSnapshot;
+export const clearUiLayoutHistory = uiLayoutSlice.clearHistory;
+export const recordUiLayoutHistory = uiLayoutSlice.recordHistory;
+export const applyUiLayoutHistorySnapshot = uiLayoutSlice.applyHistorySnapshot;
+export const getUiLayoutHistoryState = uiLayoutSlice.getHistoryState;
+export const getUiLayoutHistoryNavigation = uiLayoutSlice.getHistoryNavigation;
+export const canGoBack = uiLayoutSlice.canGoBack;
+export const canGoForward = uiLayoutSlice.canGoForward;
+export const goBack = uiLayoutSlice.goBack;
+export const goForward = uiLayoutSlice.goForward;
 export const setPanelLayout = uiLayoutSlice.setPanelLayout;
 export const getPanelLayout = uiLayoutSlice.getPanelLayout;
+export const getDefaultUiLayoutPanels = uiLayoutSlice.getDefaultPanels;
 export const useUiLayoutState = (): UiLayoutSliceState =>
   useStoreSelector((state) => uiLayoutSlice.selectUiLayout(state));
 export { getCachedUiLayoutSnapshot } from './uiLayout.slice.js';

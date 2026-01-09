@@ -3,9 +3,23 @@ import { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import HealthPanel from '../features/dashboard/panels/HealthPanel.js';
 import PageHeader from '../features/dashboard/components/PageHeader.js';
 import GridLayout, { type Layout } from 'react-grid-layout';
-import { usePatchUiLayout, useUiLayoutQuery } from '../query/uiLayout.queries.js';
+import {
+  useClearUiLayoutHistory,
+  useCreateUiLayoutPreset,
+  useDeleteUiLayoutPreset,
+  useNavigateUiLayoutHistory,
+  usePatchUiLayout,
+  useRenameUiLayoutPreset,
+  useReplaceUiLayout,
+  useUiLayoutHistoryQuery,
+  useUiLayoutPresetsQuery,
+  useUiLayoutQuery
+} from '../query/uiLayout.queries.js';
 import type { PanelLayoutDto } from '../api/routes/uiLayout.api.js';
 import {
+  getDefaultUiLayoutPanels,
+  getUiLayoutSnapshot,
+  getUiLayoutHistoryNavigation,
   getPanelLayout,
   useUiLayoutState,
   getCachedUiLayoutSnapshot
@@ -54,11 +68,60 @@ export const DashboardPage = (): JSX.Element => {
     isError: layoutError,
     isFetchedAfterMount: layoutFetchedAfterMount
   } = useUiLayoutQuery(true, cachedLayout);
+  useUiLayoutHistoryQuery(true);
   const patchUiLayout = usePatchUiLayout();
+  const replaceUiLayout = useReplaceUiLayout();
+  const clearHistory = useClearUiLayoutHistory();
+  const navigateUiLayoutHistory = useNavigateUiLayoutHistory();
+  const presetsQuery = useUiLayoutPresetsQuery(true);
+  const createPreset = useCreateUiLayoutPreset();
+  const renamePreset = useRenameUiLayoutPreset();
+  const deletePreset = useDeleteUiLayoutPreset();
   const isSavingLayout = patchUiLayout.status === 'loading';
+  const isReplacingLayout = replaceUiLayout.status === 'loading';
+  const isClearingHistory = clearHistory.status === 'loading';
+  const isNavigatingHistory = navigateUiLayoutHistory.status === 'loading';
+  const isPresetBusy =
+    createPreset.status === 'loading' ||
+    renamePreset.status === 'loading' ||
+    deletePreset.status === 'loading';
   const hasFetchedLayout = layoutFetchedAfterMount || layoutError;
-  const isInteractionLocked = isSavingLayout || !hasFetchedLayout;
+  const isInteractionLocked =
+    isSavingLayout || isReplacingLayout || isClearingHistory || isNavigatingHistory || !hasFetchedLayout;
   const uiLayoutState = useUiLayoutState();
+  const layoutPresets = presetsQuery.data?.layouts ?? [];
+  const currentLayoutLabel = useMemo(() => {
+    const currentPanels = uiLayoutState.panels ?? {};
+    const matchesPanels = (panels: Record<string, PanelLayoutDto>): boolean => {
+      const keys = new Set([...Object.keys(currentPanels), ...Object.keys(panels ?? {})]);
+      for (const key of keys) {
+        const left = currentPanels[key];
+        const right = panels?.[key];
+        if (!left || !right) return false;
+        if (
+          left.visible !== right.visible ||
+          left.collapsed !== right.collapsed ||
+          left.x !== right.x ||
+          left.y !== right.y ||
+          left.w !== right.w ||
+          left.h !== right.h
+        ) {
+          return false;
+        }
+      }
+      return true;
+    };
+
+    const presetMatch = layoutPresets.find((preset) =>
+      matchesPanels(preset.snapshot?.panels ?? {})
+    );
+    if (presetMatch) return presetMatch.name;
+
+    const defaultPanels = getDefaultUiLayoutPanels();
+    if (matchesPanels(defaultPanels)) return 'default';
+
+    return 'custom';
+  }, [layoutPresets, uiLayoutState]);
   const layoutReady = uiLayoutState.hydrated || layoutQueryReady || layoutError;
   const isLoadingLayout = !layoutReady;
   const [suppressGridTransitions, setSuppressGridTransitions] = useState(true);
@@ -260,6 +323,65 @@ export const DashboardPage = (): JSX.Element => {
   }, [panels, uiLayoutState]);
 
   const activePanels = panels.filter((panel) => panelVisibility[panel.id]);
+  const canGoBack = uiLayoutState.historyPast.length > 0;
+  const canGoForward = uiLayoutState.historyFuture.length > 0;
+
+  const handleHistoryNavigation = (direction: 'back' | 'forward'): void => {
+    if (isInteractionLocked) return;
+    const navigation = getUiLayoutHistoryNavigation(direction);
+    if (!navigation) return;
+    navigateUiLayoutHistory.mutate(navigation);
+  };
+
+  const handleBack = (): void => handleHistoryNavigation('back');
+
+  const handleForward = (): void => handleHistoryNavigation('forward');
+
+  const handleDefaultLayout = (): void => {
+    if (isInteractionLocked) return;
+    replaceUiLayout.mutate({ panels: getDefaultUiLayoutPanels() });
+  };
+
+  const handleDeleteHistory = (): void => {
+    if (isInteractionLocked) return;
+    clearHistory.mutate();
+  };
+
+  const handleSaveLayoutPreset = (name: string): void => {
+    if (isInteractionLocked || isPresetBusy) return;
+    const snapshot = getUiLayoutSnapshot();
+    createPreset.mutate({ name, snapshot });
+  };
+
+  const handleCreateLayoutPreset = (name: string): void => {
+    if (isInteractionLocked || isPresetBusy) return;
+    const snapshot = { panels: getDefaultUiLayoutPanels(), lastUpdatedUtc: null };
+    createPreset.mutate(
+      { name, snapshot },
+      {
+        onSuccess: () => {
+          replaceUiLayout.mutate({ panels: snapshot.panels });
+        }
+      }
+    );
+  };
+
+  const handleRenameLayoutPreset = (id: string, name: string): void => {
+    if (isInteractionLocked || isPresetBusy) return;
+    renamePreset.mutate({ id, payload: { name } });
+  };
+
+  const handleDeleteLayoutPreset = (id: string): void => {
+    if (isInteractionLocked || isPresetBusy) return;
+    deletePreset.mutate(id);
+  };
+
+  const handleApplyLayoutPreset = (id: string): void => {
+    if (isInteractionLocked || isPresetBusy) return;
+    const preset = layoutPresets.find((entry) => entry.id === id);
+    if (!preset) return;
+    replaceUiLayout.mutate({ panels: preset.snapshot.panels });
+  };
 
   const handleCollapseChange = (id: string, isCollapsed: boolean): void => {
     if (isInteractionLocked) return;
@@ -295,6 +417,20 @@ export const DashboardPage = (): JSX.Element => {
         panels={panels}
         visible={panelVisibility}
         onTogglePanel={togglePanel}
+        onBack={handleBack}
+        onForward={handleForward}
+        onDefaultLayout={handleDefaultLayout}
+        onDeleteHistory={handleDeleteHistory}
+        canGoBack={canGoBack}
+        canGoForward={canGoForward}
+        layoutPresets={layoutPresets}
+        onApplyLayoutPreset={handleApplyLayoutPreset}
+        onSaveLayoutPreset={handleSaveLayoutPreset}
+        onCreateLayoutPreset={handleCreateLayoutPreset}
+        onRenameLayoutPreset={handleRenameLayoutPreset}
+        onDeleteLayoutPreset={handleDeleteLayoutPreset}
+        layoutPresetsCurrentName={currentLayoutLabel}
+        layoutPresetsBusy={isPresetBusy}
         disabled={isInteractionLocked}
       />
 

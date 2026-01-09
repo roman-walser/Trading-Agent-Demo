@@ -1,0 +1,176 @@
+{
+  "test": "03_infra_persist/00_ui_layout_persist",
+  "baseUrl": "http://localhost:3000",
+  "adapter": "ndjson",
+  "timestampUtc": "2026-01-06T16:09:20.422Z",
+  "backend": {
+    "ready": true,
+    "exit": null,
+    "stdout": "Preparing cleanup...\nCleanup skipped (NODE_CLEANUP_MODE=skip).\nUI layout hydrated from persistence (2 panel(s)).\nStarting server...\n{\"level\":30,\"time\":1767715760350,\"pid\":31492,\"hostname\":\"DESKTOP-HONRRA7\",\"msg\":\"Server listening at http://0.0.0.0:3000\"}\nServer started on http://0.0.0.0:3000\n{\"level\":30,\"time\":1767715760398,\"pid\":31492,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1\",\"req\":{\"method\":\"GET\",\"url\":\"/health\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":56050},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715760403,\"pid\":31492,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-1\",\"res\":{\"statusCode\":200},\"responseTime\":5.141600012779236,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715760406,\"pid\":31492,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-2\",\"req\":{\"method\":\"GET\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":56052},\"msg\":\"incoming request\"}\n{\"level\":30,\"time\":1767715760407,\"pid\":31492,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-2\",\"res\":{\"statusCode\":200},\"responseTime\":1.0703000128269196,\"msg\":\"request completed\"}\n{\"level\":30,\"time\":1767715760414,\"pid\":31492,\"hostname\":\"DESKTOP-HONRRA7\",\"reqId\":\"req-3\",\"req\":{\"method\":\"POST\",\"url\":\"/api/ui/layout\",\"hostname\":\"localhost:3000\",\"remoteAddress\":\"127.0.0.1\",\"remotePort\":56050},\"msg\":\"incoming request\"}\n",
+    "stderr": "[infra:persist:uiLayout] Failed to parse NDJSON snapshot line. { error: `Unexpected token 'o', \"not-json\" is not valid JSON` }\n"
+  },
+  "results": {
+    "apiHealth": {
+      "path": "/api/health",
+      "status": 200,
+      "ok": true,
+      "body": {
+        "ok": true,
+        "serverTimeUtc": "2026-01-06T16:09:18Z"
+      }
+    },
+    "initialLayout": {
+      "path": "/api/ui/layout",
+      "status": 200,
+      "ok": true,
+      "body": {
+        "panels": {
+          "health": {
+            "visible": true,
+            "collapsed": false,
+            "x": 0,
+            "y": 0,
+            "w": 3,
+            "h": 8
+          }
+        },
+        "lastUpdatedUtc": "2026-01-06T16:09:11.527Z"
+      }
+    },
+    "replaceResponse": {
+      "path": "/api/ui/layout",
+      "method": "POST",
+      "status": 200,
+      "ok": true,
+      "body": {
+        "panels": {
+          "health": {
+            "visible": true,
+            "collapsed": false,
+            "x": 8,
+            "y": 0,
+            "w": 3,
+            "h": 8
+          },
+          "secondary": {
+            "visible": true,
+            "collapsed": false,
+            "x": 11,
+            "y": 0,
+            "w": 3,
+            "h": 8
+          }
+        },
+        "lastUpdatedUtc": "2026-01-06T16:09:18.756Z"
+      }
+    },
+    "afterReplace": {
+      "path": "/api/ui/layout",
+      "status": 200,
+      "ok": true,
+      "body": {
+        "panels": {
+          "health": {
+            "visible": true,
+            "collapsed": false,
+            "x": 8,
+            "y": 0,
+            "w": 3,
+            "h": 8
+          },
+          "secondary": {
+            "visible": true,
+            "collapsed": false,
+            "x": 11,
+            "y": 0,
+            "w": 3,
+            "h": 8
+          }
+        },
+        "lastUpdatedUtc": "2026-01-06T16:09:18.756Z"
+      }
+    },
+    "replaceMismatches": [],
+    "validation": {
+      "missingPanelsRejected": true,
+      "invalidShapeRejected": true
+    },
+    "ndjsonCheck": {
+      "skipped": false,
+      "file": "C:\\Users\\Roman\\Desktop\\Trading-Agent-Demo\\backend\\data\\ui-layout.ndjson",
+      "found": true,
+      "schemaVersion": 1,
+      "mismatches": [],
+      "matches": true
+    },
+    "mysqlCheck": {
+      "skipped": true,
+      "reason": "adapter not mysql",
+      "matches": false
+    },
+    "restartCheck": {
+      "skipped": false,
+      "backendReady": true,
+      "appendedInvalidLine": true,
+      "mismatches": [],
+      "matches": true,
+      "layout": {
+        "path": "/api/ui/layout",
+        "status": 200,
+        "ok": true,
+        "body": {
+          "panels": {
+            "health": {
+              "visible": true,
+              "collapsed": false,
+              "x": 8,
+              "y": 0,
+              "w": 3,
+              "h": 8
+            },
+            "secondary": {
+              "visible": true,
+              "collapsed": false,
+              "x": 11,
+              "y": 0,
+              "w": 3,
+              "h": 8
+            }
+          },
+          "lastUpdatedUtc": "2026-01-06T16:09:18.756Z"
+        }
+      }
+    },
+    "invalidLineCleanup": {
+      "skipped": false,
+      "removed": true
+    },
+    "preflightCleanup": {
+      "skipped": false,
+      "removed": false,
+      "reason": "no invalid line"
+    },
+    "restoreResult": {
+      "skipped": false,
+      "response": {
+        "path": "/api/ui/layout",
+        "method": "POST",
+        "status": 200,
+        "ok": true,
+        "body": {
+          "panels": {
+            "health": {
+              "visible": true,
+              "collapsed": false,
+              "x": 0,
+              "y": 0,
+              "w": 3,
+              "h": 8
+            }
+          },
+          "lastUpdatedUtc": "2026-01-06T16:09:20.417Z"
+        }
+      }
+    }
+  }
+}
